@@ -23,23 +23,7 @@ Here’s what I aim to achieve over the course of these 100 days:
 ## Rules
 1. I will code for a minimum of 1 hour every day for 100 days.
 2. I will document my progress daily in this repository.
-3. I will update the log below with what I accomplished each day.
-4. I will share updates on social media to stay accountable and inspire others.
-
-## Log
-Below is my daily progress log. Each entry includes the date, what I worked on, and any significant learnings or challenges.
-
-### Week 1: Kickstarting the Challenge
-- **Day 1: January 1, 2025**
-  - **Activity**: 
-  - **Highlights**: 
-  - **Challenges**: 
-
-- **Day 2: January 2, 2025**
-  - **Activity**: 
-  - **Highlights**: 
-  - **Challenges**: 
-
+3. I will share updates on social media to stay accountable and inspire others.
 
 - **DayXX/**: Each day’s work will be organized in its folder.
 - **README.md**: This file documents my journey and progress.
