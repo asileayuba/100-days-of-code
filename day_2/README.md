@@ -39,7 +39,7 @@ You can find the code and exercises from today's session in this [day_2](./day_2
 
 ### Resources
 - [Django Documentation](https://docs.djangoproject.com/en/)
-- YouTube Channel: [The Ark Pro Coder](https://www.youtube.com)
+- YouTube Channel: [The Ark Pro Coder](https://www.youtube.com/@ARKPROCODER)
 
 ---
 
