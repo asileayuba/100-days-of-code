@@ -44,3 +44,50 @@ You can find the code and exercises from today's session in this [day_2](./day_2
 ---
 
 Stay tuned for Day 3!
+
+
+
+# 100 Days of Code: Day 3
+
+## Bootstrap Integration in Django Website
+
+Today, I focused on integrating Bootstrap into my Django website. Below is a summary of what I accomplished:
+
+### Key Learnings
+- **Installed Bootstrap**:
+  - Added Bootstrap to the project by linking the CDN in the HTML `<head>` section.
+  
+- **Integrated Bootstrap Styles**:
+  - Applied Bootstrap's grid system and components to the existing HTML files.
+  - Improved the layout of the homepage by using Bootstrap's container, row, and column classes.
+  - Styled the navbar, form inputs, and buttons using Bootstrap classes.
+
+- **Enhanced User Interface**:
+  - Customized the carousel component using Bootstrap's carousel classes.
+  - Incorporated a spinner that is displayed directly under the carousel images to indicate loading.
+
+- **Responsive Design**:
+  - Ensured the website layout is responsive by using Bootstrap's responsive grid system and utility classes for better mobile support.
+
+---
+
+### Code and Files
+You can find the code and exercises from today's session in this [day_2](./day_2) folder of this repository.
+
+---
+
+### Challenges and Insights
+- Bootstrap's integration was straightforward using the CDN, but customizing certain components like the carousel required understanding its structure and JavaScript behavior.
+- I learned how to make the page layout responsive and visually appealing with minimal effort using Bootstrap's built-in classes.
+
+---
+
+### Resources
+- [Bootstrap Documentation](https://getbootstrap.com/)
+- [Django Documentation](https://docs.djangoproject.com/en/)
+- YouTube Channel: [The Ark Pro Coder](https://www.youtube.com/@ARKPROCODER)
+
+---
+
+Stay tuned for Day 4!
+
