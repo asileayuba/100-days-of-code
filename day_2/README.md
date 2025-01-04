@@ -91,3 +91,42 @@ You can find the code and exercises from today's session in this [day_2](./day_2
 
 Stay tuned for Day 4!
 
+
+
+# 100 Days of Code: Day 4
+
+## Exploring Jinja in Django Templates and Bootstrap Forms
+
+Today, I explored Django's template system and utilized its Jinja-inspired syntax for creating dynamic and reusable templates. Additionally, I used Bootstrap to design a user-friendly signup and login page. Below is a summary of what I accomplished:
+
+### Key Learnings
+- **Django Template System**:
+  - Gained a deeper understanding of template inheritance, blocks, and the `extends` keyword.
+  - Learned how to use `for` loops and conditional statements within templates to dynamically render content.
+
+- **Bootstrap Forms**:
+  - Styled signup and login pages with Bootstrap components.
+  - Enhanced user experience using Bootstrap classes for inputs, buttons, and form layouts.
+  - Implemented responsive designs to ensure compatibility across devices.
+
+---
+
+### Code and Files
+You can find the code and exercises from today's session in this [day_2](./day_2) folder of this repository.
+
+---
+
+### Challenges and Insights
+- Template inheritance streamlined the process of maintaining consistent layouts across multiple pages.
+- Using Bootstrap for forms made styling and layout adjustments faster and more efficient.
+
+---
+
+### Resources
+- [Bootstrap Documentation](https://getbootstrap.com/)
+- [Django Documentation](https://docs.djangoproject.com/en/)
+- YouTube Channel: [The Ark Pro Coder](https://www.youtube.com/@ARKPROCODER)
+
+---
+
+Stay tuned for Day 5!
