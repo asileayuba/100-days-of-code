@@ -9,3 +9,9 @@ def about(request):
 
 def contact(request):
     return render(request, 'contact.html')
+
+def handlelogin(request):
+    return render(request, 'login.html')
+
+def handlesignup(request):
+    return render(request, 'signup.html')
