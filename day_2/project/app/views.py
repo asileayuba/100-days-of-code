@@ -37,6 +37,6 @@ def handlesignup(request):
             
         myuser = User.objects.create_user(uname, email, password)
         myuser.save()
-        return HTTPResponse("Signup Successfully!")
+        return HttpResponse("Signup Successfully!")
     
     return render(request, 'signup.html')
