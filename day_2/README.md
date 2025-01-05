@@ -130,3 +130,47 @@ You can find the code and exercises from today's session in this [day_2](./day_2
 ---
 
 Stay tuned for Day 5!
+
+
+
+# 100 Days of Code: Day 5
+
+## Django Authentication System for Signup Page
+
+Today, I implemented the backend functionality for the signup page using Django's built-in authentication system. Below is a summary of what I accomplished:
+
+### Key Learnings
+- **Django Authentication Framework**:
+  - Learned to use Django's built-in `User` model for handling user registrations.
+  - Configured views to handle user input and validate registration data.
+
+- **Signup Page Functionality**:
+  - Connected the signup form to the backend for creating new users.
+  - Added input validation to ensure email uniqueness and password strength.
+  - Displayed success or error messages to guide users during registration.
+
+- **Error Handling**:
+  - Used Django's `messages` framework to notify users about the registration status.
+  - Managed edge cases like duplicate emails or missing required fields.
+
+---
+
+### Code and Files
+You can find the code and exercises from today's session in this [day_2](./day_2) folder of this repository.
+
+---
+
+### Challenges and Insights
+- Integrating the backend with the frontend provided a complete flow from user input to account creation.
+- Handling errors gracefully improved the user experience.
+
+---
+
+### Resources
+- [Django Documentation](https://docs.djangoproject.com/en/)
+- [Bootstrap Documentation](https://getbootstrap.com/)
+- YouTube Channel: [The Ark Pro Coder](https://www.youtube.com/@ARKPROCODER)
+
+---
+
+Stay tuned for Day 6!
