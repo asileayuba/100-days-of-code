@@ -174,3 +174,46 @@ You can find the code and exercises from today's session in this [day_2](./day_2
 ---
 
 Stay tuned for Day 6!
+
+
+# 100 Days of Code: Day 6
+
+## Django Alert Messages Integration
+
+Today, I focused on integrating Django's alert messages framework into my project to enhance user feedback and provide clear notifications. Below is a summary of what I accomplished:
+
+### Key Learnings
+- **Django Messages Framework**:
+  - Configured Django's `messages` framework to display alerts for success, error, and info events.
+  - Used the `messages.add_message`, `messages.success`, `messages.error`, and other methods to define feedback messages.
+
+- **Integrating Alerts into Templates**:
+  - Rendered alert messages in templates using the `for` loop and Bootstrap classes for styling.
+  - Ensured messages appear dynamically based on user actions like login, signup, or form submission.
+
+- **Bootstrap Styling for Alerts**:
+  - Applied Bootstrap alert classes (`alert-success`, `alert-danger`, `alert-info`, etc.) for consistent and visually appealing notifications.
+  - Customized alert designs to align with the overall theme of the project.
+
+---
+
+### Code and Files
+You can find the code and exercises from today's session in this [day_2](./day_2) folder of this repository.
+
+---
+
+### Challenges and Insights
+- Implementing alert messages improved user experience by providing immediate feedback on actions.
+- Combining Django's messages framework with Bootstrap styling ensured a professional and user-friendly interface.
+
+---
+
+### Resources
+- [Django Messages Framework Documentation](https://docs.djangoproject.com/en/stable/ref/contrib/messages/)
+- [Bootstrap Alerts Documentation](https://getbootstrap.com/docs/5.1/components/alerts/)
+- YouTube Channel: [The Ark Pro Coder](https://www.youtube.com/@ARKPROCODER)
+
+---
+
+Stay tuned for Day 7!
+
