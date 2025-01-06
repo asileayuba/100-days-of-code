@@ -24,7 +24,6 @@ def handlesignup(request):
             messages.warning(request, "Password Is Incorrect!")
             return redirect("/signup")
 
-        
         try:
             if User.objects.get(username=uname):
                 messages.info(request, "Username Is Taken")
@@ -41,7 +40,7 @@ def handlesignup(request):
             
         myuser = User.objects.create_user(uname, email, password)
         myuser.save()
-        messages.info(request, "Signup Successfully! /n Please Login")
+        messages.success(request, "Signup Successfully! Please Login")
         return redirect("/login")
     
     return render(request, 'signup.html')

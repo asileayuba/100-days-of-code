@@ -18,34 +18,51 @@
     <div class="container mt-3">
       <div class="row">
         <div class="col-md-6">
-         <img class="img-fluid" src="{% static 'images/pexels-timmossholder-3643925.jpg'%}" alt="">
+          <img
+            class="img-fluid"
+            src="{% static 'images/pexels-timmossholder-3643925.jpg'%}"
+            alt=""
+          />
         </div>
 
         <div class="col-md-4 mt-3">
-            <br><br>
+          <br /><br />
           <h3 class="text-white text-center">Login Here</h3>
 
-          <form action="" method="post">
+          {% for message in messages %}
+          <div
+            class="alert alert-{{message.tags}} alert-dismissible fade show"
+            role="alert"
+          >
+            <strong></strong> {{message}}
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="alert"
+              aria-label="Close"
+            ></button>
+          </div>
+          {% endfor %}
 
+          <form action="" method="post">
             <label class="text-white">Username</label>
             <div class="form-group">
-              <input type="text" class="form-control" name="username">
+              <input type="text" class="form-control" name="username" />
             </div>
 
             <label class="text-white mt-2">Password</label>
             <div class="form-group">
-              <input type="password" class="form-control" name="pass1">
+              <input type="password" class="form-control" name="pass1" />
             </div>
 
             <div class="d-grid gap-2 mt-4">
               <button class="btn btn-light" type="button">Login</button>
             </div>
-            
           </form>
-          <br><br>
-          <center><p>Not a User? <a href="/signup">Sign Up</a></p></center>
-
-
+          <br /><br />
+          <center>
+            <p>Not a User? <a href="/signup">Sign Up</a></p>
+          </center>
         </div>
       </div>
     </div>
