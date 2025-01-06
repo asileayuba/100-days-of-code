@@ -1,5 +1,6 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, redirect
 from django.contrib.auth.models import User
+from django.contrib import messages
 
 def index(request):
     return render(request, 'index.html')
@@ -20,7 +21,8 @@ def handlesignup(request):
         password = request.POST.get("pass1")
         confirmpassword = request.POST.get("pass2")
         if password != confirmpassword:
-            return HttpResponse("Oops! Password Incorrect.")
+            messages.warning(request, "Password Is Incorrect!")
+            return redirect("/signup")
 
         
         try:
