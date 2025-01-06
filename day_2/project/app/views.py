@@ -27,18 +27,21 @@ def handlesignup(request):
         
         try:
             if User.objects.get(username=uname):
-                return HttpResponse("ALREADY USED")
+                messages.info(request, "Username Is Taken")
+            return redirect("/signup")
         except:
             pass
         
         try:
             if User.objects.get(email=email):
-                return HttpResponse("EMAIL USED ALREADY")
+                messages.info(request, "Email Is Taken")
+            return redirect("/signup")
         except:
             pass
             
         myuser = User.objects.create_user(uname, email, password)
         myuser.save()
-        return HttpResponse("Signup Successfully!")
+        messages.info(request, "Signup Successfully! /n Please Login")
+        return redirect("/login")
     
     return render(request, 'signup.html')
