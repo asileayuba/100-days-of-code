@@ -39,7 +39,7 @@ def handlesignup(request):
         password = request.POST.get("pass1")
         confirmpassword = request.POST.get("pass2")
         if password != confirmpassword:
-            messages.warning(request, "Password Is Incorrect!")
+            messages.warning(request, "Password does not match.")
             return redirect("/signup")
 
         try:
