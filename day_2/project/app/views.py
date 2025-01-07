@@ -22,7 +22,7 @@ def handlelogin(request):
         pass1 = request.POST.get("pass1")
         myuser = authenticate(username=uname, password=pass1)
         if myuser is not None:
-            login(myuser)
+            login(request, myuser)
             messages.success(request, "Login Successfully!")
             return redirect("/")
         else:
