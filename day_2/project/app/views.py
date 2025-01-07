@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
 
@@ -62,3 +62,9 @@ def handlesignup(request):
         return redirect("/login")
 
     return render(request, "signup.html")
+
+
+def handlelogout(request):
+    logout(request)
+    messages.info(request, "See You Soon! 😐")
+    return redirect("/login")
