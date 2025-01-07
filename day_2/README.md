@@ -217,3 +217,50 @@ You can find the code and exercises from today's session in this [day_2](./day_2
 
 Stay tuned for Day 7!
 
+
+# 100 Days of Code: Day 7
+
+## Django Login and Logout Authentication System
+
+Today, I worked on implementing the login and logout authentication system in my Django project. Below is a summary of what I accomplished:
+
+### Key Learnings
+- **Django Authentication System**:
+  - Configured Django's built-in `login` and `logout` views to handle user authentication.
+  - Created custom login and logout pages using Django forms and views.
+
+- **Login Functionality**:
+  - Integrated the `authenticate` and `login` methods in the login view to validate user credentials.
+  - Displayed appropriate error messages for invalid login attempts using Django's messages framework.
+
+- **Logout Functionality**:
+  - Configured the `logout` view to log out users and redirect them to the homepage or a custom page.
+  - Ensured user sessions were properly terminated on logout.
+
+- **Frontend Integration**:
+  - Designed login and logout pages using Bootstrap for a polished and user-friendly interface.
+  - Incorporated form validation and feedback alerts to improve the user experience.
+
+---
+
+### Code and Files
+You can find the code and exercises from today's session in this [day_2](./day_2) folder of this repository.
+
+---
+
+### Challenges and Insights
+- Learned how to use Django's `auth` module to manage user sessions efficiently.
+- Implemented robust error handling for incorrect login credentials.
+- Improved the navigation experience by integrating login/logout links in the navbar.
+
+---
+
+### Resources
+- [Django Authentication Documentation](https://docs.djangoproject.com/en/stable/topics/auth/default/)
+- [Bootstrap Forms Documentation](https://getbootstrap.com/docs/5.1/forms/overview/)
+- YouTube Channel: [The Ark Pro Coder](https://www.youtube.com/@ARKPROCODER)
+
+---
+
+Stay tuned for Day 8!
+
