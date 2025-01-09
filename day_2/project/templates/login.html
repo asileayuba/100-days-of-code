@@ -13,6 +13,38 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
+    <style>
+      .social-container {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        margin-top: 20px;
+      }
+
+      .social-container a {
+        font-size: 24px;
+        color: white; /* Default color */
+        text-decoration: none;
+        border: 1px solid #dddddd;
+        border-radius: 50%;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 5px;
+        height: 40px;
+        width: 40px;
+        transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+      }
+
+      .social-container a:hover {
+        background-color: #555; /* Background color on hover */
+        border-color: #555; /* Change border color on hover */
+      }
+
+      .social-container a:hover i {
+        color: white; /* Change icon color on hover */
+      }
+    </style>
   </head>
   <body>
     <div class="container mt-3">
