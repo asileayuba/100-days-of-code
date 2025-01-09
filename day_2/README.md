@@ -264,3 +264,89 @@ You can find the code and exercises from today's session in this [day_2](./day_2
 
 Stay tuned for Day 8!
 
+
+# 100 Days of Code: Day 8
+
+## Django Login with Google Account Integration
+
+Today, I focused on integrating Google account login functionality into my Django project. Below is a summary of what I accomplished:
+
+### Key Learnings
+- **Google OAuth2 Integration**:
+  - Installed and configured the `social-auth-app-django` package to enable OAuth2 authentication with Google.
+  - Set up a Google Developer project to obtain the necessary credentials (client ID and client secret) for OAuth2 integration.
+
+- **Configured Settings**:
+  - Added the Google authentication backend to Django's `AUTHENTICATION_BACKENDS` in the settings file.
+  - Configured required Google API settings, including client ID, secret, and redirect URL.
+
+- **Redirect URL Handling**:
+  - Ensured users are redirected to the appropriate page after successful authentication via Google, handling first-time user creation if necessary.
+
+- **Frontend Integration**:
+  - Created a login button that redirects users to the Google authentication flow.
+  - Customized the button styling to align with the design of the website.
+
+---
+
+### Code and Files
+You can find the code and exercises from today's session in this [day_2](./day_2) folder of this repository.
+
+---
+
+### Challenges and Insights
+- The integration of Google login required handling multiple steps, including setting up the API credentials and configuring Django settings.
+- OAuth2 flow provided a seamless login experience, but required ensuring security around user data.
+
+---
+
+### Resources
+- [Django Social Auth Documentation](https://python-social-auth.readthedocs.io/en/latest/)
+- [Google OAuth2 Documentation](https://developers.google.com/identity/protocols/oauth2)
+- YouTube Channel: [The Ark Pro Coder](https://www.youtube.com/@ARKPROCODER)
+
+---
+
+Stay tuned for Day 9!
+
+
+# 100 Days of Code: Day 9
+
+## Django Login with Google Account (Continued)
+
+Today, I continued to work on the Google account login integration in my Django project, refining and troubleshooting the setup. Below is a summary of what I accomplished:
+
+### Key Learnings
+- **Google Authentication Flow**:
+  - Ensured the correct handling of user sessions upon successful authentication via Google.
+  - Implemented profile creation for users who sign in with Google for the first time.
+
+- **Error Handling**:
+  - Managed errors that could arise during the authentication process, such as incorrect or missing credentials.
+  - Displayed appropriate messages to users in case of failure to authenticate.
+
+- **User Experience Enhancement**:
+  - Refined the UI for the Google login button, improving visibility and interaction.
+  - Implemented an easy logout process for users signed in via Google, ensuring a seamless transition.
+
+---
+
+### Code and Files
+You can find the code and exercises from today's session in this [day_2](./day_2) folder of this repository.
+
+---
+
+### Challenges and Insights
+- Integrating third-party authentication with Django required understanding how OAuth2 works and handling edge cases related to user data retrieval.
+- Learning how to debug and troubleshoot common errors in OAuth2 flow helped enhance my debugging skills.
+
+---
+
+### Resources
+- [Django Social Auth Documentation](https://python-social-auth.readthedocs.io/en/latest/)
+- [Google OAuth2 Documentation](https://developers.google.com/identity/protocols/oauth2)
+- YouTube Channel: [The Ark Pro Coder](https://www.youtube.com/@ARKPROCODER)
+
+---
+
+Stay tuned for Day 10!
