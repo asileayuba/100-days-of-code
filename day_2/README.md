@@ -350,3 +350,51 @@ You can find the code and exercises from today's session in this [day_2](./day_2
 ---
 
 Stay tuned for Day 10!
+
+
+```markdown
+# 100 Days of Code: Day 10
+
+## Google and Facebook Account Login Integration
+
+Today, I focused on consolidating my understanding of third-party login integrations by revisiting the **django-allauth** documentation and enhancing my project. Below is a summary of what I accomplished:
+
+### Key Learnings
+- **Refining Google Login Integration**:
+  - Explored the **django-allauth** documentation in-depth to better understand its features and configurations.
+  - Made corrections to the initial implementation and ensured a seamless authentication flow.
+
+- **Added Facebook Account Login Integration**:
+  - Configured Facebook login alongside Google login using **django-allauth**.
+  - Set up Facebook App credentials (App ID and App Secret) and configured them in the Django project.
+  - Implemented a user-friendly frontend login option for Facebook authentication.
+
+- **Multi-Provider Support**:
+  - Ensured that users could log in using either Google or Facebook without conflicts.
+  - Improved the authentication backend handling to support multiple providers.
+
+---
+
+### Code and Files
+You can find the code and exercises from today's session in this [day_2](./day_2) folder of this repository.
+
+---
+
+### Challenges and Insights
+- Revisiting the **django-allauth** documentation helped me understand how to optimize configurations for real-world applications.
+- Adding multiple authentication providers required careful attention to settings and flow, but it significantly improved the project's usability.
+
+---
+
+### Resources
+- [django-allauth Documentation](https://django-allauth.readthedocs.io/en/latest/)
+- [Google OAuth2 Documentation](https://developers.google.com/identity/protocols/oauth2)
+- [Facebook Login Documentation](https://developers.facebook.com/docs/facebook-login/)
+
+---
+
+### Next Steps
+This wraps up my work with **django-allauth**, and I am excited to move forward with exploring Django models in the coming days!
+
+Stay tuned for Day 11! 🚀
+```
