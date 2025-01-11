@@ -398,3 +398,47 @@ This wraps up my work with **django-allauth**, and I am excited to move forward 
 
 Stay tuned for Day 11! 🚀
 ```
+
+
+# 100 Days of Code: Day 11
+
+## Django Models, Contact Page, and Data Management
+
+Today, I explored Django models and worked on implementing a **Contact Page** that stores user-submitted data in the Django admin panel. Below is a summary of what I accomplished:
+
+### Key Learnings
+- **Django Models**:
+  - Learned how to define and create Django models for database interaction.
+  - Explored model fields, their types, and their purpose (e.g., `CharField`, `EmailField`, `TextField`, etc.).
+  - Ran migrations to apply changes to the database.
+
+- **Creating a Contact Page**:
+  - Designed a contact form with fields for `Name`, `Email`, `Subject`, and `Message`.
+  - Set up a view to handle form submissions and render success messages.
+  - Styled the contact page using Bootstrap to improve user experience.
+
+- **Storing Data in the Admin Panel**:
+  - Registered the Contact model in `admin.py` to manage submissions through the Django admin interface.
+  - Tested data persistence by submitting forms and verifying entries in the admin panel.
+
+---
+
+### Code and Files
+You can find the code and exercises from today's session in this [day_2](./day_2) folder of this repository.
+
+---
+
+### Challenges and Insights
+- Defining and working with Django models clarified how Django ORM simplifies database management.
+- Integrating form submissions with the database was a valuable exercise in connecting frontend and backend workflows.
+
+---
+
+### Resources
+- [Django Documentation on Models](https://docs.djangoproject.com/en/stable/topics/db/models/)
+- [Bootstrap Documentation](https://getbootstrap.com/)
+- YouTube Channel: [The Ark Pro Coder](https://www.youtube.com/@ARKPROCODER)
+
+---
+
+Stay tuned for Day 12! 🚀
