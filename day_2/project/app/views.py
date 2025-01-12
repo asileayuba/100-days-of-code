@@ -29,7 +29,8 @@ def contact(request):
         # Emails sending starts from here
         from_email=settings.EMAIL_HOST_USER
         connection=mail.get_connection()
-         
+         connection.open()
+         email_meassage=mail.EmailMessage()
         
         
         
