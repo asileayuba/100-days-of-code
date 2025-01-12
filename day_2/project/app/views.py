@@ -31,14 +31,15 @@ def contact(request):
         from_email = settings.EMAIL_HOST_USER
         connection = mail.get_connection()
         connection.open()
-        email_meassage = mail.EmailMessage(
+        email_message = mail.EmailMessage(
             f"Email is from {fname}",
             f"UserEmail: {femail} \nUserPhoneNumber: {phone}\n\n\n Query: {desc}",
             from_email,
             ["asileayuba@gmail.com"],
             connection=connection,
         )
-        connection.send_messages([])
+        connection.send_messages([email_message])
+        connection.close()
 
         messages.info(
             request, "Thank you for reaching out to us! We'll respond to you shortly."
