@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .models import Contact
+
 # This imports below is for sending emails
 from django.conf import settings
 from django.core.mail import send_mail
@@ -19,25 +20,30 @@ def about(request):
 
 
 def contact(request):
-    if request.method=="POST":
+    if request.method == "POST":
         fname = request.POST.get("name")
         femail = request.POST.get("email")
         phone = request.POST.get("phone")
         desc = request.POST.get("desc")
-        query=Contact(name=fname, email=femail, phoneNumber=phone, description=desc)
+        query = Contact(name=fname, email=femail, phoneNumber=phone, description=desc)
         query.save()
         # Emails sending starts from here
-        from_email=settings.EMAIL_HOST_USER
-        connection=mail.get_connection()
-         connection.open()
-         email_meassage=mail.EmailMessage()
-        
-        
-        
-        
-        
-        messages.info(request, "Thank you for reaching out to us! We'll respond to you shortly.")
-        return redirect('/contact')
+        from_email = settings.EMAIL_HOST_USER
+        connection = mail.get_connection()
+        connection.open()
+        email_meassage = mail.EmailMessage(
+            f"Email is from {fname}",
+            f"UserEmail: {femail} \nUserPhoneNumber: {phone}\n\n\n Query: {desc}",
+            from_email,
+            ["asileayuba@gmail.com"],
+            connection=connection,
+        )
+        connection.send_messages([])
+
+        messages.info(
+            request, "Thank you for reaching out to us! We'll respond to you shortly."
+        )
+        return redirect("/contact")
     return render(request, "contact.html")
 
 
