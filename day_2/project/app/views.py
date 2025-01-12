@@ -3,6 +3,11 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .models import Contact
+# This imports below is for sending emails
+from django.conf import settings
+from django.core.mail import send_mail
+from django.core import mail
+from django.core.mail.message import EmailMessage
 
 
 def index(request):
@@ -21,6 +26,15 @@ def contact(request):
         desc = request.POST.get("desc")
         query=Contact(name=fname, email=femail, phoneNumber=phone, description=desc)
         query.save()
+        # Emails sending starts from here
+        from_email=settings.EMAIL_HOST_USER
+        connection=mail.get_connection()
+         
+        
+        
+        
+        
+        
         messages.info(request, "Thank you for reaching out to us! We'll respond to you shortly.")
         return redirect('/contact')
     return render(request, "contact.html")
