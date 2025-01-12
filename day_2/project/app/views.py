@@ -25,26 +25,35 @@ def contact(request):
         femail = request.POST.get("email")
         phone = request.POST.get("phone")
         desc = request.POST.get("desc")
+
+        # Save contact query to the database
         query = Contact(name=fname, email=femail, phoneNumber=phone, description=desc)
         query.save()
-        # Emails sending starts from here
-        from_email = settings.EMAIL_HOST_USER
-        connection = mail.get_connection()
-        connection.open()
-        email_message = mail.EmailMessage(
-            f"Email is from {fname}",
-            f"UserEmail: {femail} \nUserPhoneNumber: {phone}\n\n\n Query: {desc}",
-            from_email,
-            ["asileayuba@gmail.com"],
-            connection=connection,
-        )
-        connection.send_messages([email_message])
-        connection.close()
 
-        messages.info(
-            request, "Thank you for reaching out to us! We'll respond to you shortly."
+        # Email configuration
+        from_email = settings.EMAIL_HOST_USER
+        recipient_email = "asileayuba@gmail.com"
+        subject = f"Query from {fname}"
+        body = (
+            f"User Email: {femail}\n"
+            f"User Phone Number: {phone}\n\n"
+            f"Query:\n{desc}"
         )
+
+        try:
+            email_message = EmailMessage(subject, body, from_email, [recipient_email])
+            email_message.send(fail_silently=False)  # Automatically handles connection
+            messages.success(
+                request, "Thank you for reaching out! We'll get back to you shortly."
+            )
+        except Exception as e:
+            messages.error(
+                request, f"Something went wrong while sending your email: {e}"
+            )
+            return redirect("/contact")
+
         return redirect("/contact")
+
     return render(request, "contact.html")
 
 
