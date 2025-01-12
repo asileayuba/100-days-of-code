@@ -442,3 +442,46 @@ You can find the code and exercises from today's session in this [day_2](./day_2
 ---
 
 Stay tuned for Day 12! 🚀
+
+
+# 100 Days of Code: Day 12
+
+## Sending Emails Dynamically in Django
+
+Today, I implemented functionality to send emails dynamically using Django. This was a rewarding experience as I delved deeper into Django's email capabilities. Here's a summary of what I accomplished:
+
+### Key Learnings
+- **Email Backend Configuration**:
+  - Configured Django's email backend in the `settings.py` file.
+  - Set up SMTP settings for sending emails using Gmail (e.g., `EMAIL_HOST`, `EMAIL_PORT`, `EMAIL_HOST_USER`, `EMAIL_HOST_PASSWORD`, and `EMAIL_USE_TLS`).
+
+- **Sending Emails Dynamically**:
+  - Created a function in the views to handle sending emails.
+  - Used Django's `send_mail` function to send emails with dynamic content.
+  - Set up email templates to customize the email body dynamically based on user input from the contact form.
+
+- **Testing the Email Functionality**:
+  - Submitted test data from the contact form and verified the email delivery.
+  - Encountered and resolved issues with Gmail's security settings, ensuring smooth email delivery.
+
+---
+
+### Code and Files
+You can find the code and exercises from today's session in this [day_2](./day_2) folder of this repository.
+
+---
+
+### Challenges and Insights
+- Configuring Gmail SMTP required enabling "Allow less secure apps" and app-specific passwords for secure access.
+- Sending emails programmatically provided valuable insights into Django's capabilities for real-world applications.
+
+---
+
+### Resources
+- [Django Documentation: Sending Emails](https://docs.djangoproject.com/en/stable/topics/email/)
+- [Google SMTP Configuration Guide](https://support.google.com/mail/answer/7126229?hl=en)
+- YouTube Channel: [The Ark Pro Coder](https://www.youtube.com/@ARKPROCODER)
+
+---
+
+Stay tuned for Day 13! 🚀📧
