@@ -165,10 +165,11 @@ USE_TZ = True
 
 EMAIL_HOST='smtp.gmail.com'
 EMAIL_HOST_USER='asileayuba@gmail.com'
-EMAIL_HOST_PASSWORD=''
+EMAIL_HOST_PASSWORD='ucgr dyvj fvnp khuc'
 EMAIL_PORT=587
 EMAIL_USE_TLS=True
-EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackends'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
 
 
 
