@@ -444,7 +444,7 @@ You can find the code and exercises from today's session in this [day_2](./day_2
 Stay tuned for Day 12! 🚀
 
 
-# 100 Days of Code: Day 12
+# 100 Days of Code: Day 12 and 13
 
 ## Sending Emails Dynamically in Django
 
@@ -484,4 +484,4 @@ You can find the code and exercises from today's session in this [day_2](./day_2
 
 ---
 
-Stay tuned for Day 13! 🚀📧
+Stay tuned for Day 14! 🚀📧
