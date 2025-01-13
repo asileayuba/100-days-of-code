@@ -7,7 +7,6 @@ from .models import Contact
 # This imports below is for sending emails
 from django.conf import settings
 from django.core.mail import send_mail
-from django.core import mail
 from django.core.mail.message import EmailMessage
 
 
@@ -30,7 +29,7 @@ def contact(request):
         query = Contact(name=fname, email=femail, phoneNumber=phone, description=desc)
         query.save()
 
-        # Email configuration
+        # Email configuration for sending to the host
         from_email = settings.EMAIL_HOST_USER
         recipient_email = "asileayuba@gmail.com"
         subject = f"Query from {fname}"
@@ -41,8 +40,25 @@ def contact(request):
         )
 
         try:
+            # Send email to the host
             email_message = EmailMessage(subject, body, from_email, [recipient_email])
-            email_message.send(fail_silently=False)  # Automatically handles connection
+            email_message.send(fail_silently=False)
+
+            # Send confirmation email to the sender
+            confirmation_subject = "Thank You for Reaching Out"
+            confirmation_body = (
+                f"Hello {fname},\n\n"
+                "Thank you for your message! \nWe've received your inquiry and will respond to you shortly.\n\n"
+                "Best Regards,\nAsile Ayuba."
+            )
+            send_mail(
+                confirmation_subject, 
+                confirmation_body, 
+                from_email, 
+                [femail], 
+                fail_silently=False
+            )
+
             messages.success(
                 request, "Thank you for reaching out! We'll get back to you shortly."
             )
