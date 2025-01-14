@@ -2,7 +2,7 @@ from django.shortcuts import render, HttpResponse, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from .models import Contact
+from .models import Contact, Blogs
 
 # This imports below is for sending emails
 from django.conf import settings
@@ -128,4 +128,7 @@ def handlelogout(request):
 
 
 def handleBlog(request):
+    allPosts=Blogs.objects.all()
+    context={'allPost': allPosts}
+    print(allPosts)
     return render(request, 'blog.html')
