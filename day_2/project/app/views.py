@@ -125,3 +125,7 @@ def handlelogout(request):
     logout(request)
     messages.info(request, "See You Soon! 😐")
     return redirect("/login")
+
+
+def handleBlog(request):
+    return render(request, 'blog.html')
