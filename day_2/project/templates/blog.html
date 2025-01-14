@@ -1,35 +1,58 @@
 {% extends "base.html" %}
+
 {% block title %}Blog{% endblock title %}
+
 {% block body %}
 <div class="container mt-4">
-    <h2 id="blog" class="text-center">FRESH INSIGHTS</h2>
-    <div class="card-group">
+  <h2 id="blog" class="text-center">Don't Miss Our Newest Articles</h2>
+  <br />
+
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for post in allPosts %}
+      <div class="col">
         <div class="card">
-          <img src="..." class="card-img-top" alt="...">
+          <img src="{{ post.img.url }}" class="card-img-top" alt="..." />
           <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-          </div>
-        </div>
-        <div class="card">
-          <img src="..." class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-            <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-          </div>
-        </div>
-        <div class="card">
-          <img src="..." class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-            <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+            <h5 class="card-title">{{ post.title }}</h5>
+            <p class="card-text" id="description-{{ forloop.counter }}">
+              {{ post.description|truncatechars:150 }} 
+              <span id="read-more-{{ forloop.counter }}" 
+                    style="display: none;">
+                {{ post.description|safe }} 
+              </span>
+            </p>
+            <a href="#" class="read-more" 
+               onclick="toggleReadMore('description-{{ forloop.counter }}', 
+                                      'read-more-{{ forloop.counter }}'); 
+                       return false;">
+              Read More
+            </a>
+            <hr>
+            <p>Posted By: <b>{{ post.authname }}</b></p>
+            <p>Time Posted: <b>{{ post.timeStamp }}</b></p>
           </div>
         </div>
       </div>
+    {% endfor %}
+  </div>
 
 </div>
+
+<script>
+function toggleReadMore(descriptionId, readMoreId) {
+  var description = document.getElementById(descriptionId);
+  var readMore = document.getElementById(readMoreId);
+
+  if (description.innerText.trim() === description.textContent.trim()) { 
+    // If the text is already truncated, show the full text
+    description.innerHTML = readMore.innerHTML; 
+    this.innerHTML = "Read Less"; 
+  } else { 
+    // If the full text is showing, truncate it
+    description.innerHTML = readMore.innerText.substring(0, 150) + "..."; 
+    this.innerHTML = "Read More"; 
+  }
+}
+</script>
 
 {% endblock body %}

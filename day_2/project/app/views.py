@@ -129,6 +129,6 @@ def handlelogout(request):
 
 def handleBlog(request):
     allPosts=Blogs.objects.all()
-    context={'allPost': allPosts}
+    context={'allPosts': allPosts}
     print(allPosts)
-    return render(request, 'blog.html')
+    return render(request, 'blog.html', context)
