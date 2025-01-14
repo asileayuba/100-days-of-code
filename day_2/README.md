@@ -485,3 +485,54 @@ You can find the code and exercises from today's session in this [day_2](./day_2
 ---
 
 Stay tuned for Day 14! 🚀📧
+
+
+# 100 Days of Code: Day 14
+
+## Creating a Django Blog Page and Displaying Blog Content Dynamically
+
+Today's focus was on building a dynamic blog page using Django. This involved creating models, views, and templates to display blog content seamlessly. Here's what I accomplished:
+
+### Key Learnings
+- **Creating the Blog Model**:
+  - Defined a `Blog` model with fields such as `title`, `author`, `description`, `img`, and `TimeStamp`.
+  - Used Django's ORM to design and interact with the database.
+
+- **Database Migrations**:
+  - Generated and applied migrations to create the `Blog` table in the database.
+
+- **Fetching and Displaying Blog Content**:
+  - Created a view to query and fetch blog posts from the database.
+  - Passed the fetched content to the template for rendering.
+
+- **Dynamic Blog Page**:
+  - Designed a responsive blog page template using Bootstrap for styling.
+  - Integrated Django's template language to loop through blog posts and display them dynamically.
+
+- **URL Routing**:
+  - Configured URLs to map the blog view to the blog page.
+  - Ensured proper navigation between the blog page and other sections of the website.
+
+---
+
+### Code and Files
+You can find the code and related files for today's work in the [day_2](./day_2) folder of this repository.
+
+---
+
+### Challenges and Insights
+- Learned the importance of structuring models to reflect real-world data effectively.
+- Debugged issues with model migrations and gained a better understanding of Django's migration system.
+- Using Bootstrap ensured the blog page is both functional and visually appealing.
+
+---
+
+### Resources
+- [Django Documentation: Models](https://docs.djangoproject.com/en/stable/topics/db/models/)
+- [Bootstrap Documentation](https://getbootstrap.com/)
+- YouTube Channel: [The Ark Pro Coder](https://www.youtube.com/@ARKPROCODER)
+
+---
+
+
+Stay tuned for Day 15! 🚀📝
