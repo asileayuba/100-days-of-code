@@ -536,3 +536,48 @@ You can find the code and related files for today's work in the [day_2](./day_2)
 
 
 Stay tuned for Day 15! 🚀📝
+
+
+# 100 Days of Code: Day 15
+
+## Implementing Django Search Functionality in My Project
+
+Today's focus was on adding a search feature to my Django project, allowing users to search for specific content dynamically. Here's a summary of what I accomplished:
+
+### Key Learnings
+- **Setting Up the Search Form**:
+  - Created an HTML form with a search input field.
+  - Added a `GET` method to handle search queries submitted by the user.
+
+- **Handling Search Queries in Views**:
+  - Used Django's ORM to filter database records based on the user's search input.
+  - Implemented case-insensitive search for better user experience.
+
+- **Displaying Search Results**:
+  - Created a dedicated template to display the filtered results.
+  - Used Django's template language to handle dynamic content rendering.
+
+- **URL Routing**:
+  - Configured a URL pattern to connect the search view to the appropriate endpoint.
+
+---
+
+### Code and Files
+You can find the code and related files for today's work in the [day_2](./day_2) folder of this repository.
+
+---
+
+### Challenges and Insights
+- Handling empty search queries required adding validation logic in the view.
+- Optimizing the search query for performance was crucial to ensure quick response times.
+
+
+---
+
+### Resources
+- [Django Documentation: QuerySet API](https://docs.djangoproject.com/en/stable/ref/models/querysets/)
+
+
+---
+
+Stay tuned for Day 16! 
