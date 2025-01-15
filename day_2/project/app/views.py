@@ -135,3 +135,17 @@ def handleBlog(request):
     context={'allPosts': allPosts}
     print(allPosts)
     return render(request, 'blog.html', context)
+
+def search(request):
+    query=request.GET['search']
+    if len(query)>100:
+        allPosts=Blogs.objects.none()
+    else:
+        allPostsTitle=Blogs.objects.filter(title__icontains=query)
+        allPostsDescription=Blogs.objects.filter(description__icontains=query)
+        allPosts=allPostsTitle.union(allPostsDescription)
+    if allPosts.counts()==0:
+        messages.warning(request, "No Search Results")
+    params={"allPosts":allPosts, "query":query}
+    
+    return render(request, "search.html", params)
