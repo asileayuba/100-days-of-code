@@ -128,6 +128,9 @@ def handlelogout(request):
 
 
 def handleBlog(request):
+    if not request.user.is_authenticated:
+        messages.warning(request, "Login to view the blog")
+        return redirect("/login")
     allPosts=Blogs.objects.all()
     context={'allPosts': allPosts}
     print(allPosts)
