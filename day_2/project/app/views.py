@@ -144,7 +144,7 @@ def search(request):
         allPostsTitle=Blogs.objects.filter(title__icontains=query)
         allPostsDescription=Blogs.objects.filter(description__icontains=query)
         allPosts=allPostsTitle.union(allPostsDescription)
-    if allPosts.counts()==0:
+    if allPosts.count()==0:
         messages.warning(request, "No Search Results")
     params={"allPosts":allPosts, "query":query}
     
