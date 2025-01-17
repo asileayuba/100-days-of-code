@@ -627,3 +627,46 @@ You can find the updated home page template and associated files in the [day_2](
 
 
 Stay tuned for Day 17! 
+
+# 100 Days of Code: Day 17
+
+## Debugging the Django Project
+
+Today, I wrapped up my foundational learning of Django by focusing on debugging the project I’ve been working on. Here’s a summary of what I accomplished:
+
+### Key Learnings
+- **Debugging and Error Handling**:
+  - Identified and resolved errors in views, templates, and static file configurations.
+  - Used Django's built-in debug tools to track issues efficiently.
+  - Refined the project structure to improve maintainability.
+
+- **Project Recap**:
+  - Learned to create a Django project and app.
+  - Explored core components such as models, views, templates, and the settings file.
+  - Integrated Bootstrap for responsive and aesthetic designs.
+  - Implemented user authentication features, including login, logout, and third-party account logins (Google and Facebook) using `django-allauth`.
+  - Developed a contact page with dynamic data storage and email-sending functionality.
+  - Added search functionality to enhance user navigation.
+  - Customized the home page to dynamically render content and improve user experience.
+  - Built a blog page that displays blog content dynamically.
+
+---
+
+### Challenges and Insights
+- Debugging reinforced the importance of understanding error messages and logs.
+- This project helped me solidify my knowledge of Django basics and apply problem-solving skills to real-world scenarios.
+
+---
+
+### Next Steps
+With the foundational concepts of Django well understood, I’m excited to move forward and work on a more standard and complex project. This will:
+- Help me deepen my understanding of Django.
+- Enhance my problem-solving skills by tackling more advanced challenges.
+- Provide opportunities to build features that simulate real-world applications.
+
+---
+
+### Final Note on Django Basics
+This journey of learning Django basics has been incredibly rewarding. From setting up projects to creating dynamic and responsive web pages, I’ve gained invaluable insights into web development with Django. 
+
+Stay tuned as I take on my next challenge—a more advanced Django project to further grow as a developer. 🚀💻
