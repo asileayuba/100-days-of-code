@@ -1,0 +1,62 @@
+body {
+    position: relative;
+    margin: 0;
+    min-height: 100vh;
+    background: url('../images/pexels-yihan-wang-2148192610-29965022.jpg') no-repeat center center/cover;
+    color: white; /* Ensure text is readable */
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+    z-index: -1;
+}
+
+.img-fluid {
+    padding: 2.25rem;
+    border-radius: 21.25rem;
+    max-width: 100%;
+    height: auto;
+}
+
+p{
+    color: white;
+    font-size: larger;
+}
+
+
+.social-container {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  .social-container a {
+    font-size: 24px;
+    color: white; /* Default color */
+    text-decoration: none;
+    border: 1px solid #dddddd;
+    border-radius: 50%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 5px;
+    height: 40px;
+    width: 40px;
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+  }
+
+  .social-container a:hover {
+    background-color: #555; /* Background color on hover */
+    border-color: #555; /* Change border color on hover */
+  }
+
+  .social-container a:hover i {
+    color: white; /* Change icon color on hover */
+  }
