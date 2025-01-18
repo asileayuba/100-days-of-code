@@ -22,7 +22,7 @@ To run this project locally, follow these steps:
 
 1. **Clone the repository**:
     ```bash
-    git clone https://github.com/your-username/weather-app.git
+    git clone https://github.com/asileayuba/100-days-of-code/tree/0ccbbf57a1ababaea2f252da7fe99cd276dc6270/WeatherHive
     ```
 
 2. **Install dependencies**:
