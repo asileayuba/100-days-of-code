@@ -28,7 +28,7 @@ def home(request):
             weather = weather_data_result['weather'][0]['main']
             weather_description = weather_data_result['weather'][0]['description']
             city = weather_data_result['name']
-            country = weather_data_result['sys']['speed']
+            country = weather_data_result['sys']['country']
             wind_speed = weather_data_result['wind']['speed']
             pressure = weather_data_result['main']['pressure']
             humidity = weather_data_result['main']['humidity']
