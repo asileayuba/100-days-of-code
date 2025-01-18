@@ -24,7 +24,27 @@ def home(request):
         weather_data_result = get_weather(city)
         
         if weather_data_result is not None:
-            weather_data = json.dumps(weather_data_result, indent=4)
-            print(weather_data)
+            # Extracting Details
+            weather = weather_data_result['weather'][0]['main']
+            weather_description = weather_data_result['weather'][0]['description']
+            city = weather_data_result['name']
+            country = weather_data_result['sys']['speed']
+            wind_speed = weather_data_result['wind']['speed']
+            pressure = weather_data_result['main']['pressure']
+            humidity = weather_data_result['main']['humidity']
+            temperature = weather_data_result['main']['temp']
+        else:
+            return render(request, "index.html")
             
+    return render(request, "index.html", {
+        "weather": weather,
+        "weather_description": weather_description,
+        "city": city,
+        "country": country,
+        "wind_speed": wind_speed,
+        "pressure": pressure,
+        "humidity": humidity,
+        "temperature": temperature,
+    })
+    
     return render(request, "index.html")

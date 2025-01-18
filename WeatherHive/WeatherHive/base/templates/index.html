@@ -43,10 +43,10 @@
     >
       <div id="left" class="flex flex-col">
         <div id="top" class="mb-6">
-          <p class="font-bold text-5xl text-white">24°C</p>
+          <p class="font-bold text-5xl text-white">{{temperature}}°C</p>
           <p class="font-semibold text-md text-white">Now</p>
         </div>
-        <p class="font-semibold text-xl text-white">London, UK</p>
+        <p class="font-semibold text-xl text-white">{{city}}, {{country}}</p>
       </div>
       <div id="right" class="flex justify-end items-center">
         <img class="w-28 h-4w-28" src="{% static 'images/sunny1.png' %}" alt="" />
@@ -62,9 +62,9 @@
         <!-- Icon -->
         <img class="" src="{% static 'images/sunny1.png' %}" alt="weather icon" />
         <!-- Weather -->
-        <p class="font-bold text-4xl text-white">Sunny</p>
+        <p class="font-bold text-4xl text-white">{{weather}}</p>
         <!-- Description -->
-        <p class="font-semibold text-white">clear sky</p>
+        <p class="font-semibold text-white">{{weather_description}}</p>
       </div>
       <div id="right" class="w-1/2 flex-col space-y-2">
         <!-- Temperature -->
@@ -73,7 +73,7 @@
         >
           <ion-icon class="w-8 h-8 text-white" name="thermometer"></ion-icon>
           <div class="">
-            <p class="font-bold text-2xl text-right text-[#ff5a00]">26.08 °C</p>
+            <p class="font-bold text-2xl text-right text-[#ff5a00]">{{temperature}} °C</p>
             <p class="text-sm text-white text-right">Temperature</p>
           </div>
         </div>
@@ -83,7 +83,7 @@
         >
           <ion-icon class="w-8 h-8 text-white" name="speedometer"></ion-icon>
           <div class="">
-            <p class="font-bold text-2xl text-[#ff5a00] text-right">1.18 m/s</p>
+            <p class="font-bold text-2xl text-[#ff5a00] text-right">{{wind_speed}} m/s</p>
             <p class="text-sm text-white text-right">Wind</p>
           </div>
         </div>
@@ -93,7 +93,7 @@
         >
           <ion-icon class="w-8 h-8 text-white" name="rainy"></ion-icon>
           <div class="">
-            <p class="font-bold text-2xl text-[#ff5a00] text-right">89 %</p>
+            <p class="font-bold text-2xl text-[#ff5a00] text-right">{{humidity}} %</p>
             <p class="text-sm text-white text-right">Humidity</p>
           </div>
         </div>
