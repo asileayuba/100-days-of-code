@@ -49,7 +49,7 @@
         <p class="font-semibold text-xl text-white">{{city}}, {{country}}</p>
       </div>
       <div id="right" class="flex justify-end items-center">
-        <img class="w-28 h-4w-28" src="{% static 'images/sunny1.png' %}" alt="" />
+        <img class="w-28 h-4w-28" src="{{icon_url}}" alt="" />
       </div>
     </div>
 
@@ -60,7 +60,7 @@
     >
       <div id="left" class="flex flex-col justify-start">
         <!-- Icon -->
-        <img class="" src="{% static 'images/sunny1.png' %}" alt="weather icon" />
+        <img style="width: 100px; height: 100px; object-fit: contain;" src="{{icon_url}}" alt="weather icon" />
         <!-- Weather -->
         <p class="font-bold text-4xl text-white">{{weather}}</p>
         <!-- Description -->
