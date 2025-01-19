@@ -79,7 +79,7 @@ DATABASES = {
         "ENGINE": "django.db.backends.mysql",
         "NAME": "CoreCRM",
         "USER": "root",
-        "PASSWORD": "Asile2024$",
+        "PASSWORD": "your-password",
         "HOST": "localhost",
         "PORT": "3306",
     }
