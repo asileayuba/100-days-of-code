@@ -28,48 +28,32 @@ def get_weather(city):
 def home(request):
     # Retrieve the city name from the GET request's query parameters
     city = request.GET.get('city')
-    # Default icon URL in case no valid weather data is available
-    icon_url = "https://openweathermap.org/img/wn/10d@2x.png"
     
-    # Initialize all variables to avoid errors if API data is not available
-    weather = None
-    weather_description = None
-    country = None
-    wind_speed = None
-    pressure = None
-    humidity = None
-    temperature = None
+    # Initialize the context with default icon URL and error (if needed)
+    context = {
+        "icon_url": "https://openweathermap.org/img/wn/10d@2x.png",  # Default icon URL
+    }
 
     if city:
         # Fetch the weather data for the specified city
         weather_data_result = get_weather(city)
         
         if weather_data_result is not None:
-            # Extract the weather icon ID and generate the icon URL
+            # Extract weather details and add them to the context
             icon_id = weather_data_result["weather"][0]["icon"]
-            icon_url = f"https://openweathermap.org/img/wn/{icon_id}@2x.png"
-            # Extract weather details from the API response
-            weather = weather_data_result['weather'][0]['main']  # Main weather condition
-            weather_description = weather_data_result['weather'][0]['description']  # Detailed weather description
-            city = weather_data_result['name']  # City name (corrected for API results)
-            country = weather_data_result['sys']['country']  # Country code
-            wind_speed = weather_data_result['wind']['speed']  # Wind speed
-            pressure = weather_data_result['main']['pressure']  # Atmospheric pressure
-            humidity = weather_data_result['main']['humidity']  # Humidity percentage
-            temperature = weather_data_result['main']['temp']  # Current temperature
+            context.update({
+                "icon_url": f"https://openweathermap.org/img/wn/{icon_id}@2x.png",
+                "weather": weather_data_result['weather'][0]['main'],
+                "weather_description": weather_data_result['weather'][0]['description'],
+                "city": weather_data_result['name'],
+                "country": weather_data_result['sys']['country'],
+                "wind_speed": weather_data_result['wind']['speed'],
+                "pressure": weather_data_result['main']['pressure'],
+                "humidity": weather_data_result['main']['humidity'],
+                "temperature": weather_data_result['main']['temp'],
+            })
         else:
-            # If weather data is not available, show an error message
-            return render(request, "index.html", {"error": "City not found or API issue"})
+            # Add an error message to the context
+            context["error"] = "City not found or API issue"
 
-    # Render the home page with the weather data and icon
-    return render(request, "index.html", {
-        "icon_url": icon_url,                 # Weather icon URL
-        "weather": weather,                   # Main weather condition
-        "weather_description": weather_description, # Detailed weather description
-        "city": city,                         # City name
-        "country": country,                   # Country code
-        "wind_speed": wind_speed,             # Wind speed
-        "pressure": pressure,                 # Atmospheric pressure
-        "humidity": humidity,                 # Humidity percentage
-        "temperature": temperature,           # Current temperature
-    })
+    return render(request, "index.html", context)
