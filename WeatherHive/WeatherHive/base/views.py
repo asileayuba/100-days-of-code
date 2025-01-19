@@ -30,6 +30,16 @@ def home(request):
     city = request.GET.get('city')
     # Default icon URL in case no valid weather data is available
     icon_url = "https://openweathermap.org/img/wn/10d@2x.png"
+    
+    # Initialize all variables to avoid errors if API data is not available
+    weather = None
+    weather_description = None
+    country = None
+    wind_speed = None
+    pressure = None
+    humidity = None
+    temperature = None
+
     if city:
         # Fetch the weather data for the specified city
         weather_data_result = get_weather(city)
@@ -48,9 +58,9 @@ def home(request):
             humidity = weather_data_result['main']['humidity']  # Humidity percentage
             temperature = weather_data_result['main']['temp']  # Current temperature
         else:
-            # If weather data is not available, render the template without details
-            return render(request, "index.html")
-    
+            # If weather data is not available, show an error message
+            return render(request, "index.html", {"error": "City not found or API issue"})
+
     # Render the home page with the weather data and icon
     return render(request, "index.html", {
         "icon_url": icon_url,                 # Weather icon URL
@@ -63,6 +73,3 @@ def home(request):
         "humidity": humidity,                 # Humidity percentage
         "temperature": temperature,           # Current temperature
     })
-    
-    # Redundant return statement; unreachable code
-    return render(request, "index.html")
