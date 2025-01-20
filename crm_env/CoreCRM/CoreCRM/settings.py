@@ -55,7 +55,7 @@ ROOT_URLCONF = "CoreCRM.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -77,9 +77,9 @@ WSGI_APPLICATION = "CoreCRM.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": "CoreCRM",
+        "NAME": "corecrm",
         "USER": "root",
-        "PASSWORD": "your-password",
+        "PASSWORD": "Asile2024$",
         "HOST": "localhost",
         "PORT": "3306",
     }
