@@ -5,10 +5,13 @@
 {% block content %}
 <h1>Register</h1>
 <br>
-<form method="POST" action="{% url 'home' %}">
+
+<form method="POST" action="">
     {% csrf_token %}
 
-        <br>
+    {{ form.as_p }}
+
+    <br>
         <button type="submit" class="btn btn-secondary">Login</button>
     </form>
 
