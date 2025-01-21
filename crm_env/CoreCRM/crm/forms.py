@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
-from .models import Record
+
 
 # Custom SignUpForm that extends Django's built-in UserCreationForm 
 # Adds additional fields for first name, last name, and email with customized widgets and placeholders
@@ -62,49 +62,3 @@ class SignUpForm(UserCreationForm):
             '</span>'
         )
 
-# Form to handle adding a new record to the Record model with custom styling
-class AddRecordForm(forms.ModelForm):
-    first_name = forms.CharField(
-        required=True, 
-        widget=forms.widgets.TextInput(attrs={"placeholder": "First Name", "class": "form-control"}), 
-        label=""
-    )
-    last_name = forms.CharField(
-        required=True, 
-        widget=forms.widgets.TextInput(attrs={"placeholder": "Last Name", "class": "form-control"}), 
-        label=""
-    )
-    email = forms.CharField(
-        required=True, 
-        widget=forms.widgets.TextInput(attrs={"placeholder": "Email", "class": "form-control"}), 
-        label=""
-    )
-    phone = forms.CharField(
-        required=True, 
-        widget=forms.widgets.TextInput(attrs={"placeholder": "Phone", "class": "form-control"}), 
-        label=""
-    )
-    address = forms.CharField(
-        required=True, 
-        widget=forms.widgets.TextInput(attrs={"placeholder": "Address", "class": "form-control"}), 
-        label=""
-    )
-    city = forms.CharField(
-        required=True, 
-        widget=forms.widgets.TextInput(attrs={"placeholder": "City", "class": "form-control"}), 
-        label=""
-    )
-    state = forms.CharField(
-        required=True, 
-        widget=forms.widgets.TextInput(attrs={"placeholder": "State", "class": "form-control"}), 
-        label=""
-    )
-    zipcode = forms.CharField(
-        required=True, 
-        widget=forms.widgets.TextInput(attrs={"placeholder": "Zipcode", "class": "form-control"}), 
-        label=""
-    )
-
-    class Meta:
-        model = Record  # Specifies the Record model for form fields
-        exclude = ("user",)  # Excludes the user field from the form, typically set automatically
