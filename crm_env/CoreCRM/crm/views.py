@@ -57,3 +57,6 @@ def logout_user(request):
     
     # Redirect the user to the home page after logging out
     return redirect('home')
+
+def register_user(request):
+    return render(request, 'register.html')
