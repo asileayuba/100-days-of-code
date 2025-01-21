@@ -1,5 +1,17 @@
 {% extends "base.html" %}
 
+
+<div class="col-md-6 offset-md-3">
 {% block content %}
 <h1>Register</h1>
+<br>
+<form method="POST" action="{% url 'home' %}">
+    {% csrf_token %}
+
+        <br>
+        <button type="submit" class="btn btn-secondary">Login</button>
+    </form>
+
+
+</div>
 {% endblock content %}

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect  # Import functions to render templates and redirect users
 from django.contrib.auth import authenticate, login, logout  # Import Django authentication functions
 from django.contrib import messages  # Import messages framework for user notifications
+from .forms import SignUpForm
 
 def home(request):
     """
@@ -59,4 +60,18 @@ def logout_user(request):
     return redirect('home')
 
 def register_user(request):
-    return render(request, 'register.html')
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            
+            # Authenticate and Login
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password1']
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            messages.success(request, "You have successfully registered. Welcome!")
+            return redirect('home')
+        else:
+            form = SignUpForm()            
+            return render(request, 'register.html' {'form': form})
