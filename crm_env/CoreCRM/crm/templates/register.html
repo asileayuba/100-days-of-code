@@ -1,20 +1,32 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}  {# Extending the base template to maintain a consistent layout #}
 
+{% block content %}  {# Start of the content block that will be inserted into the base template #}
 
-<div class="col-md-6 offset-md-3">
-{% block content %}
-<h1>Register</h1>
-<br>
+<div class="col-md-6 offset-md-3">  {# Centering the form on the page with Bootstrap grid system #}
+    <h1>Register</h1>  {# Page heading for registration #}
+    <br/>
 
-<form method="POST" action="">
-    {% csrf_token %}
+    <form method="POST" action="">  {# Form submission using POST method #}
+        {% csrf_token %}  {# Django security feature to prevent CSRF attacks #}
 
-    {{ form.as_p }}
+        {% if form.errors %}  {# Check if the form has validation errors #}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                Your Form Has Errors
+                {% for field in form %}  {# Loop through form fields to display specific errors #}
+                    {% if field.errors %}
+                        {{ field.errors }}  {# Display field-specific error messages #}
+                    {% endif %}
+                {% endfor %}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>  {# Bootstrap close button for the alert #}
+            </div>
+        {% endif %}
 
-    <br>
-        <button type="submit" class="btn btn-secondary">Login</button>
+        {{ form.as_p }}  {# Renders the form fields as paragraphs for default styling #}
+
+        <br/>
+        <button type="submit" class="btn btn-secondary">Register</button>  {# Submit button with Bootstrap styling #}
     </form>
 
-
 </div>
-{% endblock content %}
+
+{% endblock %}  {# End of the content block #}
