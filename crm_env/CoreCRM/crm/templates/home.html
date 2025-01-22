@@ -45,6 +45,8 @@
 
   {% else %}
 
+  <div class="col-md-6 mt-3 mx-auto">
+
   <h1>Login</h1>
   <br />
   <form method="POST" action="{% url 'home' %}">
@@ -75,6 +77,6 @@
       <button type="submit" class="btn btn-secondary">Login</button>
     </form>
   </form>
-
+  </div>
 {% endif %} 
 {% endblock content %}
