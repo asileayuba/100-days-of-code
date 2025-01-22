@@ -5,12 +5,7 @@ from .forms import SignUpForm
 from .models import Record
 
 def home(request):
-    """
-    View function for handling login requests.
-    - If the request method is POST, process the login form.
-    - If the request method is GET, render the login page.
-    """
-    
+    records = Record.objects.all()
     # Check if the request method is POST (indicating form submission)
     if request.method == 'POST':
         # Safely get 'username' and 'password' from the submitted form using .get()
@@ -43,7 +38,7 @@ def home(request):
         return redirect('home')
 
     # If the request method is GET (initial page load), render the login template
-    return render(request, 'home.html')
+    return render(request, 'home.html', {'records':records})
 
 def logout_user(request):
     """

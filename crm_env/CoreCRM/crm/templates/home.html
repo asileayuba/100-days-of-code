@@ -5,7 +5,12 @@
 <div class="col-md-6 offset-md-3">
   {% if user.is_authenticated %}
 
-  <h1>Hello Asile!</h1>
+  <h1>Records...</h1>
+  {% if records %}
+    {% for record in records %}
+      {{records}} <br>
+    {% endfor %}
+  {% endif %}
 
   {% else %}
 
