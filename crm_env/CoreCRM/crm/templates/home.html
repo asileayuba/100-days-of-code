@@ -8,7 +8,15 @@
   <h1>Records...</h1>
   {% if records %}
     {% for record in records %}
-      {{records}} <br>
+      {{record.first_name}}
+      {{record.last_name}} 
+      {{record.email}}
+      {{record.phone}} 
+      {{record.city}}
+      {{record.state}} 
+      {{record.zipcode}} 
+      {{record.created_at}} 
+      {{record.id}} 
     {% endfor %}
   {% endif %}
 
