@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect  # Import functions to render temp
 from django.contrib.auth import authenticate, login, logout  # Import Django authentication functions
 from django.contrib import messages  # Import messages framework for user notifications
 from .forms import SignUpForm
+from .models import Record
 
 def home(request):
     """
