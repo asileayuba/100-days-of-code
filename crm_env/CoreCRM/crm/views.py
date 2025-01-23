@@ -74,3 +74,8 @@ def register_user(request):
     
     return render(request, 'register.html', {'form': form})
 
+
+def customer_record(request, pk):
+    if request.user.is_authenticated:
+        # Look Up Records
+        customer_record = Record.objects.get(id=pk)
