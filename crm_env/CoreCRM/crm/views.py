@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect  # Import functions to render templates and redirect users
 from django.contrib.auth import authenticate, login, logout  # Import Django authentication functions
 from django.contrib import messages  # Import messages framework for user notifications
-from .forms import SignUpForm
+from .forms import SignUpForm, AddRecordForm
 from .models import Record
 
 def home(request):
@@ -97,4 +97,14 @@ def delete_record(request, pk):
     
     
 def add_record(request):
-    return render(request, 'add_record.html', {})
+    form = AddRecordForm(request.POST or None)
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            if form.is_valid():
+                add_record = form.save()
+                messages.success(request, "Record Added...")
+                return redirect('home')
+        return render(request, 'add_record.html', {'form':form})
+    else:
+        messages.success(request, "You must be logged in.")
+        return redirct('home')
