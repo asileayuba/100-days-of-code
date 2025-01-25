@@ -56,7 +56,7 @@
     const ctx = document.getElementById("myChart").getContext("2d");
   
     new Chart(ctx, {
-      type: "doughnut",
+      type: "line",
       data: {
         labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
         datasets: [
@@ -64,6 +64,7 @@
             label: "# of People Votes",
             data: [12, 4, 6, 5, 8, 12],
             borderWidth: 1,
+            fill: 1,
             backgroundColor: [
               "rgba(255, 99, 132, 0.2)",
               "rgba(255, 159, 64, 0.2)",
