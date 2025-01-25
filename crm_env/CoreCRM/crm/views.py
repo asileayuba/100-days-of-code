@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect  # Import functions to render templates and redirect users
+from django.shortcuts import render, get_list_or_404, redirect  # Import functions to render templates, get_list_or_404 and redirect users
 from django.contrib.auth import authenticate, login, logout  # Import Django authentication functions
 from django.contrib import messages  # Import messages framework for user notifications
 from .forms import SignUpForm, AddRecordForm
@@ -86,14 +86,22 @@ def customer_record(request, pk):
     
     
 def delete_record(request, pk):
-    if request.user.is_authenticated:
-        delete_it = Record.objects.get(id=pk)
-        delete_it.delete()
-        messages.success(request, "Records deleted successfully.")
-        return redirect('home')
+    if request.method == "POST":
+        if request.user.is_authenticated:
+            # Using filter() and first() to avoid list errors
+            delete_it = Record.objects.filter(id=pk).first()
+            
+            if delete_it:
+                delete_it.delete()
+                messages.success(request, "Record deleted successfully.")
+            else:
+                messages.error(request, "Record not found.")
+        else:
+            messages.error(request, "You must be logged in to delete a record.")
     else:
-        messages.success(request, "You must be logged in to delete record.")
-        return redirect('home')
+        messages.error(request, "Invalid request method.")
+    
+    return redirect('home')
     
     
 def add_record(request):
