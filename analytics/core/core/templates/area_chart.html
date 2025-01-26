@@ -53,44 +53,63 @@
   </body>
 
   <script>
-    const ctx = document.getElementById("myChart").getContext("2d");
+        const ctx = document.getElementById("myChart").getContext("2d");
 
-    new Chart(ctx, {
-      type: "bar",
-      data: {
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-        datasets: [
-          {
-            label: "# of People Votes",
-            data: [12, 4, 6, 5, 8, 12],
-            borderWidth: 1,
-            backgroundColor: [
-              "rgba(255, 99, 132, 0.2)",
-              "rgba(255, 159, 64, 0.2)",
-              "rgba(255, 205, 86, 0.2)",
-              "rgba(75, 192, 192, 0.2)",
-              "rgba(54, 162, 235, 0.2)",
-              "rgba(153, 102, 255, 0.2)",
-            ],
-            borderColor: [
-              "rgb(255, 99, 132)",
-              "rgb(255, 159, 64)",
-              "rgb(255, 205, 86)",
-              "rgb(75, 192, 192)",
-              "rgb(54, 162, 235)",
-              "rgb(153, 102, 255)",
+        // Note: changes to the plugin code is not reflected to the chart, because the plugin is loaded at chart construction time and editor changes only trigger an chart.update().
+    const plugin = {
+      id: 'customCanvasBackgroundColor',
+      beforeDraw: (chart, args, options) => {
+        const {ctx} = chart;
+        ctx.save();
+        ctx.globalCompositeOperation = 'destination-over';
+        ctx.fillStyle = options.color || '#99ffff';
+        ctx.fillRect(0, 0, chart.width, chart.height);
+        ctx.restore();
+      }
+    };
+
+        new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+            datasets: [
+              {
+                label: "# of People Votes",
+                data: [12, 4, 6, 5, 8, 12],
+                borderWidth: 1,
+                backgroundColor: [
+                  "rgba(255, 99, 132, 0.2)",
+                  "rgba(255, 159, 64, 0.2)",
+                  "rgba(255, 205, 86, 0.2)",
+                  "rgba(75, 192, 192, 0.2)",
+                  "rgba(54, 162, 235, 0.2)",
+                  "rgba(153, 102, 255, 0.2)",
+                ],
+                borderColor: [
+                  "rgb(255, 99, 132)",
+                  "rgb(255, 159, 64)",
+                  "rgb(255, 205, 86)",
+                  "rgb(75, 192, 192)",
+                  "rgb(54, 162, 235)",
+                  "rgb(153, 102, 255)",
+                ],
+              },
             ],
           },
-        ],
-      },
-      options: {
-        indexAxis: "y",
-        scales: {
-          y: {
-            beginAtZero: true,
+          options: {
+            indexAxis: "y",
+            plugins: {
+              customCanvasBackgroundColor: {
+                color: 'lightGreen',
+              }
+            },
+            scales: {
+              y: {
+                beginAtZero: true,
+              },
+            },
           },
-        },
-      },
-    });
+          plugins: [plugin],
+        });
   </script>
 </html>
