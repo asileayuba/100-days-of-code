@@ -9,3 +9,6 @@ def area_chart(request):
 
 def datatables(request):
     return render(request, 'datatables.html')
+
+def dashboard(request):
+    return render(request, 'dashboard.html')
