@@ -1,4 +1,5 @@
-{% extends "base.html" %} 
+{% extends "base.html" %}
+{% load static %}
 {% block content %}
 <div class="d-flex">
   {% include "sidebar.html" %}
@@ -15,7 +16,7 @@
               <h5 class="card-title text-primary">Total Views</h5>
               <h6 class="card-subtitle mb-2 text-muted">Yearly</h6>
               <div>
-                <canvas id="total-views"></canvas>
+                <canvas id="total-views-chart"></canvas>
               </div>
               <h1 class="card-text text-end">50,000,000</h1>
             </div>
@@ -27,11 +28,11 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title text-primary">Revenue</h5>
-              <h6 class="card-subtitle mb-2 text-muted">Yearly</h6>
+              <h6 class="card-subtitle mb-2 text-muted">Annual</h6>
               <div>
-                <canvas id="revenue"></canvas>
+                <canvas id="revenue-chart"></canvas>
               </div>
-              <h1 class="card-text text-end">50,000,000</h1>
+              <h1 class="card-text text-end">$8,108</h1>
             </div>
           </div>
         </div>
@@ -42,16 +43,77 @@
             <div class="card-body">
               <h5 class="card-title text-primary">Growth Rate</h5>
               <h6 class="card-subtitle mb-2 text-muted">Yearly</h6>
-              <div>
-                <canvas id="growth-rate"></canvas>
-              </div>
-              <h1 class="card-text text-end">50,000,000</h1>
+              <h1 class="card-text text-end text-success">79%</h1>
             </div>
           </div>
         </div>
 
       </div>
+      
+      <!-- Card for Subscriber Count -->
+      <div class="mx-3 my-5">
+        <h3 class="text-center">Subscriber Count</h3>
+        <div class="bg-secondary bg-opacity-25 px-5 py-3 rounded">
+          <canvas id="subscriber-count"></canvas>
+        </div>
+      </div>
+
+      <div class="d-flex">
+        <div>
+            <!-- Pie Chart -->
+             <div class="card mx-3 p-3">
+                <h6 class="text-center">Traffic Sources</h6>
+                <canvas id="traffic-sources"></canvas>
+             </div>
+        </div>
+        <div>
+            <!-- Table for Video Data -->
+            <div class="card mx-3 p-3">
+                <h6 class="text-center">Video Data</h6>
+                <table id="datatable" class="display" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Video Title</th>
+                            <th>Published Date</th>
+                            <th>Views Count</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Video 1</td>
+                            <td>2025-01-01</td>
+                            <td>12,000</td>
+                        </tr>
+                        <tr>
+                            <td>Video 2</td>
+                            <td>2025-01-02</td>
+                            <td>20,000</td>
+                        </tr>
+                        <tr>
+                            <td>Video 3</td>
+                            <td>2025-01-03</td>
+                            <td>5,000</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+
+{% block scripts %}
+<script src="{% static 'js/index.js' %}"></script>
+
+<!-- DataTables CSS -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+
+<!-- jQuery (necessary for DataTables and other plugins) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- DataTables JS -->
+<script type="text/javascript" charset="utf-8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+
+{% endblock scripts %}
 {% endblock content %}
