@@ -73,7 +73,8 @@ new Chart(trafficSourcesElement, {
         }]
     },
     options: {
-        responsive: false, // This will prevent Chart.js from resizing automatically
+        responsive: false,  // Disable auto resizing
+        maintainAspectRatio: false,  // Allow custom dimensions
         plugins: {
             legend: {
                 display: true,
@@ -86,7 +87,7 @@ new Chart(trafficSourcesElement, {
                     }
                 }
             }
-        },
+        }
     }
 });
 
