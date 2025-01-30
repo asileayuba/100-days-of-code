@@ -40,20 +40,20 @@
     <script src="https://cdn.datatables.net/2.2.1/js/dataTables.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.datatables.net/2.2.1/js/dataTables.bootstrap5.js"></script>
-    {% block stylesheets %}
-    
-    {% endblock stylesheets %}
+    {% block stylesheets %} {% endblock stylesheets %}
   </head>
   <body>
     <div>
-      {% block content %}
-      
-      {% endblock content %}
+      <div class="d-flex">
+        {% include "sidebar.html" %}
+        <div class="w-100">
+          {% include "header.html" %} 
+          {% block content %} 
+          {% endblock content %}
+        </div>
+      </div>
     </div>
   </body>
 
-  {% block scripts %}
-  
-  {% endblock %}
-
+  {% block scripts %} {% endblock %}
 </html>

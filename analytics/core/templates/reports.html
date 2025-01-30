@@ -1,0 +1,85 @@
+{% extends "base.html" %} 
+{% load static %} 
+
+{% block content %}
+<!-- DataTable Column -->
+<div class="container mt-3">
+        <b><h5 class="text-center">Most View Videos</h5></b>
+        <table id="datatable" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Video Title</th>
+                    <th>Views</th>
+                    <th>Likes</th>
+                    <th>Comments</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>How to Build a Website in 10 Minutes</td>
+                    <td>1,245,678</td>
+                    <td>98,765</td>
+                    <td>12,345</td>
+                </tr>
+                <tr>
+                    <td>Top 5 AI Tools for Developers</td>
+                    <td>987,654</td>
+                    <td>85,432</td>
+                    <td>9,876</td>
+                </tr>
+                <tr>
+                    <td>Python for Beginners - Full Course</td>
+                    <td>876,543</td>
+                    <td>74,321</td>
+                    <td>8,765</td>
+                </tr>
+                <tr>
+                    <td>10 Tips to Boost Your Coding Skills</td>
+                    <td>765,432</td>
+                    <td>65,210</td>
+                    <td>7,654</td>
+                </tr>
+                <tr>
+                    <td>The Future of Artificial Intelligence</td>
+                    <td>654,321</td>
+                    <td>54,109</td>
+                    <td>6,543</td>
+                </tr>
+                <tr>
+                    <td>Understanding Neural Networks</td>
+                    <td>543,210</td>
+                    <td>43,987</td>
+                    <td>5,432</td>
+                </tr>
+                <tr>
+                    <td>How to Get Your First Tech Job</td>
+                    <td>432,109</td>
+                    <td>32,876</td>
+                    <td>4,321</td>
+                </tr>
+                <tr>
+                    <td>React vs Vue vs Angular - Which One to Learn?</td>
+                    <td>321,098</td>
+                    <td>21,765</td>
+                    <td>3,210</td>
+                </tr>
+                <tr>
+                    <td>Building a Portfolio Website from Scratch</td>
+                    <td>210,987</td>
+                    <td>10,654</td>
+                    <td>2,109</td>
+                </tr>
+                <tr>
+                    <td>How to Make Money as a Developer</td>
+                    <td>109,876</td>
+                    <td>5,432</td>
+                    <td>1,098</td>
+                </tr>
+            </tbody>
+        </table>                
+    </div>   
+{% block scripts %}
+
+{% endblock scripts %} 
+<script src="{% static 'js/reports.js' %}"></script>
+{% endblock content %}

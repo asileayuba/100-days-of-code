@@ -13,3 +13,6 @@ def datatables(request):
 
 def dashboard(request):
     return render(request, 'dashboard.html')
+
+def reports(request):
+    return render(request, 'reports.html')
