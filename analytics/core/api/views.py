@@ -9,12 +9,13 @@ def total_views(request):
         "labels": [],
         "data": [],
     }
-    print(quer)
+    
     for item in queryset:
-        dct["labels"].append(item.label)
-        dct["data"].append(item.views)
-    print(dct)
-
+        dct["labels"].append(item.label)  
+        dct["data"].append(item.views)  
+    
+    # Return the data as a JSON response
+    return JsonResponse(dct)
 
 
     # return JsonResponse({
