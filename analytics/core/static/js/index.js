@@ -100,12 +100,37 @@ if (trafficSourcesElement) {
     });
 }
 
-// Initialize DataTable
 $(document).ready(function() {
-    $('#datatable').DataTable({
+    // Initialize DataTable
+    const dataTable = $('#datatable').DataTable({
         "paging": true,
         "searching": true,
         "ordering": true,
-        "info": true
+        "info": true,
+        "columns": [
+            { title: "Title" },
+            { title: "Views" },
+            { title: "Likes" },
+            { title: "Comments" }
+        ]
     });
+
+    // Fetch data for the DataTable
+    fetch('/api/datatable_api/')
+        .then(response => response.json())
+        .then(data => {
+            dataTable.clear(); // Clear existing rows
+
+            data.forEach(row => {
+                dataTable.row.add([
+                    row.title,
+                    row.views,
+                    row.likes,
+                    row.comments
+                ]);
+            });
+
+            dataTable.draw(); // Redraw the table with new data
+        })
+        .catch(error => console.error('Error fetching data for DataTable:', error));
 });
