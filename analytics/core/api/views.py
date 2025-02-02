@@ -17,7 +17,8 @@ def total_views(request):
     # Return the data as a JSON response
     return JsonResponse(dct)
 
-
+def datatable_api(request):
+    return JsonResponse({})
     # return JsonResponse({
     #     "labels": ["Aug", "Sept", "Oct", "Nov", "Dec", "Jan"],
     #     "data": [randint(1000*i, 1000*(i+10)) for i in range(6)],
