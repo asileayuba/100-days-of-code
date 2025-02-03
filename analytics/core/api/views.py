@@ -69,7 +69,7 @@ def movies_with_ratings(request):
     # Fetch ratings and related movie data
     queryset = Ratings.objects.all().values(
         "rating", "votes", "movie__id", "movie__title", "movie__year"
-    )[:1000]  # Limit the query to the first 1000 records
+    ).filter(movie__year__gt=2000).order_by('-rating')[:1000]  # Limit the query to the first 1000 records
     
     data = []  
     
