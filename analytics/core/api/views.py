@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from random import randint
 from api.models import TotalViewsModel, MostWatchedVideos
-from app.models import Movies
+from app.models import Movies, Ratings
 
 def total_views(request):
     queryset = TotalViewsModel.objects.all()
@@ -48,13 +48,40 @@ def datatable_api(request):
 
 
 def movies(request):
-    # Fetch the first 50 movies
-    movie_queryset = Movies.objects.all()[:50]
+    # Fetch the first 1000 movies
+    movie_queryset = Movies.objects.all()[:1000]
     
     data = []
     for item in movie_queryset:
-        data.append([item.id, item.title, item.year])
+        # Construct the dictionary with key names as expected by the DataTable
+        data.append({
+            "id": item.id,  
+            "title": item.title,
+            "year": item.year,
+        })
     
     return JsonResponse({
-        "data": data
+        "data": data 
+    })
+    
+    
+def movies_with_ratings(request):
+    # Fetch ratings and related movie data
+    queryset = Ratings.objects.all().values(
+        "rating", "votes", "movie__id", "movie__title", "movie__year"
+    )[:1000]  # Limit the query to the first 1000 records
+    
+    data = []  
+    
+    for item in queryset:
+        data.append({
+            "id": item["movie__id"],  
+            "title": item["movie__title"],
+            "year": item["movie__year"],
+            "rating": item["rating"],
+            "votes": item["votes"]
+        })
+    
+    return JsonResponse({
+        "data": data 
     })

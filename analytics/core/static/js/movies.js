@@ -4,26 +4,33 @@ $(document).ready(function() {
         $('#datatable').DataTable().clear().destroy();
     }
 
-    // Initialize DataTable
+    // Initialize DataTable with the columns to be displayed
     const dataTable = $('#datatable').DataTable({
         "paging": true,  // Enable paging
-        "pageLength": 3,  // Show only 3 rows per page
         "searching": true,
         "ordering": true,
         "info": true,
         "columns": [
-            { title: "ID", data: "ID" },
-            { title: "Title", data: "Title" },
-            { title: "Year", data: "Year" }
+            { title: "ID", data: "id" },       // Expecting 'id' here
+            { title: "Title", data: "title" }, // Expecting 'title' here
+            { title: "Year", data: "year" },   // Expecting 'year' here
+            { title: "Rating", data: "rating" }, // Expecting 'rating' here
+            { title: "Votes", data: "votes" }  // Expecting 'votes' here
         ]
     });
 
-    // Fetch data for the DataTable
-    fetch('/api/datatable_api/')
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);  // Debug log
-            dataTable.clear().rows.add(data).draw();  // Add data to the table
-        })
-        .catch(error => console.error('Error:', error));
+    // Fetch data for the DataTable (from /api/movies_with_ratings/)
+    fetch('/api/movies_with_ratings/')
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);  // Debug log
+
+        if (data && data.data) {
+            // Add data to the DataTable
+            dataTable.clear().rows.add(data.data).draw();
+        } else {
+            console.error('Invalid data structure:', data);
+        }
+    })
+    .catch(error => console.error('Error:', error));
 });
