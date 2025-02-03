@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from random import randint
-from api.models import TotalViewsModel
-
+from api.models import TotalViewsModel, MostWatchedVideos
+from app.models import Movies
 
 def total_views(request):
     queryset = TotalViewsModel.objects.all()
@@ -25,7 +25,9 @@ from django.http import JsonResponse
 
 
 def datatable_api(request):
-    data = [
+    quaery = MostWatchedVideos.objects.all()
+    return JsonResponse({ 
+        "data": [
         ["How to Build a Website in 10 Minutes", "1,245,678", "98,765", "12,345"],
         ["Top 5 AI Tools for Developers", "987,654", "85,432", "9,876"],
         ["Python for Beginners - Full Course", "876,543", "74,321", "8,765"],
@@ -37,10 +39,22 @@ def datatable_api(request):
         ["Building a Portfolio Website from Scratch", "210,987", "10,654", "2,109"],
         ["How to Make Money as a Developer", "109,876", "5,432", "1,098"],
     ]
-
-    return JsonResponse(data, safe=False)
+        })
 
     # return JsonResponse({
     #     "labels": ["Aug", "Sept", "Oct", "Nov", "Dec", "Jan"],
     #     "data": [randint(1000*i, 1000*(i+10)) for i in range(6)],
     # })
+
+
+def movies(request):
+    # Fetch the first 50 movies
+    movie_queryset = Movies.objects.all()[:50]
+    
+    data = []
+    for item in movie_queryset:
+        data.append([item.id, item.title, item.year])
+    
+    return JsonResponse({
+        "data": data
+    })
