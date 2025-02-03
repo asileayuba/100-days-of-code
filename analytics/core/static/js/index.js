@@ -119,18 +119,8 @@ $(document).ready(function() {
     fetch('/api/datatable_api/')
         .then(response => response.json())
         .then(data => {
-            dataTable.clear(); // Clear existing rows
-
-            data.forEach(row => {
-                dataTable.row.add([
-                    row.title,
-                    row.views,
-                    row.likes,
-                    row.comments
-                ]);
-            });
-
-            dataTable.draw(); // Redraw the table with new data
+            console.log(data); // Debug log
+            dataTable.clear().rows.add(data).draw(); // Add this line to populate the table
         })
-        .catch(error => console.error('Error fetching data for DataTable:', error));
+        .catch(error => console.error('Error:', error));
 });
