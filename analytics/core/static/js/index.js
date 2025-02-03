@@ -103,7 +103,8 @@ if (trafficSourcesElement) {
 $(document).ready(function() {
     // Initialize DataTable
     const dataTable = $('#datatable').DataTable({
-        "paging": true,
+        "paging": true,  // Enable paging
+        "pageLength": 3,  // Show only 3 rows per page
         "searching": true,
         "ordering": true,
         "info": true,
