@@ -1,8 +1,10 @@
 from django.shortcuts import render
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from random import randint
 from api.models import TotalViewsModel, MostWatchedVideos
 from app.models import Movies, Ratings
+import csv
+
 
 def total_views(request):
     queryset = TotalViewsModel.objects.all()
@@ -85,3 +87,34 @@ def movies_with_ratings(request):
     return JsonResponse({
         "data": data 
     })
+    
+    
+def export(request):
+    # Set up the HTTP response with the correct content type and header for downloading CSV
+    response = HttpResponse(
+        content_type="text/csv",
+        headers={'Content-Disposition': 'attachment; filename="movies_export.csv"'}
+    )
+    
+    # Create a CSV writer object
+    writer = csv.writer(response)
+    
+    # Write the header row (column names)
+    writer.writerow(['ID', 'Title', 'Year', 'Rating', 'Votes'])
+    
+    # Fetch the first 1000 ratings and related movie data, filtered by year > 2000 and ordered by rating
+    queryset = Ratings.objects.all().values(
+        "rating", "votes", "movie__id", "movie__title", "movie__year"
+    ).filter(movie__year__gt=2000).order_by('-rating')[:1000]
+    
+    # Write each row of the data
+    for item in queryset:
+        writer.writerow([
+            item["movie__id"],  # Movie ID
+            item["movie__title"],  # Movie Title
+            item["movie__year"],  # Movie Year
+            item["rating"],  # Movie Rating
+            item["votes"],  # Movie Votes
+        ])
+        
+    return response
