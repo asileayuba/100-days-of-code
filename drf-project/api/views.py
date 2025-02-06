@@ -1,12 +1,10 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-
+from students.models import Student
 
 
 def studentsViews(request):
-    students = {
-        'id': 1,
-        'name': 'Asile',
-        'class': 'Computer Science'
-    }
-    return JsonResponse(students)
+    students = Student.objects.all()
+    # Manual Serialization
+    students_list = list(student.values())
+    return JsonResponse(students_list)
