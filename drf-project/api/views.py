@@ -4,9 +4,9 @@ from students.models import Student
 from .serializers import StudentSerializer
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.decorators import api_view
 
-
-
+@api_view(['GET'])
 def studentsViews(request):
     if request.method == 'GET':
         # Get all the data from the Student table
