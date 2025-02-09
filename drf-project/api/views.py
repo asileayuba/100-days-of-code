@@ -24,3 +24,8 @@ def studentsViews(request):
     
 
 def studentDetailView(request, pk):
+    try:
+        student = Student.objects.get(pk=pk)
+    except Student.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+     
