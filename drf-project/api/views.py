@@ -31,4 +31,5 @@ def studentDetailView(request, pk):
     
     if request.method == 'GET':
         serializer = StudentSerializer(student)
+        return Response(serializer.data, status=status.HTTP_200_OK)
      
