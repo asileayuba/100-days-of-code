@@ -28,4 +28,7 @@ def studentDetailView(request, pk):
         student = Student.objects.get(pk=pk)
     except Student.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
+    
+    if request.method == 'GET':
+        serializer = StudentSerializer(student)
      
