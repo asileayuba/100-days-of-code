@@ -22,7 +22,7 @@ def studentsViews(request):
         print(serializer.errors)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
-
+@api_view(['GET'])
 def studentDetailView(request, pk):
     try:
         student = Student.objects.get(pk=pk)
