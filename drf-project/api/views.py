@@ -1,10 +1,13 @@
+# Import necessary decorators and modules
+
 # from django.shortcuts import render
 # from django.http import JsonResponse
-from students.models import Student
-from .serializers import StudentSerializer
-from rest_framework.response import Response
-from rest_framework import status
-from rest_framework.decorators import api_view
+from students.models import Student # Import the Student model 
+from .serializers import StudentSerializer # Import the serializer for the Student model
+from rest_framework.response import Response # Handles API responses
+from rest_framework import status # Provides HTTP status codes
+from rest_framework.decorators import api_view  # Allows defining API views that accept HTTP methods
+
 
 @api_view(['GET', 'POST'])
 def studentsViews(request):
@@ -22,14 +25,22 @@ def studentsViews(request):
         print(serializer.errors)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
+    
+# Define an API view that only accepts GET requests
 @api_view(['GET'])
 def studentDetailView(request, pk):
+    """
+    Retrieve a student's details by primary key (pk).
+    Returns 404 if the student does not exist.
+    """
     try:
+        # Attempt to retrieve the student object by primary key (pk)
         student = Student.objects.get(pk=pk)
     except Student.DoesNotExist:
+        # If the student is not found, return a 404 Not Found response
         return Response(status=status.HTTP_404_NOT_FOUND)
     
+    # If the request method is GET, serialize the student object and return the data
     if request.method == 'GET':
-        serializer = StudentSerializer(student)
-        return Response(serializer.data, status=status.HTTP_200_OK)
-     
+        serializer = StudentSerializer(student)  # Convert student object to JSON format
+        return Response(serializer.data, status=status.HTTP_200_OK)  # Return the serialized data
