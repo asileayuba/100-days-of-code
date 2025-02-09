@@ -21,3 +21,6 @@ def studentsViews(request):
             return Response(serializer.data, status.HTTP_201_CREATED)
         print(serializer.errors)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+
+def studentDetailView(request, pk):
