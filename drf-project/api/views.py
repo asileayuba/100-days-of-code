@@ -47,3 +47,6 @@ def studentDetailView(request, pk):
     
     elif request.method == 'PUT':
         serializer = StudentSerializer(student, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
