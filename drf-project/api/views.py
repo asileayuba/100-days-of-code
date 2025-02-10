@@ -44,3 +44,6 @@ def studentDetailView(request, pk):
     if request.method == 'GET':
         serializer = StudentSerializer(student)  # Convert student object to JSON format
         return Response(serializer.data, status=status.HTTP_200_OK)  # Return the serialized data
+    
+    elif request.method == 'PUT':
+        serializer = StudentSerializer(data=request.data)
