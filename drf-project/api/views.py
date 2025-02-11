@@ -26,40 +26,34 @@ def studentsViews(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
     
-# Define an API view that only accepts GET and PUT requests
+    
+# Define an API view that supports GET, PUT, and DELETE requests
 @api_view(['GET', 'PUT', 'DELETE'])
 def studentDetailView(request, pk):
     """
-    Retrieve a student's details by primary key (pk).
+    Retrieve, update, or delete a student by primary key (pk).
     Returns 404 if the student does not exist.
     """
     try:
-        # Attempt to retrieve the student object by primary key (pk)
+        # Fetch student by primary key (pk); return 404 if not found
         student = Student.objects.get(pk=pk)
     except Student.DoesNotExist:
-        # If the student is not found, return a 404 Not Found response
         return Response(status=status.HTTP_404_NOT_FOUND)
     
-    # If the request method is GET, serialize the student object and return the data
     if request.method == 'GET':
-        serializer = StudentSerializer(student)  # Convert student object to JSON format
-        return Response(serializer.data, status=status.HTTP_200_OK)  # Return the serialized data
+        # Serialize and return student data
+        serializer = StudentSerializer(student)
+        return Response(serializer.data, status=status.HTTP_200_OK)
     
     elif request.method == 'PUT':
-        # Deserialize the incoming request data and update the existing student object
+        # Update student details with validated request data
         serializer = StudentSerializer(student, data=request.data)
-    
-        # Check if the provided data is valid according to the serializer's validation rules
         if serializer.is_valid():
-            serializer.save()  # Save the updated student data to the database
-            return Response(serializer.data, status=status.HTTP_200_OK)  # Return the updated student data
-        else:
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)  # Return validation errors
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
     elif request.method == 'DELETE':
-        # Delete the student object from the database
+        # Remove student record from the database
         student.delete()
-        
-        # Return a 204 No Content response indicating successful deletion
         return Response(status=status.HTTP_204_NO_CONTENT)
-
