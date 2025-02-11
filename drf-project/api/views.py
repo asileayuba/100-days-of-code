@@ -49,11 +49,12 @@ def studentDetailView(request, pk):
         # Deserialize the incoming request data and update the existing student object
         serializer = StudentSerializer(student, data=request.data)
     
-    # Check if the provided data is valid according to the serializer's validation rules
-    if serializer.is_valid():
-        serializer.save()  # Save the updated student data to the database
-        return Response(serializer.data, status=status.HTTP_200_OK)  # Return the updated student data
-    else:
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)  # Return validation errors
-    
-elif request.method == 'DELETE':
+        # Check if the provided data is valid according to the serializer's validation rules
+        if serializer.is_valid():
+            serializer.save()  # Save the updated student data to the database
+            return Response(serializer.data, status=status.HTTP_200_OK)  # Return the updated student data
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)  # Return validation errors
+        
+    elif request.method == 'DELETE':
+        student.delete()
