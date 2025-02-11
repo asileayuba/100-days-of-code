@@ -57,5 +57,9 @@ def studentDetailView(request, pk):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)  # Return validation errors
         
     elif request.method == 'DELETE':
+        # Delete the student object from the database
         student.delete()
+        
+        # Return a 204 No Content response indicating successful deletion
         return Response(status=status.HTTP_204_NO_CONTENT)
+
