@@ -58,3 +58,4 @@ def studentDetailView(request, pk):
         
     elif request.method == 'DELETE':
         student.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
