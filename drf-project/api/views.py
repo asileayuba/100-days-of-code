@@ -55,3 +55,5 @@ def studentDetailView(request, pk):
         return Response(serializer.data, status=status.HTTP_200_OK)  # Return the updated student data
     else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)  # Return validation errors
+    
+elif request.method == 'DELETE':
