@@ -27,7 +27,7 @@ def studentsViews(request):
     
     
 # Define an API view that only accepts GET and PUT requests
-@api_view(['GET', 'PUT'])
+@api_view(['GET', 'PUT', 'DELETE'])
 def studentDetailView(request, pk):
     """
     Retrieve a student's details by primary key (pk).
