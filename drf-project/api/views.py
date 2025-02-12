@@ -7,7 +7,7 @@ from .serializers import StudentSerializer # Import the serializer for the Stude
 from rest_framework.response import Response # Handles API responses
 from rest_framework import status # Provides HTTP status codes
 from rest_framework.decorators import api_view  # Allows defining API views that accept HTTP methods
-
+from rest_framework.views import APIView
 
 @api_view(['GET', 'POST'])
 def studentsViews(request):
@@ -57,3 +57,8 @@ def studentDetailView(request, pk):
         # Remove student record from the database
         student.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+
+class Employees(APIView):
+    get
