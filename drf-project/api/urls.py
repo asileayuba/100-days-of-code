@@ -8,5 +8,5 @@ urlpatterns = [
     path('students/<int:pk>/', views.studentDetailView),
     
     # Employees Path
-    path('emloyees/', views.Employees.as_view())
+    path('employees/', views.Employees.as_view())
 ]

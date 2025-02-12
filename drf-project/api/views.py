@@ -3,11 +3,12 @@
 # from django.shortcuts import render
 # from django.http import JsonResponse
 from students.models import Student # Import the Student model 
-from .serializers import StudentSerializer # Import the serializer for the Student model
+from .serializers import StudentSerializer, EmployeeSerializer # Import the serializer for the Student and Employee model
 from rest_framework.response import Response # Handles API responses
 from rest_framework import status # Provides HTTP status codes
 from rest_framework.decorators import api_view  # Allows defining API views that accept HTTP methods
 from rest_framework.views import APIView
+from employees.models import Employee
 
 @api_view(['GET', 'POST'])
 def studentsViews(request):
@@ -59,6 +60,15 @@ def studentDetailView(request, pk):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-
+# API view to handle employee-related requests
 class Employees(APIView):
-    get
+    def get(self, request):
+        # Retrieve all employee records from the database
+        employees = Employee.objects.all()
+        
+        # Serialize the queryset to JSON format
+        serializer = EmployeeSerializer(employees, many=True)
+        
+        # Return serialized data with a 200 OK status
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
