@@ -73,4 +73,5 @@ class Employees(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
     
     def post(self, request):
+        serializer = EmployeeSerializer(data=request.data)
         
