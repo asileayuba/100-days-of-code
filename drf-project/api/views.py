@@ -73,9 +73,12 @@ class Employees(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
     
     def post(self, request):
-        serializer = EmployeeSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    # Deserialize and validate incoming employee data
+    serializer = EmployeeSerializer(data=request.data)
     
+    if serializer.is_valid():
+        serializer.save()  # Save the new employee record to the database
+        return Response(serializer.data, status=status.HTTP_201_CREATED)  # Return the created employee data
+    
+    # Return validation errors if data is invalid
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
