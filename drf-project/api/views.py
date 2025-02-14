@@ -93,3 +93,5 @@ class EmployeesDetail(APIView):
         
     def get(self, request, pk):
         employee = self.get_object(pk)
+        serializer = EmployeeSerializer
+        return Response(serializer.data, status=status.HTTP_200_OK)
