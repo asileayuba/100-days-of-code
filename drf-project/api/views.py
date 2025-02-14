@@ -84,14 +84,19 @@ class Employees(APIView):
         # Return validation errors if data is invalid
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-class EmployeesDetail(APIView):
+# API view to handle individual employee records
+class EmployeeDetail(APIView):
+    
     def get_object(self, pk):
+        """Retrieve an employee by primary key (pk) or raise 404 if not found."""
         try:
-            employee = Employee.objects.get(pk=pk)
+            return Employee.objects.get(pk=pk)
         except Employee.DoesNotExist:
-            raise Http404
-        
+            raise Http404  # Raise 404 error if employee does not exist
+
     def get(self, request, pk):
-        employee = self.get_object(pk)
-        serializer = EmployeeSerializer
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        """Handle GET request to retrieve a specific employee's details."""
+        employee = self.get_object(pk)  # Fetch the employee object
+        serializer = EmployeeSerializer(employee)  # Serialize the employee object
+        return Response(serializer.data, status=status.HTTP_200_OK)  # Return the serialized data
+    
