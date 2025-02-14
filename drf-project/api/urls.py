@@ -9,4 +9,5 @@ urlpatterns = [
     
     # Employees Path
     path('employees/', views.Employees.as_view())
+    path('employees/<int:pk>', views.EmployeesDetail.as_view())
 ]
