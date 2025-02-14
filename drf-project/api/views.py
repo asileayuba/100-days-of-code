@@ -82,3 +82,7 @@ class Employees(APIView):
         
         # Return validation errors if data is invalid
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class EmployeesDetail(APIView):
+    def get_object(self, pk):
+        
