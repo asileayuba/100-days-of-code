@@ -90,3 +90,6 @@ class EmployeesDetail(APIView):
             employee = Employee.objects.get(pk=pk)
         except Employee.DoesNotExist:
             raise Http404
+        
+    def get(self, request, pk):
+        employee = self.get_object(pk)
