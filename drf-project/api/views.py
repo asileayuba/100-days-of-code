@@ -9,6 +9,7 @@ from rest_framework import status # Provides HTTP status codes
 from rest_framework.decorators import api_view  # Allows defining API views that accept HTTP methods
 from rest_framework.views import APIView
 from employees.models import Employee
+from django.http import Http404
 
 @api_view(['GET', 'POST'])
 def studentsViews(request):
@@ -85,4 +86,7 @@ class Employees(APIView):
 
 class EmployeesDetail(APIView):
     def get_object(self, pk):
-        
+        try:
+            employee = Employee.objects.get(pk=pk)
+        except Employee.DoesNotExist:
+            raise Http404
