@@ -101,3 +101,4 @@ class EmployeeDetail(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)  # Return the serialized data
     
     def put(self, request, pk):
+        return
