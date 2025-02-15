@@ -101,15 +101,21 @@ class EmployeeDetail(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)  # Return the serialized data
     
     def put(self, request, pk):
-        employee = self.get_object(pk)
-        serializer = EmployeeSerializer(employee, data=request.data)
+        """Handle PUT request to update an existing employee's details."""
+        employee = self.get_object(pk)  # Fetch the employee object
+        serializer = EmployeeSerializer(employee, data=request.data)  # Deserialize incoming data
+    
+
         if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_200_OK)
+            serializer.save()  # Save updated employee data
+            return Response(serializer.data, status=status.HTTP_200_OK)  # Return updated data
+        
+        # Return validation errors if data is invalid
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
     def delete(self, request, pk):
-        employee = self.get_object(pk)
-        employee.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        """Handle DELETE request to remove an employee record."""
+        employee = self.get_object(pk)  # Fetch the employee object
+        employee.delete()  # Delete the employee from the database
+        return Response(status=status.HTTP_204_NO_CONTENT)  # Return a 204 No Content response
     
