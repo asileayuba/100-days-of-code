@@ -128,4 +128,5 @@ class Employees(mixins.ListModelMixin, mixins.CreateModelMixin, generics.Generic
     def get(self, request):
         return self.list(request)
     
-    
+    def post(self, request):
+        return self.create(request)
