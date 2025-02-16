@@ -130,3 +130,7 @@ class Employees(mixins.ListModelMixin, mixins.CreateModelMixin, generics.Generic
     
     def post(self, request):
         return self.create(request)
+    
+    
+class EmployeeDetail(generics.GenericAPIView):
+    
