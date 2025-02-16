@@ -120,17 +120,22 @@ def studentDetailView(request, pk):
 #         employee.delete()  # Delete the employee from the database
 #         return Response(status=status.HTTP_204_NO_CONTENT)  # Return a 204 No Content response
     
-    
+ 
+ 
+   
+# API view for listing all employees and creating a new employee
 class Employees(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
-    queryset = Employee.objects.all()
-    serializer_class = EmployeeSerializer
-    
+    queryset = Employee.objects.all()  # Define the queryset to retrieve all employees
+    serializer_class = EmployeeSerializer  # Specify the serializer for Employee model
+
     def get(self, request):
-        return self.list(request)
-    
+        """Handle GET request to list all employees."""
+        return self.list(request)  # Uses ListModelMixin to return all employee records
+
     def post(self, request):
-        return self.create(request)
+        """Handle POST request to create a new employee record."""
+        return self.create(request)  # Uses CreateModelMixin to add a new employee
     
     
 class EmployeeDetail(generics.GenericAPIView):
-    
+    pass
