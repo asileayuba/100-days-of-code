@@ -125,4 +125,7 @@ class Employees(mixins.ListModelMixin, mixins.CreateModelMixin, generics.Generic
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
     
+    def get(self, request):
+        return self.list(request)
+    
     
