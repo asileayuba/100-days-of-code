@@ -145,4 +145,4 @@ class EmployeeDetail(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, generic
         return self.retrieve(request, pk)
     
     def put(self, request, pk):
-        pass
+        return self.update(request, pk)
