@@ -140,3 +140,6 @@ class Employees(mixins.ListModelMixin, mixins.CreateModelMixin, generics.Generic
 class EmployeeDetail(mixins.RetrieveModelMixin, generics.GenericAPIView):
     queryset = Employee.objects.all() 
     serializer_class = EmployeeSerializer
+    
+    def get(self, request, pk):
+        return
