@@ -137,5 +137,5 @@ class Employees(mixins.ListModelMixin, mixins.CreateModelMixin, generics.Generic
         return self.create(request)  # Uses CreateModelMixin to add a new employee
     
     
-class EmployeeDetail(generics.GenericAPIView):
+class EmployeeDetail(mixins.RetrieveModelMixin, generics.GenericAPIView):
     pass
