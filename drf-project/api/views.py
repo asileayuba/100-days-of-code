@@ -142,4 +142,4 @@ class EmployeeDetail(mixins.RetrieveModelMixin, generics.GenericAPIView):
     serializer_class = EmployeeSerializer
     
     def get(self, request, pk):
-        return
+        return self.retrieve(request, pk)
