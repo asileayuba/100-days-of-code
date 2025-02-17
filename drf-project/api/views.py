@@ -137,7 +137,7 @@ class Employees(mixins.ListModelMixin, mixins.CreateModelMixin, generics.Generic
         return self.create(request)  # Uses CreateModelMixin to add a new employee
     
     
-class EmployeeDetail(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, generics.GenericAPIView):
+class EmployeeDetail(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, generics.GenericAPIView):
     queryset = Employee.objects.all() 
     serializer_class = EmployeeSerializer
     
