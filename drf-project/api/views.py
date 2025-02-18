@@ -122,34 +122,45 @@ def studentDetailView(request, pk):
     
  
  
-   
-# API view for listing all employees and creating a new employee
-class Employees(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
-    queryset = Employee.objects.all()  # Define the queryset to retrieve all employees
-    serializer_class = EmployeeSerializer  # Specify the serializer for Employee model
 
-    def get(self, request):
-        """Handle GET request to list all employees."""
-        return self.list(request)  # Uses ListModelMixin to return all employee records
+# # Mixins
+# # API view for listing all employees and creating a new employee
+# class Employees(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
+#     queryset = Employee.objects.all()  # Define the queryset to retrieve all employees
+#     serializer_class = EmployeeSerializer  # Specify the serializer for Employee model
 
-    def post(self, request):
-        """Handle POST request to create a new employee record."""
-        return self.create(request)  # Uses CreateModelMixin to add a new employee
+#     def get(self, request):
+#         """Handle GET request to list all employees."""
+#         return self.list(request)  # Uses ListModelMixin to return all employee records
+
+#     def post(self, request):
+#         """Handle POST request to create a new employee record."""
+#         return self.create(request)  # Uses CreateModelMixin to add a new employee
     
-    
-# API view for retrieving, updating, and deleting a specific employee
-class EmployeeDetail(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, generics.GenericAPIView):
-    queryset = Employee.objects.all()  # Define queryset to retrieve all employees
-    serializer_class = EmployeeSerializer  # Specify the serializer for Employee model
 
-    def get(self, request, pk):
-        """Handle GET request to retrieve details of a specific employee."""
-        return self.retrieve(request, pk)  # Uses RetrieveModelMixin
+# # Mixins
+# # API view for retrieving, updating, and deleting a specific employee
+# class EmployeeDetail(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, generics.GenericAPIView):
+#     queryset = Employee.objects.all()  # Define queryset to retrieve all employees
+#     serializer_class = EmployeeSerializer  # Specify the serializer for Employee model
 
-    def put(self, request, pk):
-        """Handle PUT request to update an existing employee's details."""
-        return self.update(request, pk)  # Uses UpdateModelMixin
+#     def get(self, request, pk):
+#         """Handle GET request to retrieve details of a specific employee."""
+#         return self.retrieve(request, pk)  # Uses RetrieveModelMixin
 
-    def delete(self, request, pk):
-        """Handle DELETE request to remove an employee record."""
-        return self.destroy(request, pk)  # Uses DestroyModelMixin
+#     def put(self, request, pk):
+#         """Handle PUT request to update an existing employee's details."""
+#         return self.update(request, pk)  # Uses UpdateModelMixin
+
+#     def delete(self, request, pk):
+#         """Handle DELETE request to remove an employee record."""
+#         return self.destroy(request, pk)  # Uses DestroyModelMixin     
+        
+        
+        
+        
+class Employees(generics.ListAPIView):
+    pass
+
+
+
