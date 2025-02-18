@@ -159,9 +159,14 @@ def studentDetailView(request, pk):
         
         
 # Generics        
+# API view for listing all employees and creating a new employee
 class Employees(generics.ListCreateAPIView):
-    queryset = Employee.objects.all()
-    serializer_class = EmployeeSerializer
+    """
+    Handles GET requests to list all employees
+    and POST requests to create a new employee.
+    """
+    queryset = Employee.objects.all()  # Fetch all employee records
+    serializer_class = EmployeeSerializer  # Use EmployeeSerializer for data serialization
 
 
 # Generics
