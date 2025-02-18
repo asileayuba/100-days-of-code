@@ -164,3 +164,5 @@ class Employees(generics.ListAPIView):
 
 
 
+class EmployeeDetail(generics.RetrieveAPIView):
+    pass
