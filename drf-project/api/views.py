@@ -158,11 +158,12 @@ def studentDetailView(request, pk):
         
         
         
-        
+# Generics        
 class Employees(generics.ListAPIView):
-    pass
+    queryset = Employee.objects.all()
+    serializer_class = EmployeeSerializer
 
 
-
+# Generics
 class EmployeeDetail(generics.RetrieveAPIView):
     pass
