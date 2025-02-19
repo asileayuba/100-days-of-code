@@ -172,7 +172,7 @@ class Employees(generics.ListCreateAPIView):
 
 
 # Generics
-class EmployeeDetail(generics.RetrieveAPIView):
+class EmployeeDetail(generics.RetrieveAPIView, generics.UpdateAPIView):
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
     lookup_field = 'pk'
