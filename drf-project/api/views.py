@@ -171,8 +171,15 @@ class Employees(generics.ListCreateAPIView):
     serializer_class = EmployeeSerializer  # Use EmployeeSerializer for data serialization
 
 
-# Generics
+# API view for retrieving, updating, and deleting a specific employee
 class EmployeeDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Employee.objects.all()
-    serializer_class = EmployeeSerializer
-    lookup_field = 'pk'
+    """
+    Handles:
+    - GET request to retrieve an employee by primary key (pk).
+    - PUT request to update an existing employee.
+    - DELETE request to remove an employee record.
+    """
+    queryset = Employee.objects.all()  # Fetch all employee records
+    serializer_class = EmployeeSerializer  # Use EmployeeSerializer for data serialization
+    lookup_field = 'pk'  # Specify the lookup field for retrieving an employee
+    
