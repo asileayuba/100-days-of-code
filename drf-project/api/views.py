@@ -157,7 +157,9 @@ def studentDetailView(request, pk):
 #         return self.destroy(request, pk)  # Uses DestroyModelMixin     
         
         
-        
+
+
+      
 # Generics        
 # API view for listing all employees and creating a new employee
 class Employees(generics.ListCreateAPIView):
@@ -171,4 +173,4 @@ class Employees(generics.ListCreateAPIView):
 
 # Generics
 class EmployeeDetail(generics.RetrieveAPIView):
-    pass
+    queryset = Employee.objects.all()
