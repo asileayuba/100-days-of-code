@@ -189,4 +189,5 @@ def studentDetailView(request, pk):
 class EmployeeViewset(viewsets.Viewset):
     def list(self, request):
         queryset = Employee.objects.all()
-        
+        serializer = EmployeeSerializer(queryset, many=True)
+        return Response(serializer.data)
