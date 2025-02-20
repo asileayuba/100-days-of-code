@@ -186,7 +186,7 @@ def studentDetailView(request, pk):
     
     
 
-class EmployeeViewset(viewsets.Viewset):
+class EmployeeViewSet(viewsets.ViewSet):
     def list(self, request):
         queryset = Employee.objects.all()
         serializer = EmployeeSerializer(queryset, many=True)
