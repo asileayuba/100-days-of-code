@@ -188,4 +188,5 @@ def studentDetailView(request, pk):
 
 class EmployeeViewset(viewsets.Viewset):
     def list(self, request):
-        queryset =n
+        queryset = Employee.objects.all()
+        
