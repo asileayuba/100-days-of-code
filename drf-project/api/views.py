@@ -191,3 +191,9 @@ class EmployeeViewSet(viewsets.ViewSet):
         queryset = Employee.objects.all()
         serializer = EmployeeSerializer(queryset, many=True)
         return Response(serializer.data)
+    
+    def create(self, request):
+        serializer = EmployeeSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
