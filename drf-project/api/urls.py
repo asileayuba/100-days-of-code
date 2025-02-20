@@ -1,6 +1,10 @@
 from django.urls import path
 from . import views
+from rest_framework.routers import DefaultRouter
 
+
+router = DefaultRouter()
+router.register('employees', views.EmployeeViewset)
 
 urlpatterns = [
     # Students Paths
@@ -8,6 +12,8 @@ urlpatterns = [
     path('students/<int:pk>/', views.studentDetailView),
     
     # Employees Path
-    path('employees/', views.Employees.as_view()),
-    path('employees/<int:pk>', views.EmployeeDetail.as_view()),
+    # path('employees/', views.Employees.as_view()),
+    # path('employees/<int:pk>', views.EmployeeDetail.as_view()),
+    
+    path('', include(router.urls))
 ]
