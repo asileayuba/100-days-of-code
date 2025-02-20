@@ -10,7 +10,7 @@ from rest_framework.decorators import api_view  # Allows defining API views that
 from rest_framework.views import APIView
 from employees.models import Employee
 from django.http import Http404
-from rest_framework import mixins, generics
+from rest_framework import mixins, generics, viewsets
 
 @api_view(['GET', 'POST'])
 def studentsViews(request):
@@ -159,27 +159,33 @@ def studentDetailView(request, pk):
         
 
 
-      
-# Generics        
-# API view for listing all employees and creating a new employee
-class Employees(generics.ListCreateAPIView):
-    """
-    Handles GET requests to list all employees
-    and POST requests to create a new employee.
-    """
-    queryset = Employee.objects.all()  # Fetch all employee records
-    serializer_class = EmployeeSerializer  # Use EmployeeSerializer for data serialization
 
+# # Generics        
+# # API view for listing all employees and creating a new employee
+# class Employees(generics.ListCreateAPIView):
+#     """
+#     Handles GET requests to list all employees
+#     and POST requests to create a new employee.
+#     """
+#     queryset = Employee.objects.all()  # Fetch all employee records
+#     serializer_class = EmployeeSerializer  # Use EmployeeSerializer for data serialization
 
-# API view for retrieving, updating, and deleting a specific employee
-class EmployeeDetail(generics.RetrieveUpdateDestroyAPIView):
-    """
-    Handles:
-    - GET request to retrieve an employee by primary key (pk).
-    - PUT request to update an existing employee.
-    - DELETE request to remove an employee record.
-    """
-    queryset = Employee.objects.all()  # Fetch all employee records
-    serializer_class = EmployeeSerializer  # Use EmployeeSerializer for data serialization
-    lookup_field = 'pk'  # Specify the lookup field for retrieving an employee
+   
+# # API view for retrieving, updating, and deleting a specific employee
+# class EmployeeDetail(generics.RetrieveUpdateDestroyAPIView):
+#     """
+#     Handles:
+#     - GET request to retrieve an employee by primary key (pk).
+#     - PUT request to update an existing employee.
+#     - DELETE request to remove an employee record.
+#     """
+#     queryset = Employee.objects.all()  # Fetch all employee records
+#     serializer_class = EmployeeSerializer  # Use EmployeeSerializer for data serialization
+#     lookup_field = 'pk'  # Specify the lookup field for retrieving an employee
     
+    
+    
+
+class EmployeeViewset(viewsets.Viewset):
+    def list(self, request):
+        queryset =n
