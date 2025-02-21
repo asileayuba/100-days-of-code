@@ -1,6 +1,7 @@
 # Import necessary decorators and modules
 
 from django.shortcuts import render, get_object_or_404
+
 # from django.http import JsonResponse
 from students.models import Student  # Import the Student model
 from .serializers import (
@@ -183,6 +184,7 @@ def studentDetailView(request, pk):
 #     serializer_class = EmployeeSerializer  # Use EmployeeSerializer for data serialization
 #     lookup_field = 'pk'  # Specify the lookup field for retrieving an employee
 
+
 # ViewSet
 # ViewSet for handling Employee operations
 class EmployeeViewSet(viewsets.ViewSet):
@@ -205,23 +207,53 @@ class EmployeeViewSet(viewsets.ViewSet):
         serializer = EmployeeSerializer(data=request.data)  # Deserialize request data
         if serializer.is_valid():
             serializer.save()  # Save new employee record
-            return Response(serializer.data, status=status.HTTP_201_CREATED)  # Return created employee
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)  # Return validation errors
-    
+            return Response(
+                serializer.data, status=status.HTTP_201_CREATED
+            )  # Return created employee
+        return Response(
+            serializer.errors, status=status.HTTP_400_BAD_REQUEST
+        )  # Return validation errors
 
     def retrieve(self, request, pk=None):
-        employee = get_object_or_404(Employee, pk=pk)
-        serializer = EmployeeSerializer(employee)
-        return Response(serializer.data, status=status.HTTP_200_OK)
-    
+        """
+        Handles GET request to retrieve an employee by primary key (pk).
+        """
+        employee = get_object_or_404(
+            Employee, pk=pk
+        )  # Retrieve employee or 404 if not found
+        serializer = EmployeeSerializer(employee)  # Serialize employee data
+        return Response(
+            serializer.data, status=status.HTTP_200_OK
+        )  # Return serialized employee data
+
     def update(self, request, pk=None):
-        employee = get_object_or_404(Employee, pk=pk)
-        serializer = EmployeeSerializer(employee, data=request.data)
+        """
+        Handles PUT request to update an existing employee.
+        """
+        employee = get_object_or_404(
+            Employee, pk=pk
+        )  # Retrieve employee or 404 if not found
+        serializer = EmployeeSerializer(
+            employee, data=request.data
+        )  # Deserialize request data
+
         if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.errors)
-        
+            serializer.save()  # Save the updated employee data
+            return Response(
+                serializer.data, status=status.HTTP_200_OK
+            )  # Return updated data
+        return Response(
+            serializer.errors, status=status.HTTP_400_BAD_REQUEST
+        )  # Return validation errors
+
     def delete(self, request, pk=None):
-        employee = get_object_or_404(Employee, pk=pk)
-        employee.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        """
+        Handles DELETE request to remove an employee by primary key (pk).
+        """
+        employee = get_object_or_404(
+            Employee, pk=pk
+        )  # Retrieve employee or 404 if not found
+        employee.delete()  # Delete the employee record
+        return Response(
+            status=status.HTTP_204_NO_CONTENT
+        )  # Return 204 No Content to confirm deletion
