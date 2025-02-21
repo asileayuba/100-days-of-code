@@ -213,3 +213,6 @@ class EmployeeViewSet(viewsets.ViewSet):
         employee = get_object_or_404(Employee, pk=pk)
         serializer = EmployeeSerializer(employee)
         return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    def update(self, request, pk=None):
+        employee = get_object_or_404(Employee, pk=pk)
