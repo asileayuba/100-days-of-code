@@ -208,3 +208,5 @@ class EmployeeViewSet(viewsets.ViewSet):
             return Response(serializer.data, status=status.HTTP_201_CREATED)  # Return created employee
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)  # Return validation errors
     
+
+    def retrieve(self, request, pk=None)
