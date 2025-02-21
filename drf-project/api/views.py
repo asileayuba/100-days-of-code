@@ -212,3 +212,4 @@ class EmployeeViewSet(viewsets.ViewSet):
     def retrieve(self, request, pk=None):
         employee = get_object_or_404(Employee, pk=pk)
         serializer = EmployeeSerializer(employee)
+        return Response(serializer.data, status=status.HTTP_200_OK)
