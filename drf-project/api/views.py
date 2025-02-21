@@ -216,3 +216,10 @@ class EmployeeViewSet(viewsets.ViewSet):
     
     def update(self, request, pk=None):
         employee = get_object_or_404(Employee, pk=pk)
+        serializer = EmployeeSerializer(employee, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.errors)
+        
+    def delete(self, request, pk=None):
+        
