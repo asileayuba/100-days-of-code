@@ -1,6 +1,6 @@
 # Import necessary decorators and modules
 
-# from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 # from django.http import JsonResponse
 from students.models import Student  # Import the Student model
 from .serializers import (
@@ -209,4 +209,5 @@ class EmployeeViewSet(viewsets.ViewSet):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)  # Return validation errors
     
 
-    def retrieve(self, request, pk=None)
+    def retrieve(self, request, pk=None):
+        employee = get_object_or_404(Employee, pk=pk)
