@@ -260,3 +260,4 @@ def studentDetailView(request, pk):
 
 
 class EmployeeViewSet(viewsets.ModelViewSets):
+    queryset = Employee.objects.all()
