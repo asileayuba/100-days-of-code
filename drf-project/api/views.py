@@ -258,7 +258,16 @@ def studentDetailView(request, pk):
 #             status=status.HTTP_204_NO_CONTENT
 #         )  # Return 204 No Content to confirm deletion
 
-
-class EmployeeViewSet(viewsets.ModelViewSets):
-    queryset = Employee.objects.all()
-    serializer_class = EmployeeSerializer
+# ModelViewSet
+# ViewSet for handling all CRUD operations on Employee model
+class EmployeeViewSet(viewsets.ModelViewSet):
+    """
+    A ModelViewSet that provides CRUD operations for Employee model.
+    - GET: Retrieve all employees or a single employee by ID.
+    - POST: Create a new employee.
+    - PUT/PATCH: Update an existing employee.
+    - DELETE: Remove an employee.
+    """
+    queryset = Employee.objects.all()  # Fetch all employee records
+    serializer_class = EmployeeSerializer  # Use EmployeeSerializer for serialization
+    
