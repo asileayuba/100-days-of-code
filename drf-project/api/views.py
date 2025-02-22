@@ -187,73 +187,76 @@ def studentDetailView(request, pk):
 
 # ViewSet
 # ViewSet for handling Employee operations
-class EmployeeViewSet(viewsets.ViewSet):
-    """
-    A simple ViewSet for listing and creating employees.
-    """
+# class EmployeeViewSet(viewsets.ViewSet):
+#     """
+#     A simple ViewSet for listing and creating employees.
+#     """
 
-    def list(self, request):
-        """
-        Handles GET request to retrieve all employee records.
-        """
-        queryset = Employee.objects.all()  # Fetch all employee records
-        serializer = EmployeeSerializer(queryset, many=True)  # Serialize the data
-        return Response(serializer.data)  # Return the serialized employee data
+#     def list(self, request):
+#         """
+#         Handles GET request to retrieve all employee records.
+#         """
+#         queryset = Employee.objects.all()  # Fetch all employee records
+#         serializer = EmployeeSerializer(queryset, many=True)  # Serialize the data
+#         return Response(serializer.data)  # Return the serialized employee data
 
-    def create(self, request):
-        """
-        Handles POST request to create a new employee.
-        """
-        serializer = EmployeeSerializer(data=request.data)  # Deserialize request data
-        if serializer.is_valid():
-            serializer.save()  # Save new employee record
-            return Response(
-                serializer.data, status=status.HTTP_201_CREATED
-            )  # Return created employee
-        return Response(
-            serializer.errors, status=status.HTTP_400_BAD_REQUEST
-        )  # Return validation errors
+#     def create(self, request):
+#         """
+#         Handles POST request to create a new employee.
+#         """
+#         serializer = EmployeeSerializer(data=request.data)  # Deserialize request data
+#         if serializer.is_valid():
+#             serializer.save()  # Save new employee record
+#             return Response(
+#                 serializer.data, status=status.HTTP_201_CREATED
+#             )  # Return created employee
+#         return Response(
+#             serializer.errors, status=status.HTTP_400_BAD_REQUEST
+#         )  # Return validation errors
 
-    def retrieve(self, request, pk=None):
-        """
-        Handles GET request to retrieve an employee by primary key (pk).
-        """
-        employee = get_object_or_404(
-            Employee, pk=pk
-        )  # Retrieve employee or 404 if not found
-        serializer = EmployeeSerializer(employee)  # Serialize employee data
-        return Response(
-            serializer.data, status=status.HTTP_200_OK
-        )  # Return serialized employee data
+#     def retrieve(self, request, pk=None):
+#         """
+#         Handles GET request to retrieve an employee by primary key (pk).
+#         """
+#         employee = get_object_or_404(
+#             Employee, pk=pk
+#         )  # Retrieve employee or 404 if not found
+#         serializer = EmployeeSerializer(employee)  # Serialize employee data
+#         return Response(
+#             serializer.data, status=status.HTTP_200_OK
+#         )  # Return serialized employee data
 
-    def update(self, request, pk=None):
-        """
-        Handles PUT request to update an existing employee.
-        """
-        employee = get_object_or_404(
-            Employee, pk=pk
-        )  # Retrieve employee or 404 if not found
-        serializer = EmployeeSerializer(
-            employee, data=request.data
-        )  # Deserialize request data
+#     def update(self, request, pk=None):
+#         """
+#         Handles PUT request to update an existing employee.
+#         """
+#         employee = get_object_or_404(
+#             Employee, pk=pk
+#         )  # Retrieve employee or 404 if not found
+#         serializer = EmployeeSerializer(
+#             employee, data=request.data
+#         )  # Deserialize request data
 
-        if serializer.is_valid():
-            serializer.save()  # Save the updated employee data
-            return Response(
-                serializer.data, status=status.HTTP_200_OK
-            )  # Return updated data
-        return Response(
-            serializer.errors, status=status.HTTP_400_BAD_REQUEST
-        )  # Return validation errors
+#         if serializer.is_valid():
+#             serializer.save()  # Save the updated employee data
+#             return Response(
+#                 serializer.data, status=status.HTTP_200_OK
+#             )  # Return updated data
+#         return Response(
+#             serializer.errors, status=status.HTTP_400_BAD_REQUEST
+#         )  # Return validation errors
 
-    def delete(self, request, pk=None):
-        """
-        Handles DELETE request to remove an employee by primary key (pk).
-        """
-        employee = get_object_or_404(
-            Employee, pk=pk
-        )  # Retrieve employee or 404 if not found
-        employee.delete()  # Delete the employee record
-        return Response(
-            status=status.HTTP_204_NO_CONTENT
-        )  # Return 204 No Content to confirm deletion
+#     def delete(self, request, pk=None):
+#         """
+#         Handles DELETE request to remove an employee by primary key (pk).
+#         """
+#         employee = get_object_or_404(
+#             Employee, pk=pk
+#         )  # Retrieve employee or 404 if not found
+#         employee.delete()  # Delete the employee record
+#         return Response(
+#             status=status.HTTP_204_NO_CONTENT
+#         )  # Return 204 No Content to confirm deletion
+
+
+class EmployeeViewSet(viewsets.ModelViewSets):
