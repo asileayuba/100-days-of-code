@@ -17,6 +17,8 @@ from rest_framework.views import APIView
 from employees.models import Employee
 from django.http import Http404
 from rest_framework import mixins, generics, viewsets
+from blogs.models import Blog, Comment
+from blogs.serializers import BlogSerializer, CommentSerializer
 
 
 @api_view(["GET", "POST"])
@@ -273,3 +275,14 @@ class EmployeeViewSet(viewsets.ModelViewSet):
     queryset = Employee.objects.all()  # Fetch all employee records
     serializer_class = EmployeeSerializer  # Use EmployeeSerializer for serialization
     
+    
+
+# BLogs Views
+
+class BlogsView(generics.ListCreateAPIView):
+    queryset = Blog.objects.all()
+    serializer_class = BlogSerializer
+    
+class CommentsView(generics.ListCreateAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
