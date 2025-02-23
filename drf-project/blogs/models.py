@@ -9,4 +9,7 @@ class Blog(models.Model):
     
     
 class Comment(models.Model):
-    blog = models.ForeignKey(Blog, on_delete=models.CASCADE)
+    blog = models.ForeignKey(Blog, on_delete=models.CASCADE, related_name='comments')
+    comment = models.TextField()
+    
+    
