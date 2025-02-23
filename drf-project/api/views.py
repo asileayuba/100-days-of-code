@@ -279,10 +279,23 @@ class EmployeeViewSet(viewsets.ModelViewSet):
 
 # BLogs Views
 
+# View for listing all blogs and creating a new blog
 class BlogsView(generics.ListCreateAPIView):
-    queryset = Blog.objects.all()
-    serializer_class = BlogSerializer
-    
+    """
+    Handles:
+    - GET: Retrieve a list of all blogs.
+    - POST: Create a new blog entry.
+    """
+    queryset = Blog.objects.all()  # Fetch all blog records
+    serializer_class = BlogSerializer  # Use BlogSerializer for serialization
+
+
+# View for listing all comments and creating a new comment
 class CommentsView(generics.ListCreateAPIView):
-    queryset = Comment.objects.all()
-    serializer_class = CommentSerializer
+    """
+    Handles:
+    - GET: Retrieve a list of all comments.
+    - POST: Create a new comment entry.
+    """
+    queryset = Comment.objects.all()  # Fetch all comment records
+    serializer_class = CommentSerializer  # Use CommentSerializer for serialization
