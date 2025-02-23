@@ -258,6 +258,8 @@ def studentDetailView(request, pk):
 #             status=status.HTTP_204_NO_CONTENT
 #         )  # Return 204 No Content to confirm deletion
 
+
+
 # ModelViewSet
 # ViewSet for handling all CRUD operations on Employee model
 class EmployeeViewSet(viewsets.ModelViewSet):
