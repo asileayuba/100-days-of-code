@@ -301,9 +301,9 @@ class CommentsView(generics.ListCreateAPIView):
     
     
 class BlogDetailView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Blog.object.objects.all()
+    queryset = Blog.objects.all()
     serializer_class = BlogSerializer
     lookup_field = 'pk'
 
-class CommentDetailView():
+class CommentDetailView(generics.RetrieveUpdateDestroyAPIView):
     pass
