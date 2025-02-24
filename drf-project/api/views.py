@@ -301,11 +301,18 @@ class CommentsView(generics.ListCreateAPIView):
     
     
 class BlogDetailView(generics.RetrieveUpdateDestroyAPIView):
+    """
+    Handles retrieving, updating, and deleting a specific blog post by its primary key (pk).
+    """
     queryset = Blog.objects.all()
     serializer_class = BlogSerializer
-    lookup_field = 'pk'
+    lookup_field = 'pk' 
+
 
 class CommentDetailView(generics.RetrieveUpdateDestroyAPIView):
+    """
+    Handles retrieving, updating, and deleting a specific comment by its primary key (pk).
+    """
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
-    lookup = 'pk'
+    lookup_field = 'pk' 
