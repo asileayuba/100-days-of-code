@@ -298,3 +298,9 @@ class CommentsView(generics.ListCreateAPIView):
     """
     queryset = Comment.objects.all()  # Fetch all comment records
     serializer_class = CommentSerializer  # Use CommentSerializer for serialization
+    
+    
+class BlogDetailView():
+    pass
+
+class CommentDetailView():
