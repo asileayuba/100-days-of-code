@@ -278,7 +278,6 @@ class EmployeeViewSet(viewsets.ModelViewSet):
     
 
 # BLogs Views
-
 # View for listing all blogs and creating a new blog
 class BlogsView(generics.ListCreateAPIView):
     """
