@@ -275,7 +275,7 @@ class EmployeeViewSet(viewsets.ModelViewSet):
     """
     queryset = Employee.objects.all()  # Fetch all employee records
     serializer_class = EmployeeSerializer  # Use EmployeeSerializer for serialization
-    pagination_class = CustomPagination
+    pagination_class = CustomPagination  # A Custom Pagination
     
     
 
