@@ -1,25 +1,30 @@
-# Import necessary decorators and modules
-
+# Import necessary Django modules
 from django.shortcuts import render, get_object_or_404
+from django.http import Http404
 
-# from django.http import JsonResponse
-from students.models import Student  # Import the Student model
-from .serializers import (
-    StudentSerializer,
-    EmployeeSerializer,
-)  # Import the serializer for the Student and Employee model
+# Import models
+from students.models import Student
+from employees.models import Employee
+from blogs.models import Blog, Comment
+
+# Import serializers
+from .serializers import StudentSerializer, EmployeeSerializer
+from blogs.serializers import BlogSerializer, CommentSerializer
+
+# Import Django REST framework components
 from rest_framework.response import Response  # Handles API responses
 from rest_framework import status  # Provides HTTP status codes
-from rest_framework.decorators import (
-    api_view,
-)  # Allows defining API views that accept HTTP methods
+from rest_framework.decorators import api_view  # Allows defining API views that accept HTTP methods
 from rest_framework.views import APIView
-from employees.models import Employee
-from django.http import Http404
 from rest_framework import mixins, generics, viewsets
-from blogs.models import Blog, Comment
-from blogs.serializers import BlogSerializer, CommentSerializer
+
+# Import pagination settings
 from .paginations import CustomPagination
+
+# Uncomment if needed
+# from django.http import JsonResponse
+
+
 
 
 @api_view(["GET", "POST"])
@@ -273,9 +278,11 @@ class EmployeeViewSet(viewsets.ModelViewSet):
     - PUT/PATCH: Update an existing employee.
     - DELETE: Remove an employee.
     """
-    queryset = Employee.objects.all()  # Fetch all employee records
+    queryset = Employee.objects.all().order_by('id')  # Fetch all employee records
     serializer_class = EmployeeSerializer  # Use EmployeeSerializer for serialization
     pagination_class = CustomPagination  # A Custom Pagination
+    filterset_fields = ['designation']
+    
     
     
 
