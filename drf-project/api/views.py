@@ -272,16 +272,23 @@ def studentDetailView(request, pk):
 # ViewSet for handling all CRUD operations on Employee model
 class EmployeeViewSet(viewsets.ModelViewSet):
     """
-    A ModelViewSet that provides CRUD operations for Employee model.
-    - GET: Retrieve all employees or a single employee by ID.
-    - POST: Create a new employee.
-    - PUT/PATCH: Update an existing employee.
-    - DELETE: Remove an employee.
+    A ModelViewSet that provides full CRUD operations for the Employee model.
+
+    - GET: Retrieve all employees or a specific employee by ID.
+    - POST: Create a new employee record.
+    - PUT/PATCH: Update details of an existing employee.
+    - DELETE: Remove an employee record from the database.
+
+    Additional Features:
+    - Supports filtering by 'designation'.
+    - Uses custom pagination for better data handling.
     """
-    queryset = Employee.objects.all().order_by('id')  # Fetch all employee records
-    serializer_class = EmployeeSerializer  # Use EmployeeSerializer for serialization
-    pagination_class = CustomPagination  # A Custom Pagination
-    filterset_fields = ['designation']
+    
+    queryset = Employee.objects.all().order_by('id')  # Fetch all employee records, ordered by ID
+    serializer_class = EmployeeSerializer  # Defines the serializer for Employee data
+    pagination_class = CustomPagination  # Applies custom pagination settings
+    filterset_fields = ['designation']  # Enables filtering employees by designation
+
     
     
     
