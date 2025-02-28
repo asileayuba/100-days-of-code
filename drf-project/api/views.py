@@ -23,6 +23,7 @@ from .paginations import CustomPagination
 
 # Uncomment if needed
 # from django.http import JsonResponse
+from employees.filters import EmployeeFilter
 
 
 
@@ -287,7 +288,7 @@ class EmployeeViewSet(viewsets.ModelViewSet):
     queryset = Employee.objects.all().order_by('id')  # Fetch all employee records, ordered by ID
     serializer_class = EmployeeSerializer  # Defines the serializer for Employee data
     pagination_class = CustomPagination  # Applies custom pagination settings
-    filterset_fields = ['designation']  # Enables filtering employees by designation
+    filterset_class = EmployeeFilter  # Enables filtering employees by designation
 
     
     
