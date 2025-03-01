@@ -10,6 +10,7 @@ class EmployeeFilter(django_filters.FilterSet):
     """
     
     designation = django_filters.CharFilter(field_name='designation', lookup_expr='iexact')  # Case-insensitive filter
+    emp_name = django_filters.CharFilter(field_name='emp_name', )
 
     class Meta:
         model = Employee  # Specifies the model being filtered
