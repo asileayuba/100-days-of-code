@@ -14,4 +14,4 @@ class EmployeeFilter(django_filters.FilterSet):
 
     class Meta:
         model = Employee  # Specifies the model being filtered
-        fields = ['designation']  # Defines the fields available for filtering
+        fields = ['designation', 'emp_name']  # Defines the fields available for filtering
