@@ -290,7 +290,11 @@ class EmployeeViewSet(viewsets.ModelViewSet):
     serializer_class = EmployeeSerializer  # Defines the serializer for Employee data
     pagination_class = CustomPagination  # Applies custom pagination settings
     filterset_class = EmployeeFilter  # Enables filtering employees by designation
-
+    
+    # Print at the terminal
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        print("Filter Backends:", self.filter_backends)
     
     
 
