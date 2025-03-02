@@ -25,3 +25,9 @@ class EmployeeFilter(django_filters.FilterSet):
         
         
     def filter_by_id_range(self, queryset, name, value):
+        if name == 'id_min':
+            return queryset.filter(emp_id__gte=value)
+        elif name == 'id_max:
+            return queryset.filter(emp_id__lte=value)
+        return queryset
+        
