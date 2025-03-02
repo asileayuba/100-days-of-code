@@ -17,6 +17,7 @@ class EmployeeFilter(django_filters.FilterSet):
     emp_name = django_filters.CharFilter(field_name='emp_name', lookup_expr='icontains')  # Partial match for name search
     # id = django_filters.RangeFilter(field_name='id')  # Filter employees within an ID range
     id_min = django_filters.CharFilter(method='filter_by_id_range')
+    id_max = django_filters.CharFilter(method='filter_by_id_range')
 
     class Meta:
         model = Employee  # Specifies the model being filtered
