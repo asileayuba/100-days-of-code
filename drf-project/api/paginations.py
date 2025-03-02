@@ -2,14 +2,15 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 
 class CustomPagination(PageNumberPagination):
-    # Allows clients to specify the number of items per page using 'page_size' query parameter
+
+    # Enables dynamic page size via query param
     page_size_query_param = 'page_size'
 
-    # Custom query parameter for specifying the page number
+    # Uses 'page-num' instead of default 'page'
     page_query_param = 'page-num'
 
-    # Sets the maximum allowed page size to 1
-    max_page_size = 1
+    # Allows up to 100 items per page
+    max_page_size = 10
 
     def get_paginated_response(self, data):
         """
