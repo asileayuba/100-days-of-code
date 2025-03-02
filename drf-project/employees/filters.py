@@ -21,7 +21,7 @@ class EmployeeFilter(django_filters.FilterSet):
 
     class Meta:
         model = Employee  # Specifies the model being filtered
-        fields = ['designation', 'emp_name']  # Defines the fields available for filtering
+        fields = ['designation', 'emp_name', 'id_min', 'id_max']  # Defines the fields available for filtering
         
         
     def filter_by_id_range(self, queryset, name, value):
