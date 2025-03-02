@@ -24,6 +24,7 @@ from .paginations import CustomPagination
 # Uncomment if needed
 # from django.http import JsonResponse
 from employees.filters import EmployeeFilter
+from django_filters.rest_framework import DjangoFilterBackend
 
 
 
@@ -290,6 +291,7 @@ class EmployeeViewSet(viewsets.ModelViewSet):
     serializer_class = EmployeeSerializer  # Defines the serializer for Employee data
     pagination_class = CustomPagination  # Applies custom pagination settings
     filterset_class = EmployeeFilter  # Enables filtering employees by designation
+    filter_backends = [DjangoFilterBackend]
     
     # Print at the terminal
     def __init__(self, *args, **kwargs):

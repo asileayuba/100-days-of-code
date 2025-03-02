@@ -15,8 +15,9 @@ class EmployeeFilter(django_filters.FilterSet):
     
     designation = django_filters.CharFilter(field_name='designation', lookup_expr='iexact')  # Case-insensitive filter
     emp_name = django_filters.CharFilter(field_name='emp_name', lookup_expr='icontains')  # Partial match for name search
-    id = django_filters.RangeFilter(field_name='id')  # Filter employees within an ID range
+    # id = django_filters.RangeFilter(field_name='id')  # Filter employees within an ID range
+    id_min = django_filters.CharFilter(method='filter_by_id_range')
 
     class Meta:
         model = Employee  # Specifies the model being filtered
-        fields = ['designation', 'emp_name', 'id']  # Defines the fields available for filtering
+        fields = ['designation', 'emp_name']  # Defines the fields available for filtering
