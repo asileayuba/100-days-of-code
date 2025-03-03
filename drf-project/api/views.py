@@ -308,6 +308,7 @@ class BlogsView(generics.ListCreateAPIView):
     """
     queryset = Blog.objects.all()  # Fetch all blog records
     serializer_class = BlogSerializer  # Use BlogSerializer for serialization
+    filter_backends = [SearchFilter]
 
 
 # View for listing all comments and creating a new comment
