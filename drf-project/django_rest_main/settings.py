@@ -134,4 +134,5 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 3,  # Default page size (still used if no custom pagination)
     
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+    'SEARCH_PARAM': 'q',
 }
