@@ -17,6 +17,7 @@ from rest_framework import status  # Provides HTTP status codes
 from rest_framework.decorators import api_view  # Allows defining API views that accept HTTP methods
 from rest_framework.views import APIView
 from rest_framework import mixins, generics, viewsets
+from rest_framework.filters import SearchFilter
 
 # Import pagination settings
 from .paginations import CustomPagination
