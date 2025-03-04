@@ -316,7 +316,7 @@ class BlogsView(generics.ListCreateAPIView):
     # Enables search functionality
     filter_backends = [SearchFilter, OrderingFilter]  # Adds search capability
     search_fields = ['blog_title', 'blog_body']  # Searchable fields: title and body content
-    ordering_fields = ['id']
+    ordering_fields = ['id', 'blog_title']
 
 # View for listing all comments and creating a new comment
 class CommentsView(generics.ListCreateAPIView):
