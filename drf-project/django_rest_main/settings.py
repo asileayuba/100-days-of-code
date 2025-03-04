@@ -130,10 +130,12 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 REST_FRAMEWORK = {
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE': 3,  # Default page size (still used if no custom pagination)
-    
-    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
-    'SEARCH_PARAM': 'q',
-    'ORDERING_PARAM': 'order-by',
+    # Default pagination settings
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',  # Uses limit-offset pagination
+    'PAGE_SIZE': 3,  # Default page size (applies if no custom pagination is set)
+
+    # Filtering and search configurations
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],  # Enables DjangoFilterBackend for filtering
+    'SEARCH_PARAM': 'q',  # Custom search query parameter
+    'ORDERING_PARAM': 'order-by',  # Custom ordering query parameter
 }
