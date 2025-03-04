@@ -308,15 +308,17 @@ class BlogsView(generics.ListCreateAPIView):
     - GET: Retrieves a list of all blog entries.
     - POST: Creates a new blog entry.
     - Search: Allows searching by blog title and blog body content.
+    - Ordering: Enables sorting by blog ID and title.
     """
 
     queryset = Blog.objects.all()  # Fetch all blog records
     serializer_class = BlogSerializer  # Use BlogSerializer for serialization
 
-    # Enables search functionality
-    filter_backends = [SearchFilter, OrderingFilter]  # Adds search capability
+    # Enables search and ordering functionality
+    filter_backends = [SearchFilter, OrderingFilter]  # Adds search and sorting capabilities
     search_fields = ['blog_title', 'blog_body']  # Searchable fields: title and body content
-    ordering_fields = ['id', 'blog_title']
+    ordering_fields = ['id', 'blog_title']  # Fields available for sorting
+    
 
 # View for listing all comments and creating a new comment
 class CommentsView(generics.ListCreateAPIView):
