@@ -302,15 +302,21 @@ class EmployeeViewSet(viewsets.ModelViewSet):
 # View for listing all blogs and creating a new blog
 class BlogsView(generics.ListCreateAPIView):
     """
-    Handles:
-    - GET: Retrieve a list of all blogs.
-    - POST: Create a new blog entry.
+    API view for retrieving and creating blog entries.
+
+    Features:
+    - GET: Retrieves a list of all blog entries.
+    - POST: Creates a new blog entry.
+    - Search: Allows searching by blog title and blog body content.
     """
+
     queryset = Blog.objects.all()  # Fetch all blog records
     serializer_class = BlogSerializer  # Use BlogSerializer for serialization
-    filter_backends = [SearchFilter]
-    search_fields = ['blog_title', 'blog_body']
 
+    # Enables search functionality
+    filter_backends = [SearchFilter, OrderingFilter]  # Adds search capability
+    search_fields = ['blog_title', 'blog_body']  # Searchable fields: title and body content
+    
 
 # View for listing all comments and creating a new comment
 class CommentsView(generics.ListCreateAPIView):
