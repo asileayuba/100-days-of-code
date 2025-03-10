@@ -1,9 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Product
 
 # Create your views here.
 
-def store(request):
+def store(request, category_slug=None):
+    categories = None
+    products = None
+    
+    if category_slug != None:
+        categories = get_object_or_404(Category, category_slug=Slug)
     """
     Renders the store page with a list of available products.
 
