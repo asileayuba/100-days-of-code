@@ -8,18 +8,13 @@ def store(request, category_slug=None):
     products = None
     
     if category_slug != None:
-        categories = get_object_or_404(Category, category_slug=Slug)
-    """
-    Renders the store page with a list of available products.
+        categories = get_object_or_404(Category, category_slug=slug)
+        products = product.objects.filter(category=categories, is_available=True)
+        product_count = products.count()
+    else:
 
-    Features:
-    - Retrieves all products marked as available (`is_available=True`).
-    - Counts the total number of available products.
-    - Passes the product list and count as context data to the template.
-    """
-
-    products = Product.objects.filter(is_available=True)  # Fetch available products
-    product_count = products.count()  # Count the number of available products
+        products = Product.objects.filter(is_available=True)  # Fetch available products
+        product_count = products.count()  # Count the number of available products
 
     context = {
         'products': products,  # List of available products
