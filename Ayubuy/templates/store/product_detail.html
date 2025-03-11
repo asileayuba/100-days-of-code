@@ -1,4 +1,5 @@
 {% extends "base.html" %} 
+{% load static %}
 
 
 {% block content %}
@@ -11,7 +12,7 @@
         <aside class="col-md-6">
           <article class="gallery-wrap">
             <div class="img-big-wrap">
-              <a href="#"><img src="./images/items/12.jpg" /></a>
+              <a href="#"><img src="{% static './images/items/12.jpg' %}" /></a>
             </div>
             <!-- img-big-wrap.// -->
           </article>
@@ -105,12 +106,12 @@
         <article class="box mb-3">
           <div class="icontext w-100">
             <img
-              src="./images/avatars/avatar1.jpg"
+              src="{% static './images/avatars/avatar1.jpg' %}"
               class="img-xs icon rounded-circle"
             />
             <div class="text">
               <span class="date text-muted float-md-right">24.04.2020 </span>
-              <h6 class="mb-1">Mike John</h6>
+              <h6 class="mb-1">Teena Lucas</h6>
             </div>
           </div>
           <!-- icontext.// -->
