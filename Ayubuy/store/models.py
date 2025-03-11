@@ -35,7 +35,7 @@ class Product(models.Model):
     modified_date = models.DateTimeField(auto_now_add=True)  # Auto-set modification timestamp
     
     def get_url(self):
-        return reverse('product_detail', arg=[self.category.slug, self.slug])
+        return reverse('product_detail', args=[self.category.slug, self.slug])
 
     def __str__(self):
         """
