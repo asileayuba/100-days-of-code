@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.core.exceptions import ObjectDoesNotExist  # Import ObjectDoesNotExist
-from store.models import Product  # Import Product model
+from django.core.exceptions import ObjectDoesNotExist  # Import ObjectDoesNotExist for exception handling
+from store.models import Product  # Import Product model from the store app
 from .models import Cart, CartItem  # Import Cart and CartItem models
 
 
@@ -11,7 +11,7 @@ def _cart_id(request):
     
     If a session key does not exist, a new session is created.
     This ensures each user (including anonymous users) has a unique cart.
-    
+
     Args:
         request: The HTTP request object.
 
@@ -20,7 +20,7 @@ def _cart_id(request):
     """
     cart = request.session.session_key  # Get current session key
     if not cart:
-        cart = request.session.create()  # Create new session if none exists
+        cart = request.session.create()  # Create a new session if none exists
     return cart
 
 
@@ -62,22 +62,62 @@ def add_cart(request, product_id):
 
     return redirect('cart')  # Redirect to the cart page after adding the product
 
+
+# View function to remove a single unit of a product from the cart
 def remove_cart(request, product_id):
-    cart =Cart.objects.get(cart_id=_cart_id(request))
-    product = get_object_or_404(product, id=product_id)
-    cart_item = CartItem.objects.get(product=product, cart=cart)
+    """
+    Removes one quantity of a product from the cart.
+    
+    - If more than one quantity exists, it decreases the quantity.
+    - If only one quantity exists, it removes the cart item completely.
+
+    Args:
+        request: The HTTP request object.
+        product_id (int): The ID of the product to be removed.
+
+    Returns:
+        HttpResponseRedirect: Redirects to the cart page after modification.
+    """
+    cart = Cart.objects.get(cart_id=_cart_id(request))  # Get the cart object
+    product = get_object_or_404(Product, id=product_id)  # Get the product or return 404 if not found
+    cart_item = CartItem.objects.get(product=product, cart=cart)  # Get the cart item
+
     if cart_item.quantity > 1:
-        cart_item.quantity -= 1
+        cart_item.quantity -= 1  # Decrease quantity if more than one exists
         cart_item.save()
     else:
-        cart_item.delete()
-    return redirect('cart')
+        cart_item.delete()  # Remove the cart item if only one exists
+
+    return redirect('cart')  # Redirect to the cart page
+
+
+# View function to completely remove a product from the cart
+def remove_cart_item(request, product_id):
+    """
+    Completely removes a product from the shopping cart.
+    
+    Args:
+        request: The HTTP request object.
+        product_id (int): The ID of the product to be removed.
+
+    Returns:
+        HttpResponseRedirect: Redirects to the cart page after deletion.
+    """
+    cart = Cart.objects.get(cart_id=_cart_id(request))  # Get the cart object
+    product = get_object_or_404(Product, id=product_id)  # Get the product or return 404 if not found
+    cart_item = CartItem.objects.get(product=product, cart=cart)  # Get the cart item
+    cart_item.delete()  # Remove the cart item completely
+
+    return redirect('cart')  # Redirect to the cart page
 
 
 # View function to display the cart page
 def cart(request, total=0, quantity=0, cart_items=None):
     """
     Displays the shopping cart page.
+    
+    - Retrieves cart details such as total price and quantity.
+    - If the cart is empty, displays an empty cart message.
 
     Args:
         request: The HTTP request object.
@@ -91,14 +131,19 @@ def cart(request, total=0, quantity=0, cart_items=None):
     try:
         cart = Cart.objects.get(cart_id=_cart_id(request))  # Get the cart
         cart_items = CartItem.objects.filter(cart=cart, is_active=True)  # Get active cart items
+        
+        # Calculate total price and quantity
         for cart_item in cart_items:
-            total += (cart_item.product.price * cart_item.quantity)  # Calculate total cost
-            quantity += cart_item.quantity  # Calculate total quantity
-        tax = (2* total)/100
-        grand_total = total + tax
-    except ObjectDoesNotExist:
-        cart_items = []  # If cart or cart items don't exist, set to empty list
+            total += (cart_item.product.price * cart_item.quantity)  # Total cost
+            quantity += cart_item.quantity  # Total quantity of items
+        
+        tax = (2 * total) / 100  # 2% tax on total
+        grand_total = total + tax  # Calculate grand total including tax
 
+    except ObjectDoesNotExist:
+        cart_items = []  # If the cart does not exist, set cart items to an empty list
+
+    # Prepare context data for rendering
     context = {
         'total': total,
         'quantity': quantity,
@@ -106,6 +151,5 @@ def cart(request, total=0, quantity=0, cart_items=None):
         'tax': tax,
         'grand_total': grand_total,
     }
-    return render(request, 'store/cart.html', context)  # Render cart page
 
-
+    return render(request, 'store/cart.html', context)  # Render the cart page
