@@ -37,6 +37,9 @@ class CartItem(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE)  # Cart associated with the item
     quantity = models.IntegerField()  # Number of products in the cart
     is_active = models.BooleanField(default=True)  # Active status of the cart item
+    
+    def sub_total(self):
+        return self.product.price * self.quantity
 
     def __str__(self):
         """
