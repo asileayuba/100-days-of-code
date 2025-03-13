@@ -9,4 +9,5 @@ urlpatterns = [
     path('add_cart/<int:product_id>/', views.add_cart, name='add_cart'),
     # Route for adding a product to the cart
     # `<int:product_id>` ensures that only integer values are passed as product IDs
+    path('remove_cart/<int:product_id>/', views.remove_cart, name='remove_cart'),
 ]
