@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.core.exceptions import ObjectDoesNotExist  # Import ObjectDoesNotExist
 from store.models import Product  # Import Product model
 from .models import Cart, CartItem  # Import Cart and CartItem models
@@ -62,6 +62,17 @@ def add_cart(request, product_id):
 
     return redirect('cart')  # Redirect to the cart page after adding the product
 
+def remove_cart(request, product_id):
+    cart =Cart.objects.get(cart_id=_cart_id(request))
+    product = get_object_or_404(product, id=product_id)
+    cart_item = CartItem.objects.get(product=product, cart=cart)
+    if cart_item.quantity > 1:
+        cart_item.quantity -= 1
+        cart_item.save()
+    else:
+        cart_item.delete()
+    return redirect('cart')
+
 
 # View function to display the cart page
 def cart(request, total=0, quantity=0, cart_items=None):
@@ -96,3 +107,5 @@ def cart(request, total=0, quantity=0, cart_items=None):
         'grand_total': grand_total,
     }
     return render(request, 'store/cart.html', context)  # Render cart page
+
+
