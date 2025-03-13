@@ -27,10 +27,10 @@
     <tr>
         <td>
             <figure class="itemside align-items-center">
-                <div class="aside"><img src="{% static './images/items/11.jpg' %}" class="img-sm"></div>
+                <div class="aside"><img src="{{ cart_item.product.images.url}}" class="img-sm"></div>
                 <figcaption class="info">
-                    <a href="#" class="title text-dark">Camera Canon EOS M50 Kit</a>
-                    <p class="text-muted small">Matrix: 25 Mpx <br> Brand: Canon</p>
+                    <a href="#" class="title text-dark">{{ cart_item.product.product_name }}</a>
+                    <p class="text-muted small">Color: 25 Mpx <br> Size: Canon</p>
                 </figcaption>
             </figure>
         </td>
@@ -59,7 +59,7 @@
         </td>
     </tr>
     {% endfor %}
-    
+
     </tbody>
     </table>
     </div> <!-- card.// -->
