@@ -2,7 +2,6 @@ from django.shortcuts import render, get_object_or_404
 from .models import Product
 from category.models import Category
 from carts.models import CartItem
-
 from carts.views import _cart_id
 
 # Create your views here.
@@ -55,6 +54,7 @@ def product_detail(request, category_slug, product_slug):
 
     Features:
     - Retrieves a single product based on both its category and product slug.
+    - Checks if the product is already in the cart for the current session.
     - Handles exceptions in case the product does not exist.
     - Passes the product details as context data to the template.
 
@@ -70,13 +70,17 @@ def product_detail(request, category_slug, product_slug):
     try:
         # Fetch the product based on category slug and product slug
         single_product = Product.objects.get(category__slug=category_slug, slug=product_slug)
+
+        # Check if the product exists in the cart for the current session
         in_cart = CartItem.objects.filter(cart__cart_id=_cart_id(request), product=single_product).exists()
+
     except Product.DoesNotExist:
         single_product = None  # Handle the case where the product is not found
+        in_cart = False  # Ensure in_cart is False if the product does not exist
     
     context = {
         'single_product': single_product,  # Pass the retrieved product to the template
-        'in_cart': in_cart,
+        'in_cart': in_cart,  # Boolean indicating if the product is already in the cart
     }
 
     return render(request, 'store/product_detail.html', context)  # Render product details page

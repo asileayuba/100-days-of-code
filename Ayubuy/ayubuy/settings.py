@@ -57,21 +57,41 @@ ROOT_URLCONF = 'ayubuy.urls'
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
-        'APP_DIRS': True,
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',  
+        # Specifies the Django template engine as the backend
+        
+        'DIRS': ['templates'],  
+        # Defines the directory where Django should look for template files (custom templates)
+
+        'APP_DIRS': True,  
+        # Enables automatic discovery of templates within each installed app's `templates` directory
+        
         'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-                'category.context_processors.menu_links',
-                'carts.context_processors.counter',
+            'context_processors': [  
+                # List of context processors that inject additional data into templates
+                
+                'django.template.context_processors.debug',  
+                # Enables debugging information in templates (useful in development)
+                
+                'django.template.context_processors.request',  
+                # Makes the `request` object available in templates
+                
+                'django.contrib.auth.context_processors.auth',  
+                # Provides authentication-related context (e.g., `user` object)
+                
+                'django.contrib.messages.context_processors.messages',  
+                # Enables messages framework for displaying user notifications
+                
+                'category.context_processors.menu_links',  
+                # Custom context processor: Injects category menu links into templates
+                
+                'carts.context_processors.counter',  
+                # Custom context processor: Provides cart item count in templates
             ],
         },
     },
 ]
+
 
 WSGI_APPLICATION = 'ayubuy.wsgi.application'
 
