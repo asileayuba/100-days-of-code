@@ -4,7 +4,6 @@ from category.models import Category
 from carts.models import CartItem
 
 from carts.views import _cart_id
-from django.http import HttpResponse
 
 # Create your views here.
 
@@ -72,12 +71,12 @@ def product_detail(request, category_slug, product_slug):
         # Fetch the product based on category slug and product slug
         single_product = Product.objects.get(category__slug=category_slug, slug=product_slug)
         in_cart = CartItem.objects.filter(cart__cart_id=_cart_id(request), product=single_product).exists()
-        return HttpResponse(in_cart)
     except Product.DoesNotExist:
         single_product = None  # Handle the case where the product is not found
     
     context = {
         'single_product': single_product,  # Pass the retrieved product to the template
+        'in_cart': in_cart,
     }
 
     return render(request, 'store/product_detail.html', context)  # Render product details page

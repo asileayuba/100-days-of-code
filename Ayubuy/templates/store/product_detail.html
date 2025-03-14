@@ -79,12 +79,23 @@
             <!-- row.// -->
             <hr />
             {% if single_product.stock <= 0 %}
-            <h5 class="text-danger">Out of Stock</h5>
+              <h5 class="text-danger">Out of Stock</h5>
             {% else %}
-            <a href="{% url 'add_cart' single_product.id %}" class="btn btn-primary">
-              <span class="text">Add to cart</span>
-              <i class="fas fa-shopping-cart"></i>
-            </a>
+              {% if in_cart %}
+              <a href="#" class="btn btn-success">
+                <span class="text">Added to cart</span>
+                <i class="fas fa-check"></i>
+              </a>
+              <a href="{% url 'cart' %}" class="btn btn-outline-primary">
+                <span class="text">View cart</span>
+                <i class="fas fa-eye"></i>
+              </a>
+              {% else %}
+                <a href="{% url 'add_cart' single_product.id %}" class="btn btn-primary">
+                  <span class="text">Add to cart</span>
+                  <i class="fas fa-shopping-cart"></i>
+                </a>
+              {% endif %}
             {% endif %}
           </article>
           <!-- product-info-aside .// -->
@@ -118,10 +129,10 @@
           <!-- icontext.// -->
           <div class="mt-3">
             <p>
-              Dummy comment Lorem ipsum dolor sit amet, consectetur adipisicing
-              elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-              aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-              laboris nisi ut aliquip
+              I'm really impressed with this product. 
+              It delivers great value and has made a noticeable difference. 
+              The quality is excellent, and it arrived quickly. 
+              I'd definitely recommend it to anyone looking for a worthwhile purchase.
             </p>
           </div>
         </article>
