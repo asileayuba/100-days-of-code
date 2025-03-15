@@ -34,13 +34,13 @@ def store(request, category_slug=None):
         
         # Fetch products belonging to the selected category and that are available
         products = Product.objects.filter(category=categories, is_available=True)
-        paginator = Paginator(products, 1)
+        paginator = Paginator(products, 1)  # Consider making this configurable
         page = request.GET.get('page')
         paged_products = paginator.get_page(page)
         product_count = products.count()
     else:
         # Fetch all available products if no category filter is applied
-        products = Product.objects.filter(is_available=True)
+        products = Product.objects.filter(is_available=True).order_by('id')  # Explicit ordering field may help
         paginator = Paginator(products, 3)
         page = request.GET.get('page')
         paged_products = paginator.get_page(page)
@@ -84,6 +84,7 @@ def product_detail(request, category_slug, product_slug):
     except Product.DoesNotExist:
         single_product = None  # Handle the case where the product is not found
         in_cart = False  # Ensure in_cart is False if the product does not exist
+        # Consider logging this exception for debugging purposes
     
     context = {
         'single_product': single_product,  # Pass the retrieved product to the template
