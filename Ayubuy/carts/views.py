@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.core.exceptions import ObjectDoesNotExist  # Import ObjectDoesNotExist for exception handling
 from store.models import Product  # Import Product model from the store app
 from .models import Cart, CartItem  # Import Cart and CartItem models
+from django.http import HttpResponse
 
 
 # Utility function to get or create a cart session ID
@@ -40,6 +41,11 @@ def add_cart(request, product_id):
     Returns:
         HttpResponseRedirect: Redirects to the cart page after adding the product.
     """
+    color = request.GET['color']
+    size = request.GET['size']
+    return HttpResponse(color + ' ' + size)
+    exit()
+    
     product = Product.objects.get(id=product_id)  # Retrieve the product by ID
 
     # Retrieve or create a Cart object
