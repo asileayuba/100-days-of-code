@@ -1,8 +1,7 @@
 from django.contrib import admin
 from .models import Product, Variation
 
-# Register your models here.
-
+# Admin configuration for the Product model
 class ProductAdmin(admin.ModelAdmin):
     """
     Admin configuration for the Product model.
@@ -10,12 +9,30 @@ class ProductAdmin(admin.ModelAdmin):
     Features:
     - Displays key product details (name, price, stock, category, modified date, and availability).
     - Auto-generates slug field from product name for SEO-friendly URLs.
+    - Provides search and filtering options for better usability.
     """
     
     list_display = ('product_name', 'price', 'stock', 'category', 'modified_date', 'is_available')  # Columns in admin list view
+    list_filter = ('category', 'is_available', 'modified_date')  # Filters for easy data access
+    search_fields = ('product_name', 'category__category_name')  # Enables search by product name & category
     prepopulated_fields = {'slug': ('product_name',)}  # Auto-populate slug from product name
+    list_editable = ('price', 'stock', 'is_available')  # Allow quick inline edits
 
-# Register the Product model with custom admin settings
+
+class VariationAdmin(admin.ModelAdmin):
+    """
+    Admin configuration for the Variation model.
+
+    Features:
+    - Displays product variations (category, value, active status).
+    - Allows filtering and searching for better admin usability.
+    """
+    
+    list_display = ('product', 'variation_category', 'variation_value', 'is_active')  # Display columns
+    list_editable = ('is_active',)  # Enable inline editing of active status
+    list_filter = ('product__category', 'product', 'variation_category', 'variation_value')  # Enhanced filtering
+    search_fields = ('product__product_name', 'variation_category', 'variation_value')  # Search variations
+
+# Register the models with custom admin settings
 admin.site.register(Product, ProductAdmin)
-
-admin.site.register(Variation)
+admin.site.register(Variation, VariationAdmin)

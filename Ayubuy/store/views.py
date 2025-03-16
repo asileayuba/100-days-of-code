@@ -6,6 +6,7 @@ from django.db.models import Q
 from carts.views import _cart_id
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.http import HttpResponse
+
 # Create your views here.
 
 def store(request, category_slug=None):
@@ -96,13 +97,38 @@ def product_detail(request, category_slug, product_slug):
 
 
 def search(request):
-    if 'keyword' in request.GET:
+    """
+    Handles product search functionality.
+
+    Features:
+    - Retrieves the search keyword from the request.
+    - Filters products based on the keyword match in the product name or description.
+    - Orders results by creation date in descending order.
+    - Counts the total number of matching products.
+    - Passes the search results and count as context data to the template.
+
+    Parameters:
+    - request: The HTTP request object.
+
+    Returns:
+    - HTTP response rendering the 'store/store.html' template with search results.
+    """
+
+    products = []  # Initialize product list to prevent errors if no keyword is provided
+    product_count = 0  # Initialize product count
+
+    if 'keyword' in request.GET:  # Check if a search query exists in request
         keyword = request.GET['keyword']
         if keyword:
-            products = Product.objects.order_by('-created_date').filter(Q(description__icontains=keyword) | Q(product_name__icontains=keyword))
-            product_count = products.count()
+            # Filter products that match the search keyword in name or description
+            products = Product.objects.order_by('-created_date').filter(
+                Q(description__icontains=keyword) | Q(product_name__icontains=keyword)
+            )
+            product_count = products.count()  # Count the number of matching products
+
     context = {
-        'products': products,
-        'product_count': product_count,
+        'products': products,  # Pass the list of found products
+        'product_count': product_count,  # Total number of matched products
     }
-    return render(request, 'store/store.html', context)
+
+    return render(request, 'store/store.html', context)  # Render the store page with search results
