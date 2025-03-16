@@ -4,10 +4,15 @@
 
 {% block content %}
 
-<!-- ========================= SECTION PAGETOP ========================= -->
+<!-- ========================= SECTION PAGE TOP ========================= -->
 <section class="section-pagetop bg">
   <div class="container">
+    {% if 'search' in request.path %}
+    <h2 class="title-page">Search Result</h2>
+    <!-- Search result -->
+    {% else %}
     <h2 class="title-page">Explore Our Store</h2>
+    {% endif %}
   </div>
   <!-- container //  -->
 </section>
