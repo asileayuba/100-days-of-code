@@ -4,7 +4,7 @@ from category.models import Category
 from carts.models import CartItem
 from carts.views import _cart_id
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
-
+from django.http import HttpResponse
 # Create your views here.
 
 def store(request, category_slug=None):
@@ -92,3 +92,7 @@ def product_detail(request, category_slug, product_slug):
     }
 
     return render(request, 'store/product_detail.html', context)  # Render product details page
+
+
+def search(request):
+    return HttpResponse("My search")
