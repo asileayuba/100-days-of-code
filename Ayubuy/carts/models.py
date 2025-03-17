@@ -1,5 +1,5 @@
 from django.db import models  # Import Django's models module
-from store.models import Product  # Import the Product model from the store app
+from store.models import Product, Variation  # Import the Product, and Variation model from the store app
 
 # Model for the shopping cart
 class Cart(models.Model):
@@ -34,6 +34,7 @@ class CartItem(models.Model):
     """
 
     product = models.ForeignKey(Product, on_delete=models.CASCADE)  # Product linked to the cart item
+    variations = models.ManyToManyField(Variation, blank=True)
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE)  # Cart associated with the item
     quantity = models.IntegerField()  # Number of products in the cart
     is_active = models.BooleanField(default=True)  # Active status of the cart item
