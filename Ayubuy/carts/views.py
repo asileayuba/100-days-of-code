@@ -41,11 +41,11 @@ def add_cart(request, product_id):
     Returns:
         HttpResponseRedirect: Redirects to the cart page after adding the product.
     """
-    color = request.GET['color']
-    # size = request.GET['size']
-    return HttpResponse(color)
-    exit()
-    
+    if request.method == 'POST':
+        
+        color = request.POST['color']
+        size = request.POST['size']
+        print(color, size)
     product = Product.objects.get(id=product_id)  # Retrieve the product by ID
 
     # Retrieve or create a Cart object
