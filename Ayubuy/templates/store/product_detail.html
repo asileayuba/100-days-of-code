@@ -51,10 +51,13 @@
             <div class="row">
               <div class="item-option-select">
                 <h6>Select Size</h6>
-                <select name="size" class="form-control">
-                  <option value="small">Small</option>
-                  <option value="medium">Medium</option>
-                  <option value="large">Large</option>
+                <select name="size" class="form-control" required>
+                  <option value="" disabled selected>Choose Size</option>
+                  {% for i in single_product.variations.all %}
+                    {% if i.variation_category == 'size' %}
+                    <option value="{{ i.variation_value }}">{{ i.variation_value }}</option>
+                    {% endif %}
+                  {% endfor %}
                 </select>
               </div>
             </div>
