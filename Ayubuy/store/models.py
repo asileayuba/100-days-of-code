@@ -33,6 +33,14 @@ class Product(models.Model):
         ordering = ['-created_date']
         verbose_name = "Product"
         verbose_name_plural = "Products"
+        
+        
+class VariationManager(models.Manager):
+    def colors(self):
+        return super(VariationManager, self).filter(variation_category='color', is_active=True)
+    
+    def sizes(self):
+        return super(VariationManager, self).filter(variation_category='size', is_active=True)
 
 
 # Variation choices should be a tuple of tuples instead of a set
