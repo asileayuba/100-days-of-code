@@ -104,7 +104,7 @@ def add_cart(request, product_id):
 
 
 # View function to remove a single unit of a product from the cart
-def remove_cart(request, product_id):
+def remove_cart(request, product_id, cart_item_id):
     """
     Removes one quantity of a product from the cart.
     
@@ -120,19 +120,21 @@ def remove_cart(request, product_id):
     """
     cart = Cart.objects.get(cart_id=_cart_id(request))  # Get the cart object
     product = get_object_or_404(Product, id=product_id)  # Get the product or return 404 if not found
-    cart_item = CartItem.objects.get(product=product, cart=cart)  # Get the cart item
+    try:
+        cart_item = CartItem.objects.get(product=product, cart=cart, id=cart_item_id)  # Get the cart item
 
-    if cart_item.quantity > 1:
-        cart_item.quantity -= 1  # Decrease quantity if more than one exists
-        cart_item.save()
-    else:
-        cart_item.delete()  # Remove the cart item if only one exists
-
+        if cart_item.quantity > 1:
+            cart_item.quantity -= 1  # Decrease quantity if more than one exists
+            cart_item.save()
+        else:
+            cart_item.delete()  # Remove the cart item if only one exists     
+    except:
+        pass
     return redirect('cart')  # Redirect to the cart page
 
 
 # View function to completely remove a product from the cart
-def remove_cart_item(request, product_id):
+def remove_cart_item(request, product_id, cart_item_id):
     """
     Completely removes a product from the shopping cart.
     
@@ -145,7 +147,7 @@ def remove_cart_item(request, product_id):
     """
     cart = Cart.objects.get(cart_id=_cart_id(request))  # Get the cart object
     product = get_object_or_404(Product, id=product_id)  # Get the product or return 404 if not found
-    cart_item = CartItem.objects.get(product=product, cart=cart)  # Get the cart item
+    cart_item = CartItem.objects.get(product=product, cart=cart, id=cart_item_id)  # Get the cart item
     cart_item.delete()  # Remove the cart item completely
 
     return redirect('cart')  # Redirect to the cart page

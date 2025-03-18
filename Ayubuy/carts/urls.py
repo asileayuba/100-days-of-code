@@ -10,10 +10,10 @@ urlpatterns = [
     # Route for adding a product to the cart
     # `<int:product_id>` ensures that only integer values are passed as product IDs
 
-    path('remove_cart/<int:product_id>/', views.remove_cart, name='remove_cart'),
+    path('remove_cart/<int:product_id>/<int:cart_item_id>/', views.remove_cart, name='remove_cart'),
     # Route for reducing the quantity of a product in the cart by 1
     # If the quantity is greater than 1, it decreases; otherwise, the item is removed
 
-    path('remove_cart_item/<int:product_id>/', views.remove_cart_item, name='remove_cart_item'),
+    path('remove_cart_item/<int:product_id>/<int:cart_item_id>/', views.remove_cart_item, name='remove_cart_item'),
     # Route for completely removing a specific product from the cart
 ]
