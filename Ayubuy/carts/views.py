@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.core.exceptions import ObjectDoesNotExist  # Import ObjectDoesNotExist for exception handling
-from store.models import Product, Variation  # Import Product, and Variation model from the store app
+from store.models import Product, Variation  # Import Product and Variation models from the store app
 from .models import Cart, CartItem  # Import Cart and CartItem models
 from django.http import HttpResponse
 
@@ -49,7 +49,11 @@ def add_cart(request, product_id):
             value = request.POST[key]
             
             try:
-                variation = Variation.objects.get(product=product, variation_category__iexact=key, variation_value__iexact=value)
+                variation = Variation.objects.get(
+                    product=product, 
+                    variation_category__iexact=key, 
+                    variation_value__iexact=value
+                )
                 product_variation.append(variation)
             except:
                 pass
@@ -92,9 +96,9 @@ def add_cart(request, product_id):
             item.save()
     else: 
         cart_item = CartItem.objects.create(
-            product = product,
-            quantity = 1,  # Default quantity is 1
-            cart = cart,
+            product=product,
+            quantity=1,  # Default quantity is 1
+            cart=cart,
         )
         if len(product_variation) > 0:
             cart_item.variations.clear()
@@ -128,8 +132,9 @@ def remove_cart(request, product_id, cart_item_id):
             cart_item.save()
         else:
             cart_item.delete()  # Remove the cart item if only one exists     
-    except:
-        pass
+    except CartItem.DoesNotExist:
+        pass  # Prevents errors if the cart item is not found
+
     return redirect('cart')  # Redirect to the cart page
 
 
@@ -184,6 +189,8 @@ def cart(request, total=0, quantity=0, cart_items=None):
 
     except ObjectDoesNotExist:
         cart_items = []  # If the cart does not exist, set cart items to an empty list
+        tax = 0
+        grand_total = 0
 
     # Prepare context data for rendering
     context = {
