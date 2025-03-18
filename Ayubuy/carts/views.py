@@ -69,30 +69,36 @@ def add_cart(request, product_id):
         # current variation -> product_variation
         # item_id -> database
         ex_var_list = []
+        id = []
         for item in cart_item:
             existing_variation = item.variations.all()
-            ex_var_list.append(existing_variation)
+            ex_var_list.append(list(existing_variation))
+            id.append(item.id)
             
         print(ex_var_list)
         
-        
-        if len(product_variation) > 0:
-            cart_item.variations.clear()
-            for item in product_variation:
-                cart_item.variations.add(item)
-                
-        # cart_item.quantity += 1  # Increase quantity if product already exists
-        cart_item.save()
+        if product_variation in ex_var_list:
+            # Increase the cart item quantity
+            index = ex_var_list.index(product_variation)
+            item_id = id[index]
+            item = CartItem.objects.get(product=product, id=item_id)
+            item.quantity += 1
+            item.save()
+        else:
+            item = CartItem.objects.create(product=product, quantity=1, cart=cart)
+            if len(product_variation) > 0:
+                item.variations.clear()
+                item.variations.add(*product_variation)
+            item.save()
     else: 
         cart_item = CartItem.objects.create(
-            product=product,
-            quantity=1,  # Default quantity is 1
-            cart=cart,
+            product = product,
+            quantity = 1,  # Default quantity is 1
+            cart = cart,
         )
         if len(product_variation) > 0:
             cart_item.variations.clear()
-            for item in product_variation:
-                cart_item.variations.add(item)
+            cart_item.variations.add(*product_variation)
         cart_item.save()
     return redirect('cart')  # Redirect to the cart page after adding the product
 
