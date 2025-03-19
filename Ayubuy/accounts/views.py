@@ -5,6 +5,8 @@ from .forms import RegistrationForm, Account
 
 
 def register(request):
+    form = RegistrationForm()  # ✅ Initialize form before any condition
+
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
         if form.is_valid():
@@ -14,14 +16,18 @@ def register(request):
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
             username = email.split("@")[0]
-            user = Account.objects.create_user(first_name=first_name, last_name=last_name, email=email, password=password)
+            user = Account.objects.create_user(
+                first_name=first_name, 
+                last_name=last_name, 
+                email=email, 
+                username=username, 
+                password=password
+            )
             user.phone_number = phone_number
             user.save()
-        else:
-            form = RegistrationForm()
-    context = {
-        'form': form,
-    }
+        # No need to reassign `form = RegistrationForm()` here
+
+    context = {'form': form}
     return render(request, 'accounts/register.html', context)
 
 def login(request):
