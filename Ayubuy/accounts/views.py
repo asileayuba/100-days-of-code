@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import RegistrationForm, Account 
 from django.contrib import messages, auth
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -42,20 +43,32 @@ def register(request):
 
 
 def login(request):
-    if request.method == 'POST':
-        email = request.POST['email']
-        password = request.POST['password']
-        
-        user =  auth.authenticate(email=email, password=password)
-        
-        if user is not None:
-            auth.login(request, user)
-            # messages.success(request, "You are now logged in.")
-            return redirect('home')
-        else:
-            messages.error(request, 'Invalid login credentials')
-            return redirect('login')
-    return render(request, 'accounts/login.html') 
+    """
+    Handles user login functionality.
+    """
+    if request.method == 'POST':  # Check if the request method is POST
+        email = request.POST['email']  # Get the email from form data
+        password = request.POST['password']  # Get the password from form data
 
+        # Authenticate user using email and password
+        user = auth.authenticate(email=email, password=password)
+
+        if user is not None:  # If authentication is successful
+            auth.login(request, user)  # Log in the user
+            # messages.success(request, "You are now logged in.")  # Optional success message
+            return redirect('home')  # Redirect to the home page
+        else:
+            messages.error(request, 'Invalid login credentials')  # Display error message
+            return redirect('login')  # Redirect back to login page if authentication fails
+
+    return render(request, 'accounts/login.html')  # Render the login page for GET requests
+
+
+@login_required(login_url='login')  # Restrict access to logged-in users; redirect to login if not authenticated
 def logout(request):
-    return render(request, 'accounts/logout.html') 
+    """
+    Handles user logout functionality.
+    """
+    auth.logout(request)  # Log out the user
+    messages.success(request, 'You are logged out.')  # Display success message
+    return redirect('login')  # Redirect to login page after logout
