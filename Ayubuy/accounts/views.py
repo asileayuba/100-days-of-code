@@ -1,5 +1,6 @@
-from django.shortcuts import render 
+from django.shortcuts import render, redirect
 from .forms import RegistrationForm, Account 
+from django.contrib import messages
 
 # Create your views here.
 
@@ -33,6 +34,8 @@ def register(request):
             )
             user.phone_number = phone_number  # Assign phone number to the user
             user.save()  # Save the user instance
+            messages.success(request, 'Registration Successful.')
+            return redirect('register')
 
     context = {'form': form}  # Pass form instance to the template
     return render(request, 'accounts/register.html', context)  # Render the registration template
