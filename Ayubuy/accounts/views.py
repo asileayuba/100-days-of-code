@@ -47,7 +47,7 @@ def register(request):
             
             # USER ACTIVATION 
             current_site = get_current_site(request)
-            mail_subject = 'Please activate your account'
+            mail_subject = "Welcome to Ayubuy! Activate Your Account to Start Shopping"
             message = render_to_string('accounts/account_verification_email.html',{
                 'user': user,
                 'domain': current_site,

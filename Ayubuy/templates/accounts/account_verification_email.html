@@ -1,10 +1,16 @@
 {% autoescape off %}
 
-Hi {{user.first_name}},
+Hi {{ user.first_name }},
 
-Please click on below link to confirm your registration.
-http://{{domain}}{% url "activate" uidb64-uid token=token %}
+Welcome to Ayubuy, your go-to online shopping destination! 🎉  
 
-If you think it's not you, please ignore this email.
+We're excited to have you on board. To get started, please activate your account by clicking the link below:
+
+http://{{ domain }}{% url 'activate' uidb64=uid token=token %}
+
+If you did not sign up for Ayubuy, please ignore this email.  
+
+Happy shopping! 🛍️  
+The Ayubuy Team 
 
 {% endautoescape %}
