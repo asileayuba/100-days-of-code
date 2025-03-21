@@ -35,6 +35,15 @@ def register(request):
             )
             user.phone_number = phone_number  # Assign phone number to the user
             user.save()  # Save the user instance
+            
+            # USER ACTIVATION 
+            current_site = get_current_site(request)
+            mail_subject = 'Please activate your account'
+            message = render_to_string('accounts/account_verification_email.html',{
+                'user': user,
+                'domain': current_site,
+                'uid': urlsafe_b64decode_encode(force_byte(user.pk))
+            })
             messages.success(request, 'Registration Successful.')
             return redirect('register')
 
