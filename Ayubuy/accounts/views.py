@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import RegistrationForm, Account 
 from django.contrib import messages, auth
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 
 
 # Verification email
@@ -96,5 +97,5 @@ def logout(request):
     return redirect('login')  # Redirect to login page after logout
 
 
-def activate(request):
-    return
+def activate(request, uidb64, token):
+    return HttpResponse("Ok!")
