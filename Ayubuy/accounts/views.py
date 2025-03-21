@@ -59,7 +59,7 @@ def register(request):
             send_email = EmailMessage(mail_subject, message, to=[to_email])
             send_email.send()
             # messages.success(request, "Thank you for registering! A verification email has been sent to your inbox. Please check your email and confirm your account.")
-            return redirect('accounts/login/?command=verification&email='+email)
+            return redirect('/accounts/login/?command=verification&email='+email)
 
     context = {'form': form}  # Pass form instance to the template
     return render(request, 'accounts/register.html', context)  # Render the registration template
@@ -98,17 +98,23 @@ def logout(request):
 
 
 def activate(request, uidb64, token):
+    """
+    Handles account activation when a user clicks the activation link in their email.
+    """
     try:
+        # Decode the base64-encoded user ID
         uid = urlsafe_base64_decode(uidb64).decode()
+        # Retrieve the user object based on the decoded ID
         user = Account._default_manager.get(pk=uid)
-    except(TypeError, ValueError, OverflowError, Account.DoesNotExist):
-        user = None
-        
+    except (TypeError, ValueError, OverflowError, Account.DoesNotExist):
+        user = None  # Set user to None if any error occurs
+
+    # Validate the user and check if the token is correct
     if user is not None and default_token_generator.check_token(user, token):
-        user.is_active = True
-        user.save()
-        messages.success(request, 'Congratulation! Your account is activated.')
-        return redirect("login")
+        user.is_active = True  # Activate the user's account
+        user.save()  # Save the changes to the database
+        messages.success(request, 'Congratulations! Your account has been activated.')  # Success message
+        return redirect("login")  # Redirect the user to the login page
     else:
-        messages.error(request, 'Invalid activation link')
-        return redirect('register')
+        messages.error(request, 'Invalid activation link')  # Error message if activation fails
+        return redirect('register')  # Redirect to the registration page if the link is invalid
