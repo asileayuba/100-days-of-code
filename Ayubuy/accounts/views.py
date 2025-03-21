@@ -58,7 +58,7 @@ def register(request):
             to_email = email
             send_email = EmailMessage(mail_subject, message, to=[to_email])
             send_email.send()
-            messages.success(request, 'Registration Successful.')
+            messages.success(request, "Thank you for registering! A verification email has been sent to your inbox. Please check your email and confirm your account.")
             return redirect('register')
 
     context = {'form': form}  # Pass form instance to the template
@@ -98,4 +98,17 @@ def logout(request):
 
 
 def activate(request, uidb64, token):
-    return HttpResponse("Ok!")
+    try:
+        uid = urlsafe_base64_decode(uidb64).decode()
+        user = Account._default_manager.get(pk=uid)
+    except(TypeError, ValueError, OverflowError, Account.DoesNotExist):
+        user = None
+        
+    if user is not None and default_token_generator.check_token(user, token):
+        user.is_active = True
+        user.save()
+        messages.success(request, 'Congratulation! Your account is activated.')
+        return redirect("login")
+    else:
+        messages.error(request, 'Invalid activation link')
+        return redirect('register')
