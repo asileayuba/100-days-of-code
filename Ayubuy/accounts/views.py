@@ -58,8 +58,8 @@ def register(request):
             to_email = email
             send_email = EmailMessage(mail_subject, message, to=[to_email])
             send_email.send()
-            messages.success(request, "Thank you for registering! A verification email has been sent to your inbox. Please check your email and confirm your account.")
-            return redirect('register')
+            # messages.success(request, "Thank you for registering! A verification email has been sent to your inbox. Please check your email and confirm your account.")
+            return redirect('accounts/login/?command=verification&email='+email)
 
     context = {'form': form}  # Pass form instance to the template
     return render(request, 'accounts/register.html', context)  # Render the registration template
