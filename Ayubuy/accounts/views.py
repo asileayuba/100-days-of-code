@@ -170,4 +170,7 @@ def resetpassword_validate(request, uidb64, token):
     
     
 def resetPassword(request):
+    if request.method == 'POST':
+        password = request.POST['password']
+        confirm_password = request.POST['confirm_password']
     return render(request, 'accounts/resetPassword.html')
