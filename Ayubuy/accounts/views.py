@@ -78,8 +78,8 @@ def login(request):
 
         if user is not None:  # If authentication is successful
             auth.login(request, user)  # Log in the user
-            # messages.success(request, "You are now logged in.")  # Optional success message
-            return redirect('home')  # Redirect to the home page
+            messages.success(request, "You are now logged in.")  # Optional success message
+            return redirect('dashboard')  # Redirect to the home page
         else:
             messages.error(request, 'Invalid login credentials')  # Display error message
             return redirect('login')  # Redirect back to login page if authentication fails
