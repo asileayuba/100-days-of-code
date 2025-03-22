@@ -144,7 +144,7 @@ def forgotPassword(request):
             send_email.send()
             
             messages.success(request, 'Password reset email has been sent to your email address.')
-            return render('login')
+            return redirect('login')
         
         
         else:
