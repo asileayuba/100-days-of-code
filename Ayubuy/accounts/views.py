@@ -168,21 +168,34 @@ def resetpassword_validate(request, uidb64, token):
         messages.error(request, 'This link has expired!')
         return redirect('login')
     
-    
 def resetPassword(request):
     if request.method == 'POST':
-        password = request.POST['password']
-        confirm_password = request.POST['confirm_password']
-        
+        password = request.POST.get('password', '')
+        confirm_password = request.POST.get('confirm_password', '')
+
+        if password == '' or confirm_password == '':
+            messages.error(request, 'Both password fields are required!')
+            return redirect('resetPassword')
+
         if password == confirm_password:
             uid = request.session.get('uid')
-            user = Account.objects.get(pk=uid)
-            user.set_password(password)
-            user.save()
-            messages.success(request, 'Password reset successfully!')
-            return redirect('login')
-        
+            if not uid:
+                messages.error(request, 'Session expired or invalid request. Try again.')
+                return redirect('resetPassword')
+
+            try:
+                user = Account.objects.get(pk=uid)
+                user.set_password(password)
+                user.save()
+                del request.session['uid']  # Clear session after reset
+                messages.success(request, 'Password reset successfully!')
+                return redirect('login')
+            except Account.DoesNotExist:
+                messages.error(request, 'User not found. Try again.')
+                return redirect('resetPassword')
+
         else:
-            messages.error(request, 'Password do not match!')
+            messages.error(request, 'Passwords do not match!')
             return redirect('resetPassword')
+
     return render(request, 'accounts/resetPassword.html')
