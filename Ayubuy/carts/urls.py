@@ -14,4 +14,6 @@ urlpatterns = [
 
     path('remove_cart_item/<int:product_id>/<int:cart_item_id>/', views.remove_cart_item, name='remove_cart_item'),
     # Remove a cart item completely from the cart
+    
+    path('checkout/', views.checkout, name="checkout"),
 ]
