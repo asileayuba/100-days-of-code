@@ -204,5 +204,30 @@ def cart(request, total=0, quantity=0, cart_items=None):
     return render(request, 'store/cart.html', context)  # Render the cart page
 
 
-def checkout(request):
-    return render(request, 'store/checkout.html')
+def checkout(request, total=0, quantity=0, cart_items=None):
+    try:
+        cart = Cart.objects.get(cart_id=_cart_id(request))  # Get the cart
+        cart_items = CartItem.objects.filter(cart=cart, is_active=True)  # Get active cart items
+        
+        # Calculate total price and quantity
+        for cart_item in cart_items:
+            total += (cart_item.product.price * cart_item.quantity)  # Total cost
+            quantity += cart_item.quantity  # Total quantity of items
+        
+        tax = (2 * total) / 100  # 2% tax on total
+        grand_total = total + tax  # Calculate grand total including tax
+
+    except ObjectDoesNotExist:
+        cart_items = []  # If the cart does not exist, set cart items to an empty list
+        tax = 0
+        grand_total = 0
+
+    # Prepare context data for rendering
+    context = {
+        'total': total,
+        'quantity': quantity,
+        'cart_items': cart_items,
+        'tax': tax,
+        'grand_total': grand_total,
+    }
+    return render(request, 'store/checkout.html', context)
