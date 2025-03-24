@@ -91,7 +91,7 @@ def login(request):
                         item.user = user
                         item.save()
             except: 
-                pass
+                print("entering inside except block")
             auth.login(request, user)  # Log in the user
             messages.success(request, "You are now logged in.")  # Optional success message
             return redirect('dashboard')  # Redirect to the home page
