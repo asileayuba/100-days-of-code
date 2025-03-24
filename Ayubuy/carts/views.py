@@ -8,22 +8,9 @@ from django.contrib.auth.decorators import login_required
 
 # Utility function to get or create a cart session ID
 def _cart_id(request):
-    """
-    Retrieves the current session's cart ID.
-    
-    If a session key does not exist, a new session is created.
-    This ensures each user (including anonymous users) has a unique cart.
-
-    Args:
-        request: The HTTP request object.
-
-    Returns:
-        str: The session key representing the cart ID.
-    """
-    cart = request.session.session_key  # Get current session key
-    if not cart:
-        cart = request.session.create()  # Create a new session if none exists
-    return cart
+    if not request.session.session_key:
+        request.session.create()
+    return request.session.session_key
 
 
 # View function to add a product to the cart
@@ -141,20 +128,18 @@ def remove_cart(request, product_id, cart_item_id):
 
 # View function to completely remove a product from the cart
 def remove_cart_item(request, product_id, cart_item_id):
-    """
-    Completely removes a product from the shopping cart.
-    
-    Args:
-        request: The HTTP request object.
-        product_id (int): The ID of the product to be removed.
+    try:
+        cart = Cart.objects.get(cart_id=_cart_id(request))  # Get the cart object
+    except Cart.DoesNotExist:
+        return redirect('cart')  # Redirect if no cart exists
 
-    Returns:
-        HttpResponseRedirect: Redirects to the cart page after deletion.
-    """
-    cart = Cart.objects.get(cart_id=_cart_id(request))  # Get the cart object
-    product = get_object_or_404(Product, id=product_id)  # Get the product or return 404 if not found
-    cart_item = CartItem.objects.get(product=product, cart=cart, id=cart_item_id)  # Get the cart item
-    cart_item.delete()  # Remove the cart item completely
+    product = get_object_or_404(Product, id=product_id)  # Get the product or return 404
+    
+    try:
+        cart_item = CartItem.objects.get(product=product, cart=cart, id=cart_item_id)  # Get the cart item
+        cart_item.delete()  # Remove the cart item
+    except CartItem.DoesNotExist:
+        pass  # If the cart item doesn't exist, just continue
 
     return redirect('cart')  # Redirect to the cart page
 

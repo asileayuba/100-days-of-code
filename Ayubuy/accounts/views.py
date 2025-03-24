@@ -14,6 +14,7 @@ from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import EmailMessage
 
 from carts.views import _cart_id
+from carts.models import Cart, CartItem
 
 # Create your views here.
 
@@ -81,7 +82,14 @@ def login(request):
         if user is not None:  # If authentication is successful
             try:
                 cart = Cart.objects.get(cart_id=_cart_id(request))
-                is_cart_item_exists = CartItem.objects.filter(product=product, cart=cart).exists()
+                is_cart_item_exists = CartItem.objects.filter(cart=cart).exists()
+                if is_cart_item_exists:
+                    cart_item = CartItem.objects.filter(cart=cart)
+                    
+                    
+                    for item in cart_item:
+                        item.user = user
+                        item.save()
             except: 
                 pass
             auth.login(request, user)  # Log in the user
