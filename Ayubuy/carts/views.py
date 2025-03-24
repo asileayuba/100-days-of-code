@@ -3,6 +3,7 @@ from django.core.exceptions import ObjectDoesNotExist  # Import ObjectDoesNotExi
 from store.models import Product, Variation  # Import Product and Variation models from the store app
 from .models import Cart, CartItem  # Import Cart and CartItem models
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 
 
 # Utility function to get or create a cart session ID
@@ -203,7 +204,7 @@ def cart(request, total=0, quantity=0, cart_items=None):
 
     return render(request, 'store/cart.html', context)  # Render the cart page
 
-
+@login_required
 def checkout(request, total=0, quantity=0, cart_items=None):
     try:
         cart = Cart.objects.get(cart_id=_cart_id(request))  # Get the cart
