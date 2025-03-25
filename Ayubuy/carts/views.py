@@ -55,7 +55,7 @@ def add_cart(request, product_id):
                 item.quantity += 1
                 item.save()
             else:
-                item = CartItem.objects.create(product=product, quantity=1, user=currrent_user)
+                item = CartItem.objects.create(product=product, quantity=1, user=current_user)
                 if len(product_variation) > 0:
                     item.variations.clear()
                     item.variations.add(*product_variation)
@@ -144,23 +144,23 @@ def add_cart(request, product_id):
 # View function to remove a single unit of a product from the cart
 def remove_cart(request, product_id, cart_item_id):
    
-    product = get_object_or_404(Product, id=product_id)  # Get the product or return 404 if not found
+    product = get_object_or_404(Product, id=product_id) 
     try:
         if request.user.is_authenticated:
             cart_item = CartItem.objects.get(product=product, user=request.user, id=cart_item_id)
         else:
             cart = Cart.objects.get(cart_id=_cart_id(request))
-            cart_item = CartItem.objects.get(product=product, cart=cart, id=cart_item_id)  # Get the cart item
+            cart_item = CartItem.objects.get(product=product, cart=cart, id=cart_item_id) 
 
         if cart_item.quantity > 1:
-            cart_item.quantity -= 1  # Decrease quantity if more than one exists
+            cart_item.quantity -= 1 
             cart_item.save()
         else:
-            cart_item.delete()  # Remove the cart item if only one exists     
+            cart_item.delete() 
     except CartItem.DoesNotExist:
-        pass  # Prevents errors if the cart item is not found
+        pass 
 
-    return redirect('cart')  # Redirect to the cart page
+    return redirect('cart')  
 
 
 # View function to completely remove a product from the cart
@@ -173,7 +173,7 @@ def remove_cart_item(request, product_id, cart_item_id):
         cart = Cart.objects.get(cart_id=_cart_id(request))
         cart_item = CartItem.objects.get(product=product, cart=cart, id=cart_item_id)
     cart_item.delete()
-    return redirect('cart')  # Redirect to the cart page
+    return redirect('cart') 
 
 
 # View function to display the cart page

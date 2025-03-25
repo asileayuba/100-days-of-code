@@ -86,7 +86,7 @@ def login(request):
                 if is_cart_item_exists:
                     cart_item = CartItem.objects.filter(cart=cart)
                     
-                    # Gettimg the product variation by cart id
+                    # Getting the product variation by cart id
                     product_variation = []
                     for item in cart_item:
                         variation = item.variations.all()
