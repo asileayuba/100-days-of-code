@@ -116,6 +116,9 @@ def login(request):
                         else:
                             cart_item = CartItem.objects.filter(cart=filter)
                             for item in cart_item:
+                                item.user = user
+                                item.save()
+                                
                     # for item in cart_item:
                     #     item.user = user
                     #     item.save()
