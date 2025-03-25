@@ -36,28 +36,16 @@ def add_cart(request, product_id):
                 except:
                     pass
             
-
-        # Retrieve or create a Cart object
-        try:
-            cart = Cart.objects.get(cart_id=_cart_id(request))  # Try to get the existing cart
-        except Cart.DoesNotExist:
-            cart = Cart.objects.create(cart_id=_cart_id(request))  # Create a new cart if not found
-
         # Retrieve or create a CartItem for the product in the cart
-        is_cart_item_exists = CartItem.objects.filter(product=product, cart=cart).exists()
+        is_cart_item_exists = CartItem.objects.filter(product=product, user=currrent_user).exists()
         if is_cart_item_exists:
-            cart_item = CartItem.objects.filter(product=product, cart=cart)
-            # existing_variations -> database
-            # current variation -> product_variation
-            # item_id -> database
+            cart_item = CartItem.objects.filter(product=product, user=currrent_user)
             ex_var_list = []
             id = []
             for item in cart_item:
                 existing_variation = item.variations.all()
                 ex_var_list.append(list(existing_variation))
                 id.append(item.id)
-                
-            print(ex_var_list)
             
             if product_variation in ex_var_list:
                 # Increase the cart item quantity
@@ -67,7 +55,7 @@ def add_cart(request, product_id):
                 item.quantity += 1
                 item.save()
             else:
-                item = CartItem.objects.create(product=product, quantity=1, cart=cart)
+                item = CartItem.objects.create(product=product, quantity=1, user=currrent_user)
                 if len(product_variation) > 0:
                     item.variations.clear()
                     item.variations.add(*product_variation)
@@ -76,7 +64,7 @@ def add_cart(request, product_id):
             cart_item = CartItem.objects.create(
                 product=product,
                 quantity=1,  # Default quantity is 1
-                cart=cart,
+                user=currrent_user,
             )
             if len(product_variation) > 0:
                 cart_item.variations.clear()
