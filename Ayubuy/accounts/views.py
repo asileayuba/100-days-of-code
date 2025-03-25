@@ -89,7 +89,7 @@ def login(request):
                     # Gettimg the product variation by cart id
                     product_variation = []
                     for item in cart_item:
-                        variation = item.variation.all()
+                        variation = item.variations.all()
                         product_variation.append(list(variation))
                         
                     # Get the cart item from the user to access his product variation
@@ -114,14 +114,11 @@ def login(request):
                             item.user = user
                             item.save()
                         else:
-                            cart_item = CartItem.objects.filter(cart=filter)
+                            cart_item = CartItem.objects.filter(cart=cart)
                             for item in cart_item:
                                 item.user = user
                                 item.save()
                                 
-                    # for item in cart_item:
-                    #     item.user = user
-                    #     item.save()
             except: 
                 pass
             auth.login(request, user)  # Log in the user

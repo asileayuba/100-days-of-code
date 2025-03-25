@@ -64,7 +64,7 @@ def add_cart(request, product_id):
             cart_item = CartItem.objects.create(
                 product=product,
                 quantity=1,  # Default quantity is 1
-                user=currrent_user,
+                user=current_user,
             )
             if len(product_variation) > 0:
                 cart_item.variations.clear()
@@ -143,23 +143,14 @@ def add_cart(request, product_id):
 
 # View function to remove a single unit of a product from the cart
 def remove_cart(request, product_id, cart_item_id):
-    """
-    Removes one quantity of a product from the cart.
-    
-    - If more than one quantity exists, it decreases the quantity.
-    - If only one quantity exists, it removes the cart item completely.
-
-    Args:
-        request: The HTTP request object.
-        product_id (int): The ID of the product to be removed.
-
-    Returns:
-        HttpResponseRedirect: Redirects to the cart page after modification.
-    """
-    cart = Cart.objects.get(cart_id=_cart_id(request))  # Get the cart object
+   
     product = get_object_or_404(Product, id=product_id)  # Get the product or return 404 if not found
     try:
-        cart_item = CartItem.objects.get(product=product, cart=cart, id=cart_item_id)  # Get the cart item
+        if request.user.is_authenticated:
+            cart_item = CartItem.objects.get(product=product, user=request.user, id=cart_item_id)
+        else:
+            cart = Cart.objects.get(cart_id=_cart_id(request))
+            cart_item = CartItem.objects.get(product=product, cart=cart, id=cart_item_id)  # Get the cart item
 
         if cart_item.quantity > 1:
             cart_item.quantity -= 1  # Decrease quantity if more than one exists
@@ -174,19 +165,14 @@ def remove_cart(request, product_id, cart_item_id):
 
 # View function to completely remove a product from the cart
 def remove_cart_item(request, product_id, cart_item_id):
-    try:
-        cart = Cart.objects.get(cart_id=_cart_id(request))  # Get the cart object
-    except Cart.DoesNotExist:
-        return redirect('cart')  # Redirect if no cart exists
-
-    product = get_object_or_404(Product, id=product_id)  # Get the product or return 404
     
-    try:
-        cart_item = CartItem.objects.get(product=product, cart=cart, id=cart_item_id)  # Get the cart item
-        cart_item.delete()  # Remove the cart item
-    except CartItem.DoesNotExist:
-        pass  # If the cart item doesn't exist, just continue
-
+    product = get_object_or_404(Product, id=product_id)
+    if request.user.is_authenticated:
+        cart_item = CartItem.objects.get(product=product, user=request.user, id=cart_item_id)
+    else:
+        cart = Cart.objects.get(cart_id=_cart_id(request))
+        cart_item = CartItem.objects.get(product=product, cart=cart, id=cart_item_id)
+    cart_item.delete()
     return redirect('cart')  # Redirect to the cart page
 
 
