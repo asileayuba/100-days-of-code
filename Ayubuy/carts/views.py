@@ -15,11 +15,11 @@ def _cart_id(request):
 
 # View function to add a product to the cart
 def add_cart(request, product_id):
-    currrent_user = request.user
+    current_user = request.user
     product = Product.objects.get(id=product_id)
     
     # If the user is authenticated
-    if currrent_user.is_authenticated:
+    if current_user.is_authenticated:
         product_variation = []
         if request.method == 'POST':
             for item in request.POST:
@@ -37,9 +37,9 @@ def add_cart(request, product_id):
                     pass
             
         # Retrieve or create a CartItem for the product in the cart
-        is_cart_item_exists = CartItem.objects.filter(product=product, user=currrent_user).exists()
+        is_cart_item_exists = CartItem.objects.filter(product=product, user=current_user).exists()
         if is_cart_item_exists:
-            cart_item = CartItem.objects.filter(product=product, user=currrent_user)
+            cart_item = CartItem.objects.filter(product=product, user=current_user)
             ex_var_list = []
             id = []
             for item in cart_item:
