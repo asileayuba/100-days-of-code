@@ -124,8 +124,13 @@ def login(request):
                 pass
             auth.login(request, user) 
             messages.success(request, "You are now logged in.") 
-            url = request.META.get('HTTP_REFERER')
-            return redirect('dashboard')
+            url = requests.META.get('HTTP_REFERER')
+            try:
+                query = requests.utils.urlparse(url).query
+                print('query ->', query)
+                return redirect('dashboard')
+            except:
+                pass
         else:
             messages.error(request, 'Invalid login credentials')  # Display error message
             return redirect('login')  # Redirect back to login page if authentication fails
