@@ -129,6 +129,10 @@ def login(request):
             try:
                 query = requests.utils.urlparse(url).query
                 print('query ->', query)
+                print('---------')
+                #  next=/cart/checkout/
+                params = dict(x.split('=') for x in query.split('&'))
+                print('params ->', params)
                 return redirect('dashboard')
             except:
                 pass
