@@ -16,7 +16,6 @@ from django.core.mail import EmailMessage
 from carts.views import _cart_id
 from carts.models import Cart, CartItem
 import requests
-from urllib.parse import urlparse
 
 # Create your views here.
 
@@ -128,14 +127,13 @@ def login(request):
             url = request.META.get('HTTP_REFERER')
             try:
                 query = requests.utils.urlparse(url).query
-                print('query ->', query)
-                print('---------')
-                #  next=/cart/checkout/
+                # next=/cart/checkout/
                 params = dict(x.split('=') for x in query.split('&'))
-                print('params ->', params)
-                return redirect('dashboard')
+                if 'next' in params:
+                    nextPage = params['next']
+                    return redirect(nextPage)
             except:
-                pass
+                return redirect('dashboard')
         else:
             messages.error(request, 'Invalid login credentials')  # Display error message
             return redirect('login')  # Redirect back to login page if authentication fails
