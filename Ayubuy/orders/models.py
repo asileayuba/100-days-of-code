@@ -1,5 +1,6 @@
 from django.db import models
 from accounts.models import Account
+from store.models import Product, Variation
 
 
 
@@ -52,7 +53,7 @@ class OrderProduct(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     Payment = models.ForeignKey(Payment, on_delete=models.SET_NULL, blank=True, null=True)
     user = models.ForeignKey(Account, on_delete=models.CASCADE)
-    product =models.ForeignKey(product, on_delete=models.CASCADE)
+    product =models.ForeignKey(Product, on_delete=models.CASCADE)
     variation = models.ForeignKey(Variation, on_delete=models.CASCADE)
     color = models.CharField(max_length=50)
     size = models.CharField(max_length=50)
