@@ -15,6 +15,7 @@ from django.core.mail import EmailMessage
 
 from carts.views import _cart_id
 from carts.models import Cart, CartItem
+import requests
 
 # Create your views here.
 
@@ -121,9 +122,10 @@ def login(request):
                                 
             except: 
                 pass
-            auth.login(request, user)  # Log in the user
-            messages.success(request, "You are now logged in.")  # Optional success message
-            return redirect('dashboard')  # Redirect to the home page
+            auth.login(request, user) 
+            messages.success(request, "You are now logged in.") 
+            url = request.META.get('HTTP_REFERER')
+            return redirect('dashboard')
         else:
             messages.error(request, 'Invalid login credentials')  # Display error message
             return redirect('login')  # Redirect back to login page if authentication fails
