@@ -178,21 +178,7 @@ def remove_cart_item(request, product_id, cart_item_id):
 
 # View function to display the cart page
 def cart(request, total=0, quantity=0, cart_items=None):
-    """
-    Displays the shopping cart page.
-    
-    - Retrieves cart details such as total price and quantity.
-    - If the cart is empty, displays an empty cart message.
-
-    Args:
-        request: The HTTP request object.
-        total (float): Total cost of items in the cart.
-        quantity (int): Total quantity of items in the cart.
-        cart_items (QuerySet): List of items in the cart.
-
-    Returns:
-        HttpResponse: Rendered cart page with cart details.
-    """
+   
     try:
         if request.user.is_authenticated:
             cart_items = CartItem.objects.filter(user=request.user, is_active=True)
@@ -227,8 +213,11 @@ def cart(request, total=0, quantity=0, cart_items=None):
 @login_required(login_url='login')
 def checkout(request, total=0, quantity=0, cart_items=None):
     try:
-        cart = Cart.objects.get(cart_id=_cart_id(request))  # Get the cart
-        cart_items = CartItem.objects.filter(cart=cart, is_active=True)  # Get active cart items
+        if request.user.is_authenticated:
+            cart_items = CartItem.objects.filter(user=request.user, is_active=True)
+        else: 
+            cart = Cart.objects.get(cart_id=_cart_id(request))  # Get the cart
+            cart_items = CartItem.objects.filter(cart=cart, is_active=True)
         
         # Calculate total price and quantity
         for cart_item in cart_items:
