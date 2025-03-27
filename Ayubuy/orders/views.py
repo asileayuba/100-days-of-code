@@ -5,6 +5,11 @@ from .forms import OrderForm
 import datetime
 from .models import Order
 
+
+
+def payments(request):
+    return render(request, 'orders/payments.html')
+
 def place_order(request, total=0, quantity=0):
     current_user = request.user
 
