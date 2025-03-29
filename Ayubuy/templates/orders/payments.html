@@ -130,6 +130,7 @@
     </section>
     <!-- ========================= SECTION CONTENT END// ========================= -->
     <script>
+        var amount = "{{ grand_total|floatformat:2 }}";
         // Render the PayPal button into #paypal-button-container
         paypal.Buttons({
             style: {
@@ -144,7 +145,7 @@
                 return actions.order.create({
                     purchase_units: [{
                         amount: {
-                            value: '88.44'
+                            value: amount,
                         }
                     }]
                 });
@@ -155,6 +156,7 @@
                 return actions.order.capture().then(function(orderData) {
                     // Successful capture! For demo purposes:
                     console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+                    alert('Transaction completed by ' + orderData.payer.name.given_name + '!');
                     
                 });
             }
