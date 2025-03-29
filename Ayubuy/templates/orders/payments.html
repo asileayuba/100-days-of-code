@@ -12,9 +12,24 @@
     <div class="row">
         <aside class="col-lg-8">
             <div class="card">
-                <h5 class="card-header"> Billing Address </h5>
+                <h5 class="card-header"> Billing Information </h5>
                 <div class="card-body">
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                  <p class="card-text mb-0"><b>Name:</b> {{ order.full_name}} </p>
+                  <p class="card-text mb-0">
+                    <b>Address:</b>
+                    {% if order.address_line_1 and order.address_line_1 %}
+                        {{ order.address_line_1 }} | {{ order.address_line_2 }}
+                    {% else %}
+                        {{ order.address_line_1 }}
+                    {% endif %}
+                  </p>
+                  <p class="card-text mb-0"><b>City:</b> {{ order.city}} </p>
+                  <p class="card-text mb-0"><b>Country:</b> {{ order.country}} </p>
+                  <p class="card-text mb-0">
+                    {% if order.order_note %}
+                        <b>Address:</b> {{ order.order_note }} 
+                    {% endif %}
+                  </p>
                 </div>
             </div>
             <div class="card">
