@@ -148,9 +148,9 @@
         
 
         var amount = "{{ grand_total|floatformat:2 }}";
-        var url = {% url 'Payments' %}
+        var url = "{% url 'Payments' %}"
         const csrftoken = getCookie('csrftoken');
-        var orderID = {{ order.order_number }}
+        var orderID = "{{ order.order_number }}"
         var payment_method = 'Paypal'
         // Render the PayPal button into #paypal-button-container
         paypal.Buttons({
@@ -177,10 +177,11 @@
                 return actions.order.capture().then(function(orderData) {
                     // Successful capture! For demo purposes:
                     console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+                    sendData();
                     function sendData(){
                         fetch(url, {
-                            method = "POST",
-                            header: {
+                            method: "POST",
+                            headers: {
                                 "Content-type": "application/json",
                                 "X-CSRFToken": csrftoken,
                             },
@@ -189,7 +190,7 @@
                                 transID: orderData.id,
                                 payment_method: payment_method,
                                 status: orderData.status
-                            })
+                            }),
                         })
                        // .then(response => response.json())
                        // .then(data => console.log(data));
