@@ -25,9 +25,10 @@
                     {% endif %}
                   </p>
                   <p class="card-text mb-0"><b>City:</b> {{ order.city }}</p>
-                  <p class="card-text mb-0"><b>State:</b> {{ order.state}} </p>
-                  <p class="card-text mb-0"><b>Country:</b> {{ order.country}} </p>
-                  <p class="card-text mb-0"><b>Email:</b> {{ order.email}} </p>
+                  <p class="card-text mb-0"><b>State:</b> {{ order.state }} </p>
+                  <p class="card-text mb-0"><b>Country:</b> {{ order.country }} </p>
+                  <p class="card-text mb-0"><b>Phone:</b> {{ order.phone }} </p>
+                  <p class="card-text mb-0"><b>Email:</b> {{ order.email }} </p>
                   <p class="card-text mb-0">
                     {% if order.order_note %}
                         <b>Order Note:</b> {{ order.order_note }} 
@@ -148,7 +149,7 @@
         
 
         var amount = "{{ grand_total|floatformat:2 }}";
-        var url = "{% url 'Payments' %}"
+        var url = "{% url 'payments' %}"
         const csrftoken = getCookie('csrftoken');
         var orderID = "{{ order.order_number }}"
         var payment_method = 'Paypal'

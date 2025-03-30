@@ -6,7 +6,7 @@ from store.models import Product, Variation
 class Payment(models.Model):
     user = models.ForeignKey(Account, on_delete=models.CASCADE)
     payment_id = models.CharField(max_length=100)
-    Payment_method = models.CharField(max_length=100)
+    payment_method = models.CharField(max_length=100)
     amount_paid = models.CharField(max_length=100)  # this is the total amount paid
     status =models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -23,7 +23,7 @@ class Order(models.Model):
     }
     
     user = models.ForeignKey(Account, on_delete=models.SET_NULL, null=True)
-    Payment = models.ForeignKey(Payment, on_delete=models.SET_NULL, blank=True, null=True)
+    payment = models.ForeignKey(Payment, on_delete=models.SET_NULL, blank=True, null=True)
     order_number = models.CharField(max_length=20)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
