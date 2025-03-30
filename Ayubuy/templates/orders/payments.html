@@ -150,6 +150,8 @@
         var amount = "{{ grand_total|floatformat:2 }}";
         var url = {% url 'Payments' %}
         const csrftoken = getCookie('csrftoken');
+        var orderID = {{ order.order_number }}
+        var payment_method = 'Paypal'
         // Render the PayPal button into #paypal-button-container
         paypal.Buttons({
             style: {
@@ -180,11 +182,17 @@
                             method = "POST",
                             header: {
                                 "Content-type": "application/json",
-                                "X-CSRFToken":
-                            }
+                                "X-CSRFToken": csrftoken,
+                            },
+                            body: JSON.stringify({
+                                orderID: orderID,
+                                transID: orderData.id,
+                                payment_method: payment_method,
+                                status: orderData.status
+                            })
                         })
-                        .then(response => response.json())
-                        .then(data => console.log(data));
+                       // .then(response => response.json())
+                       // .then(data => console.log(data));
                     }
                     
                 });
