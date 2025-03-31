@@ -137,8 +137,7 @@
                 const cookies = document.cookie.split(';');
                 for (let i = 0; i < cookies.length; i++) {
                     const cookie = cookies[i].trim();
-                    // Does this cookie string begin with the name we want?
-                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    if (cookie.startsWith(name + '=')) {
                         cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
                         break;
                     }
@@ -147,14 +146,13 @@
             return cookieValue;
         }
         
-
         var amount = "{{ grand_total|floatformat:2 }}";
-        var url = "{% url 'payments' %}"
+        var url = "{% url 'payments' %}";
         const csrftoken = getCookie('csrftoken');
-        var orderID = "{{ order.order_number }}"
-        var payment_method = 'Paypal'
-        var redirect_url = {% url "order_complete" %}
-        // Render the PayPal button into #paypal-button-container
+        var orderID = "{{ order.order_number }}";
+        var payment_method = 'Paypal';
+        var redirect_url = "{% url 'order_complete' %}";
+        
         paypal.Buttons({
             style: {
                 color: 'blue',
@@ -162,9 +160,8 @@
                 label: 'pay',
                 height: 40
             },
-
-            // Set up the transaction
-            createOrder: function(data, actions) {
+        
+            createOrder: function (data, actions) {
                 return actions.order.create({
                     purchase_units: [{
                         amount: {
@@ -173,37 +170,31 @@
                     }]
                 });
             },
-
-            // Finalize the transaction
-            onApprove: function(data, actions) {
-                return actions.order.capture().then(function(orderData) {
-                    // Successful capture! For demo purposes:
+        
+            onApprove: function (data, actions) {
+                return actions.order.capture().then(function (orderData) {
                     console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
-                    sendData();
-                    function sendData(){
-                        fetch(url, {
-                            method: "POST",
-                            headers: {
-                                "Content-type": "application/json",
-                                "X-CSRFToken": csrftoken,
-                            },
-                            body: JSON.stringify({
-                                orderID: orderID,
-                                transID: orderData.id,
-                                payment_method: payment_method,
-                                status: orderData.status
-                            }),
-                        })
-                       .then((response) => response.json())
-                       .then((data) => {
-                        window.location.href = redirect_url + '?order_number='+data.order_number+'&payment_id'=+data.transID;
-                       });
-                    }
                     
+                    fetch(url, {
+                        method: "POST",
+                        headers: {
+                            "Content-type": "application/json",
+                            "X-CSRFToken": csrftoken,
+                        },
+                        body: JSON.stringify({
+                            orderID: orderID,
+                            transID: orderData.id,
+                            payment_method: payment_method,
+                            status: orderData.status
+                        }),
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        window.location.href = redirect_url + '?order_number=' + data.order_number + '&payment_id=' + data.transID;
+                    })
+                    .catch(error => console.error("Payment processing error:", error));
                 });
             }
-
-
         }).render('#paypal-button-container');
     </script>
 {% endblock content %}
