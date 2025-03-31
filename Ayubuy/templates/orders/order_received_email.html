@@ -2,8 +2,21 @@
 
 Hi {{ user.first_name }},
 
-YOUR ORDER HAS BEEN RECEIVED
+Thank you for shopping with us! 
 
-Order Number: {{ order.order_number}}
+We’re excited to let you know that we’ve received your order, and our team is already working on getting it ready for you.  
+
+Order Details 🛒 
+Order Number: {{ order.order_number }} 
+Order Date: {{ order.created_at|date:"F d, Y" }}
+Payment Status: {{ order.payment_status }} 
+Estimated Delivery: {{ order.estimated_delivery }}  
+
+You can track your order status anytime by visiting your account.  
+
+If you have any questions, feel free to reach out to our support team.  
+
+Happy Shopping! 🛍️  
+The Ayubuy Team  
 
 {% endautoescape %}
