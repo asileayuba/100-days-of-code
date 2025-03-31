@@ -6,6 +6,7 @@ import datetime
 from .models import Order, Payment, OrderProduct
 import json
 from store.models import Product
+from django.db.models import F
 
 
 def payments(request):
@@ -49,11 +50,11 @@ def payments(request):
         orderproduct.save()
     
     # Reduce the quantity of the sold products
-    product = Product.objects(id=item.product_id)
-    product.stock -= item.quantity
-    product.save()
+    for item in cart_items:
+        Product.objects.filter(id=item.product.id).update(stock=F('stock') - item.quantity)
     
     # Clear the cart
+    CartItem.objects.filter(user=request.user).delete()
     
     # Send order received email to customer
     
