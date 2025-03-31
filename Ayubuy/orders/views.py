@@ -136,3 +136,7 @@ def place_order(request, total=0, quantity=0):
             return render(request, 'orders/payments.html', context)
 
     return redirect('checkout')
+
+
+def order_complete(request):
+    return render(request, 'orders/order_complete.html')
