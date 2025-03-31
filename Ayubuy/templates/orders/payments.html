@@ -18,7 +18,7 @@
                   <p class="card-text mb-0"><b>Name:</b> {{ order.full_name}} </p>
                   <p class="card-text mb-0">
                     <b>Address:</b>
-                    {% if order.address_line_1 and order.address_line_1 %}
+                    {% if order.address_line_1 and order.address_line_2 %}
                         {{ order.address_line_1 }} | {{ order.address_line_2 }}
                     {% else %}
                         {{ order.address_line_1 }}
