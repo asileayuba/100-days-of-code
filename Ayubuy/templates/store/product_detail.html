@@ -91,6 +91,25 @@
           <h3>Customer Reviews</h3>
         </header>
 
+        <form action="" method="POST">
+          {% csrf_token %}
+          <h5>Write Your Review</h5>
+          <div>
+            <!-- Rating stars -->
+
+            Review Title:
+            <input type="text" class="form-control" name="subject" required>
+            <br>
+            Review:
+            <textarea name="review" rows="4" class="form-control"></textarea>
+            <br>
+            <input type="submit" value="Submit Review" class="btn btn-primary">
+            
+          </div>
+        </form>
+        <br>
+
+        
         <article class="box mb-3">
           <div class="icontext w-100">
             <img
