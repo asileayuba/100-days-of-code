@@ -161,6 +161,9 @@
       <header class="section-heading">
         <h3>Customer Reviews</h3>
       </header>
+
+      {% for review in reviews %}
+
         <article class="box mb-3">
           <div class="icontext w-100">
             <img
@@ -169,7 +172,7 @@
             />
             <div class="text">
               <span class="date text-muted float-md-right">12.03.2025 </span>
-              <h6 class="mb-1">Teena Lucas</h6>
+              <h6 class="mb-1">{{ review.user.full_name}}</h6>
             </div>
           </div>
           <!-- icontext.// -->
@@ -182,6 +185,7 @@
             </p>
           </div>
         </article>
+      {% endfor %}
       </div>
       <!-- col.// -->
     </div>
