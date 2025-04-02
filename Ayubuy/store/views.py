@@ -58,10 +58,10 @@ def product_detail(request, category_slug, product_slug):
         single_product = None  # Handle the case where the product is not found
         in_cart = False  # Ensure in_cart is False if the product does not exist
        
-    try: 
+    # Ensure the  user is authenticated before checking order history
+    orderproduct = False    # Default value
+    if request.user.is_authenticated:
         orderproduct = OrderProduct.objects.filter(user=request.user, product_id=single_product.id).exists()
-    except OrderProduct.DoesNotExist:
-        orderproduct = None
         
     # Get the reviews
     reviews = ReviewRating.objects.filter(product_id=single_product.id, status=True)
