@@ -64,10 +64,14 @@ def payments(request):
         'user': request.user,
         'order': order,
     })
-
-    to_email = order.email
-    send_email = EmailMessage(mail_subject, message, to=[to_email])
-    send_email.send()
+    
+    # Email recipients (avoid duplicate emails)
+    recipients = {order.email, request.user.email} # Set ensures uniqueness
+    
+    # Send email only once per unique address
+    for recipient in recipients:
+        send_email = EmailMessage(mail_subject, message, to=[recipient])
+        send_email.send()
             
     # Send order number and transaction id back to sendData method via JsonResponse
     data = {
