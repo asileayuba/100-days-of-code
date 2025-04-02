@@ -8,26 +8,12 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.http import HttpResponse
 from .forms import ReviewForm
 from django.contrib import messages
+from orders.models import OrderProduct
 
 # Create your views here.
 
 def store(request, category_slug=None):
-    """
-    Renders the store page with a list of available products.
-
-    Features:
-    - If a category is specified via `category_slug`, filters products by that category.
-    - If no category is specified, retrieves all available products.
-    - Counts the total number of available products.
-    - Passes the product list and count as context data to the template.
-
-    Parameters:
-    - request: The HTTP request object.
-    - category_slug (str, optional): The slug of the category to filter products.
-
-    Returns:
-    - HTTP response rendering the 'store/store.html' template with product data.
-    """
+    
 
     categories = None  # Initialize category variable to store the selected category
     products = None  # Initialize product list
@@ -60,23 +46,6 @@ def store(request, category_slug=None):
 
 
 def product_detail(request, category_slug, product_slug):
-    """
-    Displays the details of a specific product.
-
-    Features:
-    - Retrieves a single product based on both its category and product slug.
-    - Checks if the product is already in the cart for the current session.
-    - Handles exceptions in case the product does not exist.
-    - Passes the product details as context data to the template.
-
-    Parameters:
-    - request: The HTTP request object.
-    - category_slug (str): The slug of the category the product belongs to.
-    - product_slug (str): The unique slug of the product.
-
-    Returns:
-    - HTTP response rendering the 'store/product_detail.html' template with product details.
-    """
 
     try:
         # Fetch the product based on category slug and product slug
@@ -88,33 +57,22 @@ def product_detail(request, category_slug, product_slug):
     except Product.DoesNotExist:
         single_product = None  # Handle the case where the product is not found
         in_cart = False  # Ensure in_cart is False if the product does not exist
-        # Consider logging this exception for debugging purposes
+       
+    try: 
+        orderproduct = OrderProduct.objects.filter(user=request.user, product_id=single_product.id).exists()
+    except OrderProduct.DoesNotExist:
+        orderproduct = None
     
     context = {
         'single_product': single_product,  # Pass the retrieved product to the template
         'in_cart': in_cart,  # Boolean indicating if the product is already in the cart
+        'orderproduct': orderproduct,
     }
 
     return render(request, 'store/product_detail.html', context)  # Render product details page
 
 
 def search(request):
-    """
-    Handles product search functionality.
-
-    Features:
-    - Retrieves the search keyword from the request.
-    - Filters products based on the keyword match in the product name or description.
-    - Orders results by creation date in descending order.
-    - Counts the total number of matching products.
-    - Passes the search results and count as context data to the template.
-
-    Parameters:
-    - request: The HTTP request object.
-
-    Returns:
-    - HTTP response rendering the 'store/store.html' template with search results.
-    """
 
     products = []  # Initialize product list to prevent errors if no keyword is provided
     product_count = 0  # Initialize product count
