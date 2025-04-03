@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .models import Account, UserProfile
+from django.utils.html import format_html
 
 # Custom admin panel configuration for the Account model
 class AccountAdmin(UserAdmin):
