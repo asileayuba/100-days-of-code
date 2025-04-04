@@ -311,7 +311,7 @@ def change_password(request):
                 messages.success(request, "Password updated successfully.")
                 return redirect('change_password')
             else:
-                messages.error(request, 'Please enter valid current password')
+                messages.error(request, 'Please enter valid current password.')
                 return redirect('change_password')
         else:
             messages.error(request, 'Password does not match!')
