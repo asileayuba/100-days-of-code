@@ -1,5 +1,6 @@
-from django.shortcuts import render, redirect
-from .forms import RegistrationForm, Account 
+from django.shortcuts import render, redirect, get_object_or_404
+from .forms import RegistrationForm, UserProfileForm, UserForm
+from .models import Account, UserProfile
 from orders.models import Order
 from django.contrib import messages, auth
 from django.contrib.auth.decorators import login_required
@@ -270,4 +271,20 @@ def my_orders(request):
 
 
 def edit_profile(request):
-    return render(request, 'accounts/edit_profile.html')
+    userprofile = get_object_or_404(UserProfile, user=request.user)
+    if request.method == 'POST':
+        user_form = UserForm(request.POST, instance=request.user)
+        profile_form = UserProfileForm(request.POST, request.FILES, instance=userprofile)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(request, 'Your profile has been updated.')
+            return redirect('edit_profile')
+        else:
+            user_form = UserForm(instance=requst.user)
+            profile_form = UserProfileForm(instance=userprofile)
+        context = {
+            'user_form': user_form,
+            'profile_form': profile_form,
+        }
+    return render(request, 'accounts/edit_profile.html', context)
