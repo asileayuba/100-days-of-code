@@ -11,13 +11,35 @@
         <main class="col-md-9">
             <article class="card">
             <header class="card-header">
-                <strong class="d-inline-block mr-3"> Edit tour profile  </strong>
+                <strong class="d-inline-block mr-3"> Edit your profile  </strong>
                 
             </header>
             <div class="card-body">
                 <div class="row"> 
                     <div class="col-md-12">
-                        
+                        <form action="" method="POST">
+                            {% csrf_token %}
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label> First Name </label>
+                                    <input type="text" class="form-control" name="" id="">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label> last Name </label>
+                                    <input type="text" class="form-control" name="" id="">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label> Phone Number </label>
+                                    <input type="text" class="form-control" name="" id="">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label> Profile Picture  </label>
+                                    <input type="file" class="form-control" name="" id="">
+                                </div>
+                            </div>
+                        </form>
                     </div>   
                 </div> <!-- row.// -->
             </div> <!-- card-body .// -->
