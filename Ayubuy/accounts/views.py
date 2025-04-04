@@ -281,7 +281,7 @@ def edit_profile(request):
             messages.success(request, 'Your profile has been updated.')
             return redirect('edit_profile')
     else:
-        user_form = UserForm(instance=requst.user)
+        user_form = UserForm(instance=request.user)
         profile_form = UserProfileForm(instance=userprofile)
     context = {
         'user_form': user_form,
