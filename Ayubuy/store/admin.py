@@ -1,23 +1,23 @@
 from django.contrib import admin
-from .models import Product, Variation, ReviewRating
+from .models import Product, Variation, ReviewRating, ProductGallery
+import admin_thumbnails
+
+
+@admin_thumbnails.thumbnail('image')
+class ProductGalleryInline(admin.TabularInline):
+    model = ProductGallery
+    extra = 1
 
 # Admin configuration for the Product model
 class ProductAdmin(admin.ModelAdmin):
-    """
-    Admin configuration for the Product model.
-
-    Features:
-    - Displays key product details (name, price, stock, category, modified date, and availability).
-    - Auto-generates slug field from product name for SEO-friendly URLs.
-    - Provides search and filtering options for better usability.
-    """
     
     list_display = ('product_name', 'price', 'stock', 'category', 'modified_date', 'is_available')  # Columns in admin list view
     list_filter = ('category', 'is_available', 'modified_date')  # Filters for easy data access
     search_fields = ('product_name', 'category__category_name')  # Enables search by product name & category
     prepopulated_fields = {'slug': ('product_name',)}  # Auto-populate slug from product name
     list_editable = ('price', 'stock', 'is_available')  # Allow quick inline edits
-
+    inlines =[ProductGalleryInline]
+    
 
 class VariationAdmin(admin.ModelAdmin):
     """
@@ -37,3 +37,4 @@ class VariationAdmin(admin.ModelAdmin):
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Variation, VariationAdmin)
 admin.site.register(ReviewRating)
+admin.site.register(ProductGallery)
