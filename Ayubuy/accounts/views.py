@@ -317,3 +317,9 @@ def change_password(request):
             messages.error(request, 'Password does not match!')
             return redirect('change_password')
     return render(request, 'accounts/change_password.html')
+
+
+
+@login_required(login_url='login')
+def order_detail(request, order_id):
+    return render(request, 'accounts/order_detail.html')
