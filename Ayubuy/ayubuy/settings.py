@@ -63,7 +63,19 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_session_timeout.middleware.SessionTimeoutMiddleware',
 ]
+
+SESSION_EXPIRE_SECONDS = 3600  # 1 hour - Adjust this as per your requirement
+SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True  # Automatically expire session after inactivity
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True  # Expire session when the browser is closed
+
+# Session cookie age (the expiration time of the session in seconds)
+SESSION_COOKIE_AGE = SESSION_EXPIRE_SECONDS
+
+# Define where users are redirected when their session expires
+LOGIN_URL = 'accounts/login/'  # This is the URL where the user will be redirected
+SESSION_TIMEOUT_REDIRECT = 'accounts/login/' # Explicit redirect to login page
 
 ROOT_URLCONF = 'ayubuy.urls'
 
@@ -183,3 +195,4 @@ EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS", "False").lower() in ("true", "1", "ye
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")
+
