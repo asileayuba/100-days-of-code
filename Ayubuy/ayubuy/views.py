@@ -11,7 +11,7 @@ def home(request):
     
     context = {
         'products': products,  # Context dictionary for template rendering
-        'reviews': reviews;
+        'reviews': reviews,
     }
 
     return render(request, 'home.html', context)  # Render home page with context
