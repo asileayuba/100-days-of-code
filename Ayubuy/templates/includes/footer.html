@@ -26,9 +26,16 @@
 	$(document).ready(function(){
 		$('.thumb a').click(function(e){
 			e.preventDefault();
-			$('.minImage img').attr('src', $(this).attr("href"));
-		})
-	})
+
+			let mainImg = $('.minImage img');
+			let clickedThumb = $(this).find('img');
+
+			// Swap image sources
+			let tempSrc = mainImg.attr('src');
+			mainImg.attr('src', clickedThumb.attr('src'));
+			clickedThumb.attr('src', tempSrc);
+		});
+	});
 </script>
 
 </body>
