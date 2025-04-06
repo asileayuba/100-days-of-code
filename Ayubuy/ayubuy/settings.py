@@ -77,6 +77,7 @@ SESSION_COOKIE_AGE = SESSION_EXPIRE_SECONDS
 LOGIN_URL = 'accounts/login/'  # This is the URL where the user will be redirected
 SESSION_TIMEOUT_REDIRECT = 'accounts/login/' # Explicit redirect to login page
 
+
 ROOT_URLCONF = 'ayubuy.urls'
 
 TEMPLATES = [

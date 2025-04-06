@@ -1,18 +1,17 @@
 from django.shortcuts import render
-from store.models import Product
+from store.models import Product, ReviewRating
 
 def home(request):
-    """
-    Renders the home page with a list of available products.
 
-    - Fetches all products that are marked as available (`is_available=True`).
-    - Passes the retrieved products as context data to the 'home.html' template.
-    """
-
-    products = Product.objects.filter(is_available=True)  # Fetch available products
+    products = Product.objects.filter(is_available=True).order_by('created_date')  
+    
+    # Get the reviews
+    for product in products:
+        reviews = ReviewRating.objects.filter(product_id=product.id, status=True)
     
     context = {
         'products': products,  # Context dictionary for template rendering
+        'reviews': reviews;
     }
 
     return render(request, 'home.html', context)  # Render home page with context
