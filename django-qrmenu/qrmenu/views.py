@@ -15,11 +15,16 @@ def generate_qr_code(request):
             # Generate QR Code
             qr = qrcode.make(url)
             file_name = res_name.replace(" ", "_").lower() + '_menu.png'
-            file_path = os.path.join(settings.MEDIA_ROOT, file_name)
+            file_path = os.path.join(settings.MEDIA_ROOT, file_name)  # ../media/asile_restaurant_menu.png
             qr.save(file_path)
+            
+            # Create Image URL
+            qr_url = os.path.join(settings.MEDIA_URL, file_name)
             
             context = {
                 'res_name': res_name,
+                'qr_url': qr_url,
+                'file_name': file_name,
             }
             return render(request, 'qr_result.html', context)
     else:
