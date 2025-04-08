@@ -1,4 +1,4 @@
-#!/Users/asileayuba/Developer/100-days-of-code/qrmenu/env/bin/python
+#!/Users/asileayuba/Developer/100-days-of-code/django-qrmenu/env/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
