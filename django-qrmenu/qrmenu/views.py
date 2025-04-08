@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from .forms import QRCodeForm
 import qrcode
+import os
+from django.conf import settings
 
 
 def generate_qr_code(request):
@@ -13,8 +15,13 @@ def generate_qr_code(request):
             # Generate QR Code
             qr = qrcode.make(url)
             file_name = res_name.replace(" ", "_").lower() + '_menu.png'
-            qr.save(file_name)
-            return render(request, 'qr_result.html')
+            file_path = os.path.join(settings.MEDIA_ROOT, file_name)
+            qr.save(file_path)
+            
+            context = {
+                'res_name': res_name,
+            }
+            return render(request, 'qr_result.html', context)
     else:
         form = QRCodeForm()
         context ={
